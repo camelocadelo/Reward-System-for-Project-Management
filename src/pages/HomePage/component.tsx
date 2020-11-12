@@ -44,7 +44,7 @@ export const HomePage: FC = () => {
           Аuthorization
         </span>
         <form onSubmit={handleSubmit(onFormSubmit)}>
-          <div className="input-wrp">
+          <div className="input-wrp mt-64">
             <span className="">Username</span>
             <input
               name={FormInputs.Username}

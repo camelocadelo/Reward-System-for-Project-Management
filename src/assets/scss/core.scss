@@ -1,0 +1,75 @@
+@import "vars";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+}
+
+.font {
+  font-family: $fonts;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-center {
+  text-align:center !important
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.row-50 {
+  width: 50%;
+}
+
+.fill_w {
+  width: 100%;
+}
+
+.fill_h {
+  height: 100%;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.vh_100 {
+  height: 100vh;
+}
+
+.vw_100 {
+  width: 100vw;
+}
+
+.border-top {
+  border-top: 1px solid #E0E0E0;
+}
+
+.border-right {
+  border-right: 1px solid #E0E0E0;
+}
+
+.border-left {
+  border-left: 1px solid #E0E0E0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.border-left-0 {
+  border-left: none;
+}
