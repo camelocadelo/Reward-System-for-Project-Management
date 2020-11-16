@@ -25,6 +25,8 @@
           .types-list {
             .types-item {
               height: 24px;
+              display: flex;
+              align-items: center;
               .item-text {
                 font-weight: normal;
                 font-size: 16px;
@@ -59,12 +61,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       .auth-choose {
-        margin-top: 111px;
         background: #DAD7FE;
         border-radius: 10px;
         max-width: 324px;
         height: 58px;
+        display: flex;
+        margin-bottom: 45px;
         // visibility: hidden;
         button {
           background: none;
@@ -87,9 +91,7 @@
         }
       }
       .auth-form {
-        width: 47%;
-        height: 340px;
-        // margin-top: 72px;
+        width: 40%;
         .title {
           font-weight: 500;
           font-size: 24px;
@@ -129,7 +131,7 @@
         .auth_button {
           font-weight: bold;
           width: 100%;
-          height: 48px;
+          height: 50px;
           cursor: pointer;
           text-align: center;
           background: #4339F2;
