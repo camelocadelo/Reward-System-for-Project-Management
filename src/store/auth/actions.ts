@@ -1,19 +1,20 @@
-import { declareAction } from '@reatom/core';
-
+import { defaultAction } from 'store/defaultActions';
 import * as api from 'store/auth/api';
+import { GET_USER, LoginRequest } from './types';
+// import { LoginTypes } from 'pages/login/types';
 
-import { LoginRequest, LoginResponse } from 'store/auth/types/Login';
+export const login = (data: LoginRequest, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_USER,
+    apiCall: () => {
+      return api.getUser(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
 
-export const loginFail = declareAction<string>();
-export const loginSuccess = declareAction<LoginResponse>();
-export const loginRequest = declareAction<LoginRequest>(
-  async (payload, store) =>
-    await api
-      .login(payload.email, payload.password)
-      .then((res) => {
-        console.log('the res: ', res);
-        store.dispatch(loginSuccess(res.data));
-        console.log('huehueheu');
-      })
-      .catch((err: any) => store.dispatch(loginFail(err.response?.data?.errors || ['serverError'])))
-);
+export default {
+  login,
+};

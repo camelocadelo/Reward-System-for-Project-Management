@@ -1,42 +1,23 @@
 /* TODO: add input validation, response to errors from back */
 /* TODO: how to show errors from backend */
 
-import React, { FC, useState, useEffect, useCallback } from 'react';
-import { useAction, useAtom } from '@reatom/react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import authActions from 'store/auth/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { is } from 'remote-data-ts';
 import classNames from 'classnames';
 import './index.scss';
 import { FormValues, FormInputs, RegisterFormInputs, RegisterFormValues } from './types/FormData';
-import { atoms, actions } from 'store/auth';
-import { atoms as registerAtoms, actions as registerActions } from 'store/register';
 import { useHistory } from 'react-router-dom';
 import fireGreen from 'assets/images/fireGreen.png';
 import lightBulb from 'assets/images/lightBulb.png';
 import present from 'assets/images/present.png';
 
-export const HomePage: FC = () => {
+function HomePage(props: any) {
+  const { onGetUser, userData, userLoading } = props;
   const history = useHistory();
   const [isRegistration, setIsRegistration] = useState<boolean>(false);
-  const loginState = useAtom(atoms.login);
-  const registerState = useAtom(registerAtoms.register);
-  const login = useAction((email: string, password: string) =>
-    actions.loginRequest({
-      email,
-      password,
-    })
-  );
-
-  const registerAction = useAction(
-    (email: string, username: string, password: string, first_name: string, last_name: string) =>
-      registerActions.registerRequest({
-        email,
-        username,
-        password,
-        first_name,
-        last_name,
-      })
-  );
 
   const { handleSubmit, register } = useForm<FormValues>({
     mode: 'onChange',
@@ -50,35 +31,23 @@ export const HomePage: FC = () => {
 
   const onFormSubmit = useCallback<SubmitHandler<FormValues>>(
     (values) => {
-      return login(values.username, values.password);
+      return onGetUser({ email: values.username, password: values.password });
     },
-    [login]
+    [onGetUser]
   );
 
-  const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>(
-    (values) => {
-      return registerAction(
-        values.email,
-        values.username,
-        values.password,
-        values.first_name,
-        values.last_name
-      );
-    },
-    [registerAction]
-  );
+  const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>((values) => {
+    console.log('the register values: ', values);
+  }, []);
 
   useEffect(() => {
-    if (is.success(loginState)) {
+    if (userData && !userLoading) {
+      console.log('the user data: ', userData);
       history.push('/project');
     }
-  }, [loginState, history]);
+  }, [userData, userLoading, history]);
 
-  useEffect(() => {
-    if (is.success(registerState)) {
-      console.log('REGISTER STATE');
-    }
-  }, [registerState]);
+  console.log('the userdata: ', userData);
 
   return (
     <div className="home-page">
@@ -258,4 +227,17 @@ export const HomePage: FC = () => {
       </div>
     </div>
   );
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    userLoading: state.authReducer.login.loading,
+    userData: state.authReducer.login.data,
+  };
 };
+
+const mapDispatchToProps = {
+  onGetUser: authActions.login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HomePage));

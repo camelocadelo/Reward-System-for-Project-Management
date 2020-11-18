@@ -1,8 +1,8 @@
 import React, { FC, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const HomePage = lazy(() => import('pages/HomePage'));
-const ProjectPage = lazy(() => import('pages/ProjectPage'));
+const HomePage = lazy(() => import('pages/HomePage/component'));
+const ProjectPage = lazy(() => import('pages/ProjectPage/component'));
 
 const RootRouter: FC = () => (
   <Router>
