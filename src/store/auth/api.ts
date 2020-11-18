@@ -1,11 +1,6 @@
-import * as axios from 'store/axios';
-import { AxiosResponse } from 'axios';
+import * as API from 'store/defaultApi';
 import { API_URL } from 'core/server';
 
-import { LoginResponse } from 'store/auth/types';
+const baseUrl = `${API_URL}/api/auth/login`;
 
-export const login = (email: string, password: string): Promise<AxiosResponse<LoginResponse>> =>
-  axios.authRequest.post(API_URL + '/api/auth/login', {
-    email,
-    password,
-  });
+export const getUser = (data: any) => API.stdApiPOST({ data, url: baseUrl });
