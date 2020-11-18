@@ -1,6 +1,9 @@
+/*TODO: add types props (ProjectPageType.IProps) */
+
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import userActions from 'store/user/actions';
+import { MainTemplate } from 'components/organisms/MainTemplate';
 
 function ProjectPage(props: any) {
   const { userInfoData, onGetUserInfo } = props;
@@ -12,10 +15,12 @@ function ProjectPage(props: any) {
   console.log('the userinfo data: ', userInfoData);
 
   return (
-    <div>
-      {userInfoData && userInfoData.last_name}
-      <span> Project page </span>
-    </div>
+    <MainTemplate>
+      <div>
+        {userInfoData && userInfoData.last_name}
+        <span> Project page </span>
+      </div>
+    </MainTemplate>
   );
 }
 
