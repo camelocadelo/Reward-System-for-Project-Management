@@ -1,0 +1,23 @@
+.sidebar {
+  width: 96px;
+  height: 100vh;
+  background-color: white;
+  border-radius: 0px 20px 20px 0px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  .sidebar-logo {
+    margin-bottom: 30px;
+  }
+  .sidebar-item {
+    margin-bottom: 70px;
+  }
+  .sidebar-horizontal-line {
+    margin-bottom: 30px;
+  }
+}
