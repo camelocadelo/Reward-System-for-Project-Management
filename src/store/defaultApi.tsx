@@ -1,3 +1,5 @@
+/* TODO: stdApiGET was modified, options are no longer included */
+
 export const STD_HEADERS = {
   Accept: 'application/json, application/xml, text/plain, text/html, *.*',
   'Content-Type': 'application/json',
