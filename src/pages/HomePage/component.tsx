@@ -43,7 +43,7 @@ function HomePage(props: any) {
   useEffect(() => {
     if (userData && !userLoading) {
       console.log('the user data: ', userData);
-      history.push('/project');
+      history.push('/profile');
     }
   }, [userData, userLoading, history]);
 

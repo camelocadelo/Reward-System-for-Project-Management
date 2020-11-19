@@ -41,9 +41,18 @@
 }
 
 .typography__variant-subtext {
-  font-weight: $medium_weight;
+  font-weight: $regular_weight;
   font-size: $sub_text_size;
   line-height: $sub_text_lh;
+  color: black;
+  opacity: 0.5;
+}
+
+.typography__variant-coloredtext {
+  font-weight: $regular_weight;
+  font-size: $h2_size;
+  color: #4339F2;
+  letter-spacing: $regular_letter_spacing;
 }
 
 .typography__variant-subtextmed {

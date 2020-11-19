@@ -8,7 +8,7 @@ export const MainTemplate: FC = (props: any) => {
   return (
     <div className="main-template">
       <Sidebar />
-      {children}
+      <div className="main-template-body"> {children} </div>
     </div>
   );
 };
