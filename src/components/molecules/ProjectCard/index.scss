@@ -1,0 +1,15 @@
+.project-card {
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  padding-left: 17px;
+  padding-right: 17px;
+  display: flex;
+  flex-direction: column;
+  width: 326px;
+  .project-card-link {
+    color: #4339F2;
+    text-decoration: none;
+  }
+}

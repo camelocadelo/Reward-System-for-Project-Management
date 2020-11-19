@@ -6,6 +6,7 @@ import MoreInfo from 'assets/images/moreInfo.png';
 import GithubIcon from 'assets/images/githubIcon.png';
 import TelegramIcon from 'assets/images/telegramIcon.png';
 import JiraIcon from 'assets/images/jiraIcon.png';
+import BlueButton from 'components/atoms/BlueButton/component';
 
 function ProfileCard(props: ProfileCardProps): JSX.Element {
   const {
@@ -15,7 +16,7 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
     email,
     accountBonuses,
     onChangeUserInfo,
-    // onSendBonuses,
+    onSendBonuses,
     // onAddGithub,
     // onAddSlack,
     // onAddJira,
@@ -46,6 +47,7 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
             src={MoreInfo}
             alt="Change Info"
             onClick={onChangeUserInfo}
+            style={{ cursor: 'pointer' }}
           />
         </div>
       </div>
@@ -53,11 +55,21 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
         <span className="typography__variant-coloredtext"> {accountBonuses} </span>
         <span className="typography__variant-subtext"> Bonuses </span>
         <div style={{ marginTop: '18px' }} className="profile-card-footer">
-          <button> Send Bonuses </button>
+          <BlueButton onSendBonuses={onSendBonuses} />
           <div>
-            <img src={JiraIcon} alt="Add Jira" width="20px" style={{ marginRight: '10px' }} />
-            <img src={GithubIcon} alt="Add Github" width="20px" style={{ marginRight: '10px' }} />
-            <img src={TelegramIcon} alt="Add Telegram" width="20px" />
+            <img
+              src={JiraIcon}
+              alt="Add Jira"
+              width="20px"
+              style={{ marginRight: '10px', cursor: 'pointer' }}
+            />
+            <img
+              src={GithubIcon}
+              alt="Add Github"
+              width="20px"
+              style={{ marginRight: '10px', cursor: 'pointer' }}
+            />
+            <img src={TelegramIcon} alt="Add Telegram" width="20px" style={{ cursor: 'pointer' }} />
           </div>
         </div>
       </div>
