@@ -16,7 +16,8 @@ const login = (state = { data: null, loading: false }, action: any): any => {
     case GET_USER.success:
       console.log(action.data);
       const data = action.data;
-      localStorage.setItem('my_token', JSON.stringify(data.tokens));
+      localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem('pk', data.pk);
       // const parsedData = parseUserInfo(data);
       // localStorage.setItem('user', JSON.stringify(parsedData.token));
       // localStorage.setItem('user_role', JSON.stringify(parsedData.user.role));

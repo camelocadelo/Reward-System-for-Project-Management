@@ -1,5 +1,6 @@
 /* TODO: add input validation, response to errors from back */
 /* TODO: how to show errors from backend */
+/* TODO: rename HomePage to LoginPage */
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';

@@ -11,7 +11,7 @@ export const pages = [
   {
     title: 'Projects',
     icon: ProjectListIcon,
-    href: '/project',
+    href: '/projects',
   },
   {
     title: 'Marketplace',
