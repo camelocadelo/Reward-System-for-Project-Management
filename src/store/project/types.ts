@@ -4,6 +4,12 @@ export const CREATE_PROJECT = {
   failed: 'CREATE_PROJECT_FAILED',
 };
 
+export const GET_PROJECTS = {
+  started: 'GET_PROJECTS_STARTED',
+  success: 'GET_PROJECTS_SUCCESS',
+  failed: 'GET_PROJECTS_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;

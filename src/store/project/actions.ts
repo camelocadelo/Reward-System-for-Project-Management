@@ -1,6 +1,6 @@
 import { defaultAction } from 'store/defaultActions';
 import * as api from 'store/project/api';
-import { CREATE_PROJECT, CreateProjectRequest } from './types';
+import { CREATE_PROJECT, GET_PROJECTS, CreateProjectRequest } from './types';
 
 export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   dispatch: any,
@@ -17,6 +17,19 @@ export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   });
 };
 
+export const getProjects = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECTS,
+    apiCall: () => {
+      return api.getProjects();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
+  getProjects,
 };
