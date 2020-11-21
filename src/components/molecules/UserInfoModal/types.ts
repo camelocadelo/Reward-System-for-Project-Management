@@ -1,8 +1,8 @@
 export type FormValues = {
-  readonly FirstName: string;
-  readonly LastName: string;
-  readonly UserName: string;
-  readonly Email: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly userName: string;
+  readonly email: string;
 };
 
 export enum FormInputs {
@@ -14,6 +14,6 @@ export enum FormInputs {
 
 export interface UserInfoModalProps {
   onCloseModal(): void;
-  createProject: any;
-  projectData: any;
+  onChangeUserInfo: any;
+  changedUserInfoData: any;
 }

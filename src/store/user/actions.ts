@@ -1,6 +1,6 @@
 import { defaultAction } from 'store/defaultActions';
 import * as api from 'store/user/api';
-import { GET_USERINFO } from 'store/user/types';
+import { GET_USERINFO, CHANGE_USERINFO, ChangeUserInfoRequest } from 'store/user/types';
 
 export const getUserInfo = (callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -14,6 +14,22 @@ export const getUserInfo = (callbacks?: any) => (dispatch: any, getState: any) =
   });
 };
 
+export const changeUserInfo = (data: ChangeUserInfoRequest, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: CHANGE_USERINFO,
+    apiCall: () => {
+      return api.changeUserInfo(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getUserInfo,
+  changeUserInfo,
 };
