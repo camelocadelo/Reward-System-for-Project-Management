@@ -1,21 +1,26 @@
-/*TODO: add types props (ProjectPageType.IProps) */
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import userActions from 'store/user/actions';
 import { MainTemplate } from 'components/organisms/MainTemplate';
 import './index.scss';
 import ProfileCard from 'components/molecules/ProfileCard/component';
+import { ProfilePageProps } from './types';
+import UserInfoModal from 'components/molecules/UserInfoModal/component';
 
-function ProfilePage(props: any) {
+function ProfilePage(props: ProfilePageProps) {
   const { userInfoData, onGetUserInfo } = props;
+  const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
 
   useEffect(() => {
     onGetUserInfo();
   }, []);
 
   const handleChangeUserInfo = () => {
-    console.log('HANDLE CHANGE USER INFO');
+    setUserInfoModal(true);
+  };
+
+  const handleModalClose = () => {
+    setUserInfoModal(false);
   };
 
   const handleAddGithub = () => {
@@ -34,11 +39,9 @@ function ProfilePage(props: any) {
     console.log('HANDLE SEND BONUSES');
   };
 
-  console.log('the userinfo data: ', userInfoData);
-
   return (
     <MainTemplate>
-      <div className="profile-page">
+      <div className={userInfoModal ? 'profile-page-modal' : 'profile-page'}>
         {userInfoData && (
           <ProfileCard
             firstName={userInfoData.first_name}
@@ -54,6 +57,7 @@ function ProfilePage(props: any) {
           />
         )}
       </div>
+      {userInfoModal && <UserInfoModal onCloseModal={handleModalClose} />}
     </MainTemplate>
   );
 }
