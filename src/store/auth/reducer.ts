@@ -18,6 +18,8 @@ const login = (state = { data: null, loading: false }, action: any): any => {
       const data = action.data;
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('pk', data.pk);
+      localStorage.setItem('is_admin', data.is_admin);
+      localStorage.setItem('is_manager', data.is_manager);
       // const parsedData = parseUserInfo(data);
       // localStorage.setItem('user', JSON.stringify(parsedData.token));
       // localStorage.setItem('user_role', JSON.stringify(parsedData.user.role));
