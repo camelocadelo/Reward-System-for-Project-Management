@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormValues, FormInputs, UserInfoModalProps } from './types';
 import Close from 'assets/images/close.png';
-import projectActions from 'store/project/actions';
+import userActions from 'store/user/actions';
 import { connect } from 'react-redux';
 
 function UserInfoModal(props: UserInfoModalProps): JSX.Element {
-  const { onCloseModal, createProject, projectData } = props;
+  const { onCloseModal, onChangeUserInfo, changedUserInfoData } = props;
 
   const { handleSubmit, register } = useForm<FormValues>({
     mode: 'onChange',
@@ -16,21 +16,21 @@ function UserInfoModal(props: UserInfoModalProps): JSX.Element {
 
   const onFormSubmit = useCallback<SubmitHandler<FormValues>>(
     (values) => {
-      createProject({
-        name: values.FirstName,
-        telegram_bonus: values.LastName,
-        git_bonus: values.UserName,
-        slack_bonus: values.Email,
+      onChangeUserInfo({
+        first_name: values.firstName,
+        last_name: values.lastName,
+        username: values.userName,
+        email: values.email,
       });
     },
-    [createProject]
+    [onChangeUserInfo]
   );
 
   useEffect(() => {
-    if (projectData) {
+    if (changedUserInfoData) {
       onCloseModal();
     }
-  }, [projectData, onCloseModal]);
+  }, [changedUserInfoData, onCloseModal]);
 
   return (
     <div className="user-info-modal">
@@ -105,12 +105,12 @@ function UserInfoModal(props: UserInfoModalProps): JSX.Element {
 
 const mapStateToProps = (state: any) => {
   return {
-    projectData: state.projectReducer.createProjectState.data,
+    changedUserInfoData: state.userReducer.changeUserInfo.data,
   };
 };
 
 const mapDispatchToProps = {
-  createProject: projectActions.createProject,
+  onChangeUserInfo: userActions.changeUserInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfoModal);

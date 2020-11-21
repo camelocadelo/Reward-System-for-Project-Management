@@ -21,6 +21,7 @@ function ProfilePage(props: ProfilePageProps) {
 
   const handleModalClose = () => {
     setUserInfoModal(false);
+    onGetUserInfo();
   };
 
   const handleAddGithub = () => {
