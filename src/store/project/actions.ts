@@ -1,6 +1,11 @@
 import { defaultAction } from 'store/defaultActions';
 import * as api from 'store/project/api';
-import { CREATE_PROJECT, GET_PROJECTS, CreateProjectRequest } from './types';
+import {
+  CREATE_PROJECT,
+  GET_PROJECTS,
+  GET_PROJECT_ACTIVITIES,
+  CreateProjectRequest,
+} from './types';
 
 export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   dispatch: any,
@@ -29,7 +34,23 @@ export const getProjects = (callbacks?: any) => (dispatch: any, getState: any) =
   });
 };
 
+export const getProjectActivities = (data: string, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECT_ACTIVITIES,
+    apiCall: () => {
+      return api.getProjectActivities(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
   getProjects,
+  getProjectActivities,
 };

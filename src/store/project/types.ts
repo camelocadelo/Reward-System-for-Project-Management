@@ -10,6 +10,12 @@ export const GET_PROJECTS = {
   failed: 'GET_PROJECTS_FAILED',
 };
 
+export const GET_PROJECT_ACTIVITIES = {
+  started: 'GET_PROJECT_ACTIVITIES_STARTED',
+  success: 'GET_PROJECT_ACTIVITIES_SUCCESS',
+  failed: 'GET_PROJECT_ACTIVITIES_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;
