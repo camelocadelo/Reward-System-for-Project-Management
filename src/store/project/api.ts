@@ -9,3 +9,7 @@ export const createProject = (data: any) => API.stdApiPOST({ data, url: createPr
 
 const getProjectsUrl = `${API_URL}/op/get-projects-for-user/${my_pk}`;
 export const getProjects = () => API.stdApiGET({ url: getProjectsUrl, token: access_token });
+
+const getProjectActivitiesUrl = `${API_URL}/op/get_project_activities/`;
+export const getProjectActivities = (data: any) =>
+  API.stdApiGET({ url: `${getProjectActivitiesUrl}${data}`, token: access_token });
