@@ -22,3 +22,14 @@ export type CreateProjectRequest = {
   readonly git_bonus: number;
   readonly slack_bonus: number;
 };
+
+export type ProjectActivityResponse = {
+  readonly pk: number;
+  readonly timestamp: string;
+  readonly event_type: string;
+  readonly message?: string;
+  readonly type?: string;
+  readonly event_bonus: string;
+  readonly metaData?: string;
+  readonly username: string;
+};

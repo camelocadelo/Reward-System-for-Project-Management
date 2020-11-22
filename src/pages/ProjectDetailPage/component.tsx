@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import projectActions from 'store/project/actions';
 import { ProjectDetailPageProps } from './types';
+import ProjectActivityCard from 'components/molecules/ProjectActivityCard/component';
+import { ProjectActivityResponse } from 'store/project/types';
 
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
@@ -20,9 +22,29 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   return (
     <MainTemplate>
       {projectActivitiesState && (
-        <span className="typography__variant-h1"> {projectActivitiesState[0].project_name} </span>
+        <div style={{ marginBottom: '20px' }}>
+          <span className="typography__variant-h1"> {projectActivitiesState[0].project_name} </span>
+        </div>
       )}
-      <div> Project Detail Page {id} </div>
+      {projectActivitiesState && (
+        <div style={{ display: 'flex' }}>
+          {projectActivitiesState.map((p: ProjectActivityResponse) => (
+            <div key={p.pk} style={{ marginRight: '20px' }}>
+              <ProjectActivityCard
+                key={p.pk}
+                eventType={p.event_type}
+                username={p.username}
+                timestamp={p.timestamp}
+                eventBonus={p.event_bonus}
+                gitType={p.type}
+                gitMeta={p.metaData}
+                message={p.message}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+      <div> </div>
     </MainTemplate>
   );
 }
