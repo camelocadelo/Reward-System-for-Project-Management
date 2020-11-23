@@ -12,6 +12,7 @@ const login = (state = { data: null, loading: false }, action: any): any => {
       return {
         data: null,
         loading: true,
+        errorMesage: undefined,
       };
     case GET_USER.success:
       console.log(action.data);
@@ -29,11 +30,14 @@ const login = (state = { data: null, loading: false }, action: any): any => {
       return {
         data: data,
         loading: false,
+        errorMessage: undefined,
       };
     case GET_USER.failed:
+      console.log('the action: ', action);
       return {
         data: null,
         loading: false,
+        errorMessage: action.error,
       };
     default:
       return state;
@@ -46,17 +50,20 @@ const register = (state = { data: null, loading: false }, action: any): any => {
       return {
         data: null,
         loading: true,
+        errorMessage: undefined,
       };
     case REGISTER.success:
       const data = action.data;
       return {
         data: data,
         loading: false,
+        errorMessage: undefined,
       };
     case REGISTER.failed:
       return {
         data: null,
         loading: false,
+        errorMessage: action.emailError,
       };
     default:
       return state;

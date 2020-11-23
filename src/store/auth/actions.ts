@@ -10,7 +10,7 @@ export const login = (data: LoginRequest, callbacks?: any) => (dispatch: any, ge
       return api.getUser(data);
     },
     onSuccess: (response: any) => ({ data: response }),
-    onError: (response: any) => ({ ...response }),
+    onError: (response: any) => ({ error: response }),
   });
 };
 
@@ -25,7 +25,7 @@ export const register = (data: RegisterRequest, callbacks?: any) => (
       return api.register(data);
     },
     onSuccess: (response: any) => ({ data: response }),
-    onError: (response: any) => ({ ...response }),
+    onError: (response: any) => ({ emailError: response.emailError }),
   });
 };
 

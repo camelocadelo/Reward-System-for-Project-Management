@@ -17,8 +17,6 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     id && onGetProjectActivities && onGetProjectActivities(id);
   }, []);
 
-  console.log('THE PROJECT ACTIVITIES STATE: ', projectActivitiesState);
-
   console.log('the id: ', id);
   return (
     <MainTemplate>
