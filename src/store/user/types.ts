@@ -10,6 +10,12 @@ export const CHANGE_USERINFO = {
   failed: 'CHANGE_USERINFO_FAILED',
 };
 
+export const GET_USER_ACTIVITIES = {
+  started: 'GET_USER_ACTIVITIES_START',
+  success: 'GET_USER_ACTIVITIES_SUCCESS',
+  failed: 'GET_USER_ACTIVITIES_FAILED',
+};
+
 export type ChangeUserInfoRequest = {
   readonly first_name: string;
   readonly last_name: string;

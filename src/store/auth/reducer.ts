@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { GET_USER } from 'store/auth/types';
+import { GET_USER, REGISTER } from 'store/auth/types';
 
 // const parseUserInfo = (userInfo: AuthTypes.IRawData): AuthTypes.IUser => ({
 //   token: userInfo.token,
@@ -22,6 +22,7 @@ const login = (state = { data: null, loading: false }, action: any): any => {
       localStorage.setItem('is_manager', data.is_manager);
       localStorage.setItem('is_organizationOwner', data.is_organizationOwner);
       localStorage.setItem('is_marketplace_admin', data.is_marketplace_admin);
+      localStorage.setItem('username', data.username);
       // const parsedData = parseUserInfo(data);
       // localStorage.setItem('user', JSON.stringify(parsedData.token));
       // localStorage.setItem('user_role', JSON.stringify(parsedData.user.role));
@@ -39,6 +40,29 @@ const login = (state = { data: null, loading: false }, action: any): any => {
   }
 };
 
+const register = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case REGISTER.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case REGISTER.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case REGISTER.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 // export const user = () =>  {
 //   const local = localStorage.getItem('user');
 //   return local ? JSON.parse(local) : null;
@@ -46,7 +70,7 @@ const login = (state = { data: null, loading: false }, action: any): any => {
 
 const authReducer = combineReducers({
   login,
-  // user,
+  register,
 });
 
 export default authReducer;

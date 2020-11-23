@@ -1,0 +1,24 @@
+.table-row {
+  width: 1500px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  margin-bottom: 44px;
+  border-radius: 10px;
+}
+
+.table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-cell {
+  margin-left: 60px;
+  margin-right: 60px;
+  width: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
