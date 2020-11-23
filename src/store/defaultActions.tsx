@@ -50,13 +50,30 @@ export const defaultAction = (
             }
           });
           break;
+        case 401:
+          response.json().then((val: any) => {
+            dispatch({
+              type: options.action.failed,
+              ...options.onError({
+                message: val.message || 'serverError',
+                status: val.status,
+                myError: val,
+              }),
+            });
+          });
+          break;
         case 400:
         case 404:
         case 412:
           response.json().then((val: any) => {
+            console.log('the 400 val: ', val);
             dispatch({
               type: options.action.failed,
-              ...options.onError({ message: val.message || 'serverError', status: val.status }),
+              ...options.onError({
+                message: val.message || 'serverError',
+                status: val.status,
+                emailError: val.error[0],
+              }),
             });
           });
           break;
