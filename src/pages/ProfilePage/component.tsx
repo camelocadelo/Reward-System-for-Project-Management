@@ -6,13 +6,15 @@ import './index.scss';
 import ProfileCard from 'components/molecules/ProfileCard/component';
 import { ProfilePageProps } from './types';
 import UserInfoModal from 'components/molecules/UserInfoModal/component';
+import UserActivityTable from 'components/molecules/UserActivityTable/component';
 
 function ProfilePage(props: ProfilePageProps) {
-  const { userInfoData, onGetUserInfo } = props;
+  const { userInfoData, onGetUserInfo, userActivitiesData, onGetUserActivities } = props;
   const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
 
   useEffect(() => {
     onGetUserInfo();
+    onGetUserActivities();
   }, []);
 
   const handleChangeUserInfo = () => {
@@ -21,7 +23,11 @@ function ProfilePage(props: ProfilePageProps) {
 
   const handleModalClose = () => {
     setUserInfoModal(false);
+    if (userInfoData) {
+      localStorage.setItem('username', userInfoData.username);
+    }
     onGetUserInfo();
+    onGetUserActivities();
   };
 
   const handleAddGithub = () => {
@@ -57,6 +63,11 @@ function ProfilePage(props: ProfilePageProps) {
             onSendBonuses={handleSendBonuses}
           />
         )}
+        {userActivitiesData && (
+          <div style={{ marginTop: '40px' }}>
+            <UserActivityTable userActivityState={userActivitiesData} />
+          </div>
+        )}
       </div>
       {userInfoModal && <UserInfoModal onCloseModal={handleModalClose} />}
     </MainTemplate>
@@ -66,11 +77,13 @@ function ProfilePage(props: ProfilePageProps) {
 const mapStateToProps = (state: any) => {
   return {
     userInfoData: state.userReducer.userInfo.data,
+    userActivitiesData: state.userReducer.userActivities.data,
   };
 };
 
 const mapDispatchToProps = {
   onGetUserInfo: userActions.getUserInfo,
+  onGetUserActivities: userActions.getUserActivities,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -6,6 +6,7 @@ import projectActions from 'store/project/actions';
 import { ProjectDetailPageProps } from './types';
 import ProjectActivityCard from 'components/molecules/ProjectActivityCard/component';
 import { ProjectActivityResponse } from 'store/project/types';
+import './index.scss';
 
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
@@ -21,15 +22,15 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   console.log('the id: ', id);
   return (
     <MainTemplate>
-      {projectActivitiesState && (
+      {/* {projectActivitiesState && (
         <div style={{ marginBottom: '20px' }}>
           <span className="typography__variant-h1"> {projectActivitiesState[0].project_name} </span>
         </div>
-      )}
+      )} */}
       {projectActivitiesState && (
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex' }} className="project-detail-card-container">
           {projectActivitiesState.map((p: ProjectActivityResponse) => (
-            <div key={p.pk} style={{ marginRight: '20px' }}>
+            <div key={p.pk} style={{ marginRight: '20px' }} className="project-detail-card">
               <ProjectActivityCard
                 key={p.pk}
                 eventType={p.event_type}

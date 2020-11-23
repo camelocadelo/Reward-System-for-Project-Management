@@ -16,7 +16,7 @@ import lightBulb from 'assets/images/lightBulb.png';
 import present from 'assets/images/present.png';
 
 function HomePage(props: any) {
-  const { onGetUser, userData, userLoading } = props;
+  const { onGetUser, userData, userLoading, onRegister } = props;
   const history = useHistory();
   const [isRegistration, setIsRegistration] = useState<boolean>(false);
 
@@ -37,9 +37,18 @@ function HomePage(props: any) {
     [onGetUser]
   );
 
-  const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>((values) => {
-    console.log('the register values: ', values);
-  }, []);
+  const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>(
+    (values) => {
+      return onRegister({
+        email: values.email,
+        username: values.username,
+        password: values.password,
+        first_name: values.first_name,
+        last_name: values.last_name,
+      });
+    },
+    [onRegister]
+  );
 
   useEffect(() => {
     if (userData && !userLoading) {
@@ -47,8 +56,6 @@ function HomePage(props: any) {
       history.push('/profile');
     }
   }, [userData, userLoading, history]);
-
-  console.log('the userdata: ', userData);
 
   return (
     <div className="home-page">
@@ -234,11 +241,13 @@ const mapStateToProps = (state: any) => {
   return {
     userLoading: state.authReducer.login.loading,
     userData: state.authReducer.login.data,
+    registerData: state.authReducer.register.data,
   };
 };
 
 const mapDispatchToProps = {
   onGetUser: authActions.login,
+  onRegister: authActions.register,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HomePage));
