@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MainTemplate } from 'components/organisms/MainTemplate';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,17 +7,34 @@ import { ProjectDetailPageProps } from './types';
 import ProjectActivityCard from 'components/molecules/ProjectActivityCard/component';
 import { ProjectActivityResponse } from 'store/project/types';
 import './index.scss';
+import MainButton from 'components/atoms/MainButton/component';
+import AddTeamMember from 'components/molecules/AddTeamMember/component';
 
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
   const { id } = useParams();
   const { projectActivitiesState, onGetProjectActivities } = props;
 
+  const [isAddTeamMember, setIsAddTeamMember] = useState(false);
+
   useEffect(() => {
     id && onGetProjectActivities && onGetProjectActivities(id);
-  }, []);
+  }, [id, onGetProjectActivities]);
 
-  console.log('the id: ', id);
+  const isAdmin = localStorage.getItem('is_admin');
+  const isOrgOwner = localStorage.getItem('is_organizationOwner');
+  const isManager = localStorage.getItem('is_manager');
+
+  const isShowButton = isAdmin === 'true' || isOrgOwner === 'true' || isManager === 'true';
+
+  const handleAddTeamMember = () => {
+    setIsAddTeamMember(true);
+  };
+
+  const handleCloseAddTeamMember = () => {
+    setIsAddTeamMember(false);
+  };
+
   return (
     <MainTemplate>
       {/* {projectActivitiesState && (
@@ -43,7 +60,19 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
           ))}
         </div>
       )}
-      <div> </div>
+      {isShowButton && (
+        <div>
+          {isAddTeamMember ? (
+            <div style={{ width: '450px' }}>
+              <AddTeamMember pk={parseInt(id, 10)} onClose={handleCloseAddTeamMember} />
+            </div>
+          ) : (
+            <div style={{ width: '250px' }}>
+              <MainButton onCreateProject={handleAddTeamMember} buttonText="+ Add Team Member" />
+            </div>
+          )}
+        </div>
+      )}
     </MainTemplate>
   );
 }

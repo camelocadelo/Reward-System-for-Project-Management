@@ -66,13 +66,13 @@ export const defaultAction = (
         case 404:
         case 412:
           response.json().then((val: any) => {
-            console.log('the 400 val: ', val);
             dispatch({
               type: options.action.failed,
               ...options.onError({
                 message: val.message || 'serverError',
                 status: val.status,
-                emailError: val.error[0],
+                /* TODO: fix errors after back */
+                emailError: val,
               }),
             });
           });
