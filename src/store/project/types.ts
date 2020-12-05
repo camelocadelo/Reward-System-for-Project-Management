@@ -22,6 +22,12 @@ export const ADD_TEAM_MEMBER = {
   failed: 'ADD_TEAM_MEMBER_FAILED',
 };
 
+export const GET_PROJECT_MEMBERS = {
+  started: 'GET_PROJECT_MEMBERS_STARTED',
+  success: 'GET_PROJECT_MEMBERS_SUCCESS',
+  failed: 'GET_PROJECT_MEMBERS_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;

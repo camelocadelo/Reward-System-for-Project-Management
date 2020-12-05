@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import projectActions from 'store/project/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import classNames from 'classnames';
+import Close from 'assets/images/close.png';
 
 function AddTeamMember(props: AddTeamMemberProps): JSX.Element {
   const { pk, onAddTeamMember, addedTeamMemberState, onClose } = props;
@@ -31,6 +32,12 @@ function AddTeamMember(props: AddTeamMemberProps): JSX.Element {
 
   return (
     <div className="add-team-member">
+      <div className="add-team-member-header">
+        <div></div>
+        <div style={{ cursor: 'pointer' }}>
+          <img src={Close} alt="close" onClick={onClose} />
+        </div>
+      </div>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <div className="input-wrp">
           <span className=""> Team Member username </span>

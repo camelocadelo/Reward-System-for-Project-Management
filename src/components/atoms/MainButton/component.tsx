@@ -3,9 +3,9 @@ import './index.scss';
 import { MainButtonProps } from './types';
 
 function MainButton(props: MainButtonProps): JSX.Element {
-  const { onCreateProject, buttonText } = props;
+  const { onCreateProject, buttonText, bgColor } = props;
   return (
-    <button onClick={onCreateProject} className="main-button">
+    <button onClick={onCreateProject} className="main-button" style={{ backgroundColor: bgColor }}>
       {buttonText}
     </button>
   );

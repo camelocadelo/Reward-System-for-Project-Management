@@ -77,7 +77,7 @@ function UserInfoModal(props: UserInfoModalProps): JSX.Element {
             ref={register()}
           />
         </div>
-        <div className="input-wrp mt-8">
+        {/* <div className="input-wrp mt-8">
           <span className=""> Email </span>
           <input
             name={FormInputs.Email}
@@ -88,7 +88,7 @@ function UserInfoModal(props: UserInfoModalProps): JSX.Element {
             placeholder="Enter email"
             required
           />
-        </div>
+        </div> */}
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <button
             className={classNames(['main-button typography__variant-subtext'])}
