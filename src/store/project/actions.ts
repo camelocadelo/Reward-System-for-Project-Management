@@ -7,6 +7,7 @@ import {
   CreateProjectRequest,
   ADD_TEAM_MEMBER,
   AddTeamMemberRequest,
+  GET_PROJECT_MEMBERS,
 } from './types';
 
 export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
@@ -66,9 +67,25 @@ export const addTeamMember = (data: AddTeamMemberRequest, callbacks?: any) => (
   });
 };
 
+export const getProjectMembers = (projectPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECT_MEMBERS,
+    apiCall: () => {
+      return api.getProjectMembers(projectPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
   getProjects,
   getProjectActivities,
   addTeamMember,
+  getProjectMembers,
 };

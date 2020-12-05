@@ -9,17 +9,26 @@ import { ProjectActivityResponse } from 'store/project/types';
 import './index.scss';
 import MainButton from 'components/atoms/MainButton/component';
 import AddTeamMember from 'components/molecules/AddTeamMember/component';
+import ProjectMembersCard from 'components/molecules/ProjectMembersCard/component';
 
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
   const { id } = useParams();
-  const { projectActivitiesState, onGetProjectActivities } = props;
+  const {
+    projectActivitiesState,
+    onGetProjectActivities,
+    onGetProjectMembers,
+    projectMembersState,
+  } = props;
 
   const [isAddTeamMember, setIsAddTeamMember] = useState(false);
 
+  console.log('on get project members: ', projectMembersState);
+
   useEffect(() => {
     id && onGetProjectActivities && onGetProjectActivities(id);
-  }, [id, onGetProjectActivities]);
+    id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
+  }, [id, onGetProjectActivities, onGetProjectMembers]);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -43,25 +52,33 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         </div>
       )} */}
       {projectActivitiesState && (
-        <div style={{ display: 'flex' }} className="project-detail-card-container">
-          {projectActivitiesState.map((p: ProjectActivityResponse) => (
-            <div key={p.pk} style={{ marginRight: '20px' }} className="project-detail-card">
-              <ProjectActivityCard
-                key={p.pk}
-                eventType={p.event_type}
-                username={p.username}
-                timestamp={p.timestamp}
-                eventBonus={p.event_bonus}
-                gitType={p.type}
-                gitMeta={p.metaData}
-                message={p.message}
-              />
-            </div>
-          ))}
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'row' }}
+            className="project-detail-card-container"
+          >
+            {projectActivitiesState.slice(0, 3).map((p: ProjectActivityResponse) => (
+              <div key={p.pk} style={{ marginRight: '20px' }} className="project-detail-card">
+                <ProjectActivityCard
+                  key={p.pk}
+                  eventType={p.event_type}
+                  username={p.username}
+                  timestamp={p.timestamp}
+                  eventBonus={p.event_bonus}
+                  gitType={p.type}
+                  gitMeta={p.metaData}
+                  message={p.message}
+                />
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '22px' }}>
+            {projectActivitiesState.length > 3 && <MainButton buttonText="See All" />}
+          </div>
         </div>
       )}
       {isShowButton && (
-        <div>
+        <div style={{ marginBottom: '22px' }}>
           {isAddTeamMember ? (
             <div style={{ width: '450px' }}>
               <AddTeamMember pk={parseInt(id, 10)} onClose={handleCloseAddTeamMember} />
@@ -73,6 +90,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
           )}
         </div>
       )}
+      {projectMembersState && <ProjectMembersCard members={projectMembersState} />}
     </MainTemplate>
   );
 }
@@ -80,11 +98,13 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
 const mapStateToProps = (state: any) => {
   return {
     projectActivitiesState: state.projectReducer.projectActivities.data,
+    projectMembersState: state.projectReducer.projectMembers.data,
   };
 };
 
 const mapDispatchToProps = {
   onGetProjectActivities: projectActions.getProjectActivities,
+  onGetProjectMembers: projectActions.getProjectMembers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetailPage);

@@ -6,7 +6,7 @@ import MoreInfo from 'assets/images/moreInfo.png';
 import GithubIcon from 'assets/images/githubIcon.png';
 import TelegramIcon from 'assets/images/telegramIcon.png';
 import JiraIcon from 'assets/images/jiraIcon.png';
-import BlueButton from 'components/atoms/BlueButton/component';
+import BorderedButton from 'components/atoms/BorderedButton/component';
 import PopUpMessage from 'components/atoms/PopUpMessage/component';
 import { useOutsideClick } from 'hooks/useOutsideClick';
 
@@ -63,7 +63,6 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
           <div>
             <img
               width="18px"
-              // height="4px"
               src={MoreInfo}
               alt="Change Info"
               onClick={handleMoreClick}
@@ -75,7 +74,7 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
           <span className="typography__variant-coloredtext"> {accountBonuses} </span>
           <span className="typography__variant-subtext"> Bonuses </span>
           <div style={{ marginTop: '18px' }} className="profile-card-footer">
-            <BlueButton onSendBonuses={onSendBonuses} />
+            <BorderedButton text="Send bonuses" onSendBonuses={onSendBonuses} color="#02A0FC" />
             <div>
               <img
                 src={JiraIcon}

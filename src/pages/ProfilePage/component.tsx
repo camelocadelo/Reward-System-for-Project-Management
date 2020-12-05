@@ -30,18 +30,22 @@ function ProfilePage(props: ProfilePageProps) {
     onGetUserActivities();
   };
 
+  /* TODO: add addGithub method after back*/
   const handleAddGithub = () => {
     console.log('HANDLE ADD GITHUB');
   };
 
+  /* TODO: add addSlack method after back*/
   const handleAddSlack = () => {
     console.log('HANDLE ADD SLACK');
   };
 
+  /*TODO: add addJira method after back */
   const handleAddJira = () => {
     console.log('HANDLE ADD JIRA');
   };
 
+  /* TODO: add sendBonuses method after back*/
   const handleSendBonuses = () => {
     console.log('HANDLE SEND BONUSES');
   };

@@ -4,6 +4,7 @@ import {
   GET_PROJECTS,
   GET_PROJECT_ACTIVITIES,
   ADD_TEAM_MEMBER,
+  GET_PROJECT_MEMBERS,
 } from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
@@ -100,11 +101,35 @@ const addedTeamMemberState = (state = { data: null, loading: false }, action: an
   }
 };
 
+const projectMembers = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_PROJECT_MEMBERS.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_PROJECT_MEMBERS.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case GET_PROJECT_MEMBERS.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
   projectActivities,
   addedTeamMemberState,
+  projectMembers,
 });
 
 export default projectReducer;

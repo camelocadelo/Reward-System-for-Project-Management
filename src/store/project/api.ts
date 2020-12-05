@@ -16,3 +16,7 @@ export const getProjectActivities = (data: any) =>
 
 const addTeamMemberUrl = `${API_URL}/op/add_team_member`;
 export const addTeamMember = (data: any) => API.stdApiPOST({ data, url: addTeamMemberUrl });
+
+const getProjectMembersUrl = `${API_URL}/op/get-users-of-project/`;
+export const getProjectMembers = (projectPk: number) =>
+  API.stdApiGET({ url: `${getProjectMembersUrl}${projectPk}`, token: access_token });
