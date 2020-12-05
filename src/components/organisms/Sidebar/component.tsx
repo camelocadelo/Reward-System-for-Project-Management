@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 import Logo from 'assets/images/Logo.png';
 import LogoutIcon from 'assets/images/logoutIcon.svg';
 
-/* TODO: functionality of logout: redirect to login page, delete token*/
-const onLogout = () => {
-  console.log('Log out icon clicked');
-};
-
 export const Sidebar: FC = () => {
+  /* TODO: functionality of logout: redirect to login page, delete token*/
+  const onLogout = () => {
+    console.log('Log out icon clicked');
+  };
+
   return (
     <div className="sidebar">
       <div>

@@ -13,3 +13,6 @@ export const getProjects = () => API.stdApiGET({ url: getProjectsUrl, token: acc
 const getProjectActivitiesUrl = `${API_URL}/op/get_project_activities/`;
 export const getProjectActivities = (data: any) =>
   API.stdApiGET({ url: `${getProjectActivitiesUrl}${data}`, token: access_token });
+
+const addTeamMemberUrl = `${API_URL}/op/add_team_member`;
+export const addTeamMember = (data: any) => API.stdApiPOST({ data, url: addTeamMemberUrl });

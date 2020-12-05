@@ -16,6 +16,12 @@ export const GET_PROJECT_ACTIVITIES = {
   failed: 'GET_PROJECT_ACTIVITIES_FAILED',
 };
 
+export const ADD_TEAM_MEMBER = {
+  started: 'ADD_TEAM_MEMBER_STARTED',
+  success: 'ADD_TEAM_MEMBER_SUCCESS',
+  failed: 'ADD_TEAM_MEMBER_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;
@@ -31,5 +37,10 @@ export type ProjectActivityResponse = {
   readonly type?: string;
   readonly event_bonus: string;
   readonly metaData?: string;
+  readonly username: string;
+};
+
+export type AddTeamMemberRequest = {
+  readonly pk: number;
   readonly username: string;
 };

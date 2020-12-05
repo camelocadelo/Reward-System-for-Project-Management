@@ -25,7 +25,7 @@ export const register = (data: RegisterRequest, callbacks?: any) => (
       return api.register(data);
     },
     onSuccess: (response: any) => ({ data: response }),
-    onError: (response: any) => ({ emailError: response.emailError }),
+    onError: (response: any) => ({ emailError: response }),
   });
 };
 

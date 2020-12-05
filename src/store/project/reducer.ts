@@ -1,5 +1,10 @@
 import { combineReducers } from 'redux';
-import { CREATE_PROJECT, GET_PROJECTS, GET_PROJECT_ACTIVITIES } from 'store/project/types';
+import {
+  CREATE_PROJECT,
+  GET_PROJECTS,
+  GET_PROJECT_ACTIVITIES,
+  ADD_TEAM_MEMBER,
+} from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
   switch (action.type) {
@@ -71,10 +76,35 @@ const projectActivities = (state = { data: null, loading: false }, action: any):
   }
 };
 
+const addedTeamMemberState = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case ADD_TEAM_MEMBER.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case ADD_TEAM_MEMBER.success:
+      console.log(action.data);
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case ADD_TEAM_MEMBER.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
   projectActivities,
+  addedTeamMemberState,
 });
 
 export default projectReducer;
