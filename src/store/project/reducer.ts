@@ -5,6 +5,7 @@ import {
   GET_PROJECT_ACTIVITIES,
   ADD_TEAM_MEMBER,
   GET_PROJECT_MEMBERS,
+  DELETE_PROJECT,
 } from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
@@ -124,12 +125,37 @@ const projectMembers = (state = { data: null, loading: false }, action: any): an
   }
 };
 
+const deletedProjectState = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case DELETE_PROJECT.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case DELETE_PROJECT.success:
+      console.log(action.data);
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case DELETE_PROJECT.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
   projectActivities,
   addedTeamMemberState,
   projectMembers,
+  deletedProjectState,
 });
 
 export default projectReducer;

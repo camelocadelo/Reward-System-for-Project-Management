@@ -20,3 +20,7 @@ export const addTeamMember = (data: any) => API.stdApiPOST({ data, url: addTeamM
 const getProjectMembersUrl = `${API_URL}/op/get-users-of-project/`;
 export const getProjectMembers = (projectPk: number) =>
   API.stdApiGET({ url: `${getProjectMembersUrl}${projectPk}`, token: access_token });
+
+const deleteProjectUrl = `${API_URL}/op/delete-project/`;
+export const deleteProject = (projectPk: number) =>
+  API.stdApiDELETE({ url: `${deleteProjectUrl}${projectPk}`, token: access_token });
