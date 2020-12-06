@@ -28,6 +28,12 @@ export const GET_PROJECT_MEMBERS = {
   failed: 'GET_PROJECT_MEMBERS_FAILED',
 };
 
+export const DELETE_PROJECT = {
+  started: 'DELETE_PROJECT_STARTED',
+  success: 'DELETE_PROJECT_SUCCESS',
+  failed: 'DELETE_PROJECT_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;

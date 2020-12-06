@@ -8,6 +8,7 @@ import {
   ADD_TEAM_MEMBER,
   AddTeamMemberRequest,
   GET_PROJECT_MEMBERS,
+  DELETE_PROJECT,
 } from './types';
 
 export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
@@ -82,10 +83,26 @@ export const getProjectMembers = (projectPk: number, callbacks?: any) => (
   });
 };
 
+export const deleteProject = (projectPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_PROJECT,
+    apiCall: () => {
+      return api.deleteProject(projectPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
   getProjects,
   getProjectActivities,
   addTeamMember,
   getProjectMembers,
+  deleteProject,
 };
