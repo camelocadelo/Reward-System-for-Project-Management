@@ -49,7 +49,7 @@ function ProjectPage(props: ProjectPageProps): JSX.Element {
         )}
       </div>
       {isShowButton && (
-        <div style={{ width: '140px', marginTop: '32px', marginLeft: '10px' }}>
+        <div style={{ width: 'fit-content', marginTop: '32px', marginLeft: '10px' }}>
           <MainButton onCreateProject={handleOpenModal} buttonText="Create Project" />
         </div>
       )}

@@ -65,7 +65,9 @@ export const defaultAction = (
         case 400:
         case 404:
         case 412:
+          console.log('the response aha: ', response);
           response.json().then((val: any) => {
+            console.log('the val: ', val);
             dispatch({
               type: options.action.failed,
               ...options.onError({
