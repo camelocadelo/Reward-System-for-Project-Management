@@ -60,7 +60,11 @@ function ProjectCard(props: ProjectCardProps): JSX.Element {
         </Link>
       </div>
       {isDeleteModal && (
-        <ProjectDeleteModal onClickCancel={handleModalCancel} onClickModalOk={handleModalOk} />
+        <ProjectDeleteModal
+          text="Are you sure you want to delete this project?"
+          onClickCancel={handleModalCancel}
+          onClickModalOk={handleModalOk}
+        />
       )}
     </>
   );

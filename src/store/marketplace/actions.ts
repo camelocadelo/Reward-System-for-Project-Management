@@ -1,7 +1,11 @@
 import { defaultAction } from 'store/defaultActions';
 import * as api from 'store/marketplace/api';
 
-import { GET_MARKETPLACE_PRODUCTS, ADD_MARKETPLACE_PRODUCT } from './types';
+import {
+  GET_MARKETPLACE_PRODUCTS,
+  ADD_MARKETPLACE_PRODUCT,
+  DELETE_MARKETPLACE_PRODUCT,
+} from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -30,7 +34,23 @@ export const addMarketplaceProduct = (data: any, callbacks?: any) => (
   });
 };
 
+export const deleteMarketplaceProduct = (productPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_MARKETPLACE_PRODUCT,
+    apiCall: () => {
+      return api.deleteMarketplaceProduct(productPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
+  deleteMarketplaceProduct,
 };

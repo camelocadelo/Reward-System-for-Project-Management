@@ -14,3 +14,7 @@ export const addMarketplaceProduct = (data: any) =>
     token: access_token,
     data,
   });
+
+const deleteMarketplaceProductUrl = `${API_URL}/marketplace/deleteProduct/`;
+export const deleteMarketplaceProduct = (productPk: number) =>
+  API.stdApiDELETE({ url: `${deleteMarketplaceProductUrl}${productPk}`, token: access_token });

@@ -7,10 +7,16 @@ import MarketplacePrizesTable from 'pages/MarketplaceAdmin/ProductsList/Tabs/Pri
 import './index.scss';
 import { ProductsListProps } from './types';
 import { Link } from 'react-router-dom';
+import ProjectDeleteModal from 'components/molecules/ProjectDeleteModal/component';
 
 function ProductsList(props: ProductsListProps) {
-  const { marketplaceProducts, onGetMarketplaceProducts } = props;
+  const { marketplaceProducts, onGetMarketplaceProducts, onDeleteMarketplaceProduct } = props;
   const [isOrdersTable, setIsOrdersTable] = useState<boolean>(false);
+  const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
+
+  const [deleteProductPk, setDeleteProductPk] = useState<number>(-1);
+
+  console.log('the delete product pk: ', deleteProductPk);
 
   const handleOrderTab = () => {
     setIsOrdersTable(true);
@@ -24,7 +30,25 @@ function ProductsList(props: ProductsListProps) {
     onGetMarketplaceProducts();
   }, []);
 
+  const handleDeleteProduct = (pk: number) => {
+    setIsDeleteModal(true);
+    setDeleteProductPk(pk);
+    console.log('THE PRODUCT TO BE DELETED FROM PRODUCT LIST PAGE: ', pk);
+  };
+
   console.log('the marketplace products: ', marketplaceProducts);
+
+  const handleModalOk = () => {
+    onDeleteMarketplaceProduct && deleteProductPk && onDeleteMarketplaceProduct(deleteProductPk);
+    onGetMarketplaceProducts();
+    setIsDeleteModal(false);
+    // onDeleteProject && projectPK && onDeleteProject(projectPK);
+    //todo
+  };
+
+  const handleModalCancel = () => {
+    setIsDeleteModal(false);
+  };
 
   return (
     <MainTemplate>
@@ -72,10 +96,20 @@ function ProductsList(props: ProductsListProps) {
           {isOrdersTable ? (
             <div> Marketplace orders table </div>
           ) : (
-            <MarketplacePrizesTable marketplaceProducts={marketplaceProducts} />
+            <MarketplacePrizesTable
+              marketplaceProducts={marketplaceProducts}
+              onDeleteProduct={handleDeleteProduct}
+            />
           )}
         </div>
       </div>
+      {isDeleteModal && (
+        <ProjectDeleteModal
+          text="Are you sure you want to delete this product?"
+          onClickCancel={handleModalCancel}
+          onClickModalOk={handleModalOk}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -88,6 +122,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   onGetMarketplaceProducts: marketplaceActions.getMarketplaceProducts,
+  onDeleteMarketplaceProduct: marketplaceActions.deleteMarketplaceProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

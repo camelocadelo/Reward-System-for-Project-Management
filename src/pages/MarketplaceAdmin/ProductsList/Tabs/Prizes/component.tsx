@@ -5,7 +5,11 @@ import { columns } from './consts';
 import ProductRow from 'pages/MarketplaceAdmin/ProductsList/ProductRow/component';
 
 function MarketplacePrizesTable(props: MarketplaceProductsProps): JSX.Element {
-  const { marketplaceProducts } = props;
+  const { marketplaceProducts, onDeleteProduct } = props;
+
+  const handleProductDelete = (pk: number) => {
+    onDeleteProduct(pk);
+  };
 
   return (
     <div className="marketplace-prizes-table">
@@ -44,8 +48,17 @@ function MarketplacePrizesTable(props: MarketplaceProductsProps): JSX.Element {
         </tr>
         <tbody className="table-body">
           {marketplaceProducts &&
-            marketplaceProducts.map((p: any, i: number) => (
-              <ProductRow key={i} name={p.name} description={p.description} price={p.price} />
+            marketplaceProducts.map((p: any) => (
+              <ProductRow
+                key={p.pk}
+                pk={p.pk}
+                name={p.name}
+                description={p.description}
+                price={p.price}
+                category={p.category}
+                sizes_available={p.sizes_available}
+                onProductDelete={handleProductDelete}
+              />
             ))}
         </tbody>
       </table>
