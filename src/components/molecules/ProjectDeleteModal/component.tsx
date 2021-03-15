@@ -5,11 +5,11 @@ import { DeleteModalProps } from './types';
 import BorderedButton from 'components/atoms/BorderedButton/component';
 
 function DeleteModal(props: DeleteModalProps): JSX.Element {
-  const { onClickModalOk, onClickCancel } = props;
+  const { onClickModalOk, onClickCancel, text } = props;
   return (
     <div className="project-delete-modal">
       <div className="project-delete-modal-body">
-        <span> Are you sure you want to delete this project? </span>
+        <span> {text} </span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', marginTop: '30px' }}>
         <div style={{ marginRight: '50px' }}>

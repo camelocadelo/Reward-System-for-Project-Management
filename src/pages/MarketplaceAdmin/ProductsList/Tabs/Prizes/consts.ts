@@ -3,10 +3,10 @@ export const columns = [
     title: 'Price',
   },
   {
-    title: 'In stock',
+    title: 'Category',
   },
   {
-    title: 'Bought',
+    title: 'Sizes',
   },
   {
     title: '',

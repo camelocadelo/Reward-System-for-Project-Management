@@ -4,14 +4,21 @@ import './index.scss';
 // import TagItem from 'components/atoms/TagItem/component';
 import editIcon from 'assets/images/editproduct.png';
 import deleteIcon from 'assets/images/trashproduct.png';
-import bookPhoto from 'assets/images/bookproduct.jpg';
+import bookPhoto from 'assets/images/Dummy.jpg';
 
 function ProductRow(props: ProductRowProps): JSX.Element {
-  const { name, description, price } = props;
+  const { name, description, price, category, sizes_available, pk, onProductDelete } = props;
+
+  const handleProductDelete = () => {
+    onProductDelete(pk);
+  };
 
   return (
     <tr className="table-row">
-      <td className="table-cell" style={{ width: '400px' }}>
+      <td
+        className="table-cell"
+        style={{ width: '400px', justifyContent: 'flex-start', textAlign: 'start' }}
+      >
         <div style={{ marginRight: '15px' }}>
           <img
             src={bookPhoto}
@@ -29,8 +36,14 @@ function ProductRow(props: ProductRowProps): JSX.Element {
         </div>
       </td>
       <td className="table-cell"> {price} </td>
-      <td className="table-cell"> {12} </td>
-      <td className="table-cell"> {23} </td>
+      <td className="table-cell"> {category} </td>
+      <td className="table-cell">
+        {sizes_available.map((s: any) => (
+          <div key={s}>
+            <span>{s}</span>
+          </div>
+        ))}
+      </td>
       <td className="table-cell">
         <img
           src={editIcon}
@@ -44,6 +57,8 @@ function ProductRow(props: ProductRowProps): JSX.Element {
         <img
           src={deleteIcon}
           alt="delete"
+          onClick={handleProductDelete}
+          style={{ cursor: 'pointer' }}
           // width="90px"
           // height="90px"
           // style={{ borderRadius: '50%', marginBottom: '10px' }}
