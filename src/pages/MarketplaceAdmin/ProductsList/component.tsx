@@ -6,6 +6,7 @@ import MainButton from 'components/atoms/MainButton/component';
 import MarketplacePrizesTable from 'pages/MarketplaceAdmin/ProductsList/Tabs/Prizes/component';
 import './index.scss';
 import { ProductsListProps } from './types';
+import { Link } from 'react-router-dom';
 
 function ProductsList(props: ProductsListProps) {
   const { marketplaceProducts, onGetMarketplaceProducts } = props;
@@ -59,10 +60,15 @@ function ProductsList(props: ProductsListProps) {
           </div>
         </div>
         <div className="marketplace-table">
-          <span className="typography__variant-h2">
-            {isOrdersTable ? 'Orders' : 'Prizes'}
-            {marketplaceProducts ? ` (${marketplaceProducts.length})` : ' (0)'}
-          </span>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <span className="typography__variant-h2">
+              {isOrdersTable ? 'Orders' : 'Prizes'}
+              {marketplaceProducts ? ` (${marketplaceProducts.length})` : ' (0)'}
+            </span>
+            <a href="admin-marketplace/product-creation">
+              <MainButton buttonText="+ Create prize" />
+            </a>
+          </div>
           {isOrdersTable ? (
             <div> Marketplace orders table </div>
           ) : (

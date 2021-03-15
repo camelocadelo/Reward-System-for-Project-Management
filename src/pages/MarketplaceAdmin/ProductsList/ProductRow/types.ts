@@ -4,4 +4,5 @@ export interface ProductRowProps {
   readonly description: string;
   readonly price: number;
   readonly sizes_available?: any;
+  readonly category?: any;
 }

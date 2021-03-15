@@ -10,9 +10,9 @@ export const STD_HEADERS = {
 const modifyHeader = (options: any) => {
   const headers = STD_HEADERS;
 
-  // if (options.formData) {
-  //   delete headers['Content-Type'];
-  // }
+  if (options.formData) {
+    headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
+  }
 
   if (!!options.token) {
     const str = options.token.replace(/"/g, '');
@@ -25,14 +25,18 @@ const modifyHeader = (options: any) => {
   return headers;
 };
 
-export const stdApiPOST = (options: any) =>
-  fetch(options.url, {
+export const stdApiPOST = (options: any) => {
+  const formData = new FormData();
+  formData.append(options.rawHeader, options.raw);
+
+  return fetch(options.url, {
     method: 'POST',
     headers: modifyHeader(options),
     // body: options.data,
-    body: JSON.stringify(options.data || {}),
+    body: options.raw ? formData : JSON.stringify(options.data || {}),
     // body: qs.stringify(options.data || {}),
   });
+};
 
 export const stdApiDELETE = (options: any) =>
   fetch(options.url, {

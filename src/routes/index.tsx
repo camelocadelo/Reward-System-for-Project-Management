@@ -7,6 +7,9 @@ const ProjectPage = lazy(() => import('pages/ProjectPage/component'));
 const ProfilePage = lazy(() => import('pages/ProfilePage/component'));
 const ProjectDetailPage = lazy(() => import('pages/ProjectDetailPage/component'));
 const MarketplaceAdminList = lazy(() => import('pages/MarketplaceAdmin/ProductsList/component'));
+const ProductCreationEdition = lazy(
+  () => import('pages/MarketplaceAdmin/ProductCreationEdition/component')
+);
 
 const RootRouter: FC = () => (
   <Router>
@@ -16,7 +19,8 @@ const RootRouter: FC = () => (
         <Route exact={true} path="/projects" component={ProjectPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/projects/:id" component={ProjectDetailPage} />
-        <Route path="/admin-marketplace" component={MarketplaceAdminList} />
+        <Route exact={true} path="/admin-marketplace" component={MarketplaceAdminList} />
+        <Route path="/admin-marketplace/product-creation" component={ProductCreationEdition} />
       </Route>
     </Switch>
   </Router>
