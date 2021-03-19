@@ -172,8 +172,8 @@ function ProductCreationEdition(props: any) {
             >
               Sizes available
             </span>
-            <select onChange={handleSizeChange} defaultValue="Select size" className="sizes-select">
-              {/* <option value="" disabled selected style={{ color: 'gray' }}></option> */}
+            <select onChange={handleSizeChange} className="sizes-select">
+              <option value="" disabled selected style={{ color: 'gray' }}></option>
               <option value="xs"> xs </option>
               <option value="s"> s </option>
               <option value="m"> m </option>
