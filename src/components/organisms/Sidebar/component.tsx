@@ -3,7 +3,7 @@
 import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router';
 import './index.scss';
-import { pages } from './consts';
+import { pages, adminPages } from './consts';
 import { Link } from 'react-router-dom';
 import Logo from 'assets/images/Logo.png';
 import LogoutIcon from 'assets/images/logoutIcon.svg';
@@ -19,12 +19,17 @@ export const Sidebar: FC = () => {
 
   const handleModalOk = () => {
     setIsLogoutModal(false);
+    localStorage.removeItem('access_token');
+    // window.location.href = '';
     history.push('/');
   };
 
   const handleCancelModal = () => {
     setIsLogoutModal(false);
   };
+
+  const isAdmin = localStorage.getItem('is_admin');
+  console.log('is admin from sidebar: ', isAdmin);
 
   return (
     <>
@@ -37,17 +42,29 @@ export const Sidebar: FC = () => {
             style={{ border: '1px solid black', width: '100%', opacity: '0.2' }}
             className="sidebar-horizontal-line"
           />
-          {pages.map((p, i) => (
-            <Link key={i} to={p.href}>
-              <div className="sidebar-item">
-                <img
-                  src={p.icon}
-                  alt={p.title}
-                  style={p.title === 'Marketplace' ? { opacity: '0.25' } : { opacity: '1.0' }}
-                />
-              </div>
-            </Link>
-          ))}
+          {isAdmin === 'true'
+            ? adminPages.map((p, i) => (
+                <Link key={i} to={p.href}>
+                  <div className="sidebar-item">
+                    <img
+                      src={p.icon}
+                      alt={p.title}
+                      style={p.title === 'Marketplace' ? { opacity: '0.25' } : { opacity: '1.0' }}
+                    />
+                  </div>
+                </Link>
+              ))
+            : pages.map((p, i) => (
+                <Link key={i} to={p.href}>
+                  <div className="sidebar-item">
+                    <img
+                      src={p.icon}
+                      alt={p.title}
+                      style={p.title === 'Marketplace' ? { opacity: '0.25' } : { opacity: '1.0' }}
+                    />
+                  </div>
+                </Link>
+              ))}
         </div>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <img

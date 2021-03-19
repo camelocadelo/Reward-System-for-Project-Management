@@ -31,7 +31,10 @@ function ProductRow(props: ProductRowProps): JSX.Element {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div> {name} </div>
           <div style={{ marginTop: '10px' }}>
-            <span className="typography__variant-subtext"> {description} </span>
+            <span className="typography__variant-subtext">
+              {description.substr(0, 33)}
+              {description.length > 30 ? '...' : ''}
+            </span>
           </div>
         </div>
       </td>
@@ -40,7 +43,7 @@ function ProductRow(props: ProductRowProps): JSX.Element {
       <td className="table-cell">
         {sizes_available.map((s: any) => (
           <div key={s}>
-            <span>{s}</span>
+            <span>{s}, </span>
           </div>
         ))}
       </td>

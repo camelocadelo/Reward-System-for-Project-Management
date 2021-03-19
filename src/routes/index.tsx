@@ -10,6 +10,7 @@ const MarketplaceAdminList = lazy(() => import('pages/MarketplaceAdmin/ProductsL
 const ProductCreationEdition = lazy(
   () => import('pages/MarketplaceAdmin/ProductCreationEdition/component')
 );
+const MarketplaceUserPage = lazy(() => import('pages/MarketplaceUser/component'));
 
 const RootRouter: FC = () => (
   <Router>
@@ -21,6 +22,7 @@ const RootRouter: FC = () => (
         <Route path="/projects/:id" component={ProjectDetailPage} />
         <Route exact={true} path="/admin-marketplace" component={MarketplaceAdminList} />
         <Route path="/admin-marketplace/product-creation" component={ProductCreationEdition} />
+        <Route path="/marketplace" component={MarketplaceUserPage} />
       </Route>
     </Switch>
   </Router>

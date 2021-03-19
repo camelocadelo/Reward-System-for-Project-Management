@@ -16,6 +16,24 @@ export const pages = [
   {
     title: 'Marketplace',
     icon: MarketplaceIcon,
+    href: '/marketplace',
+  },
+];
+
+export const adminPages = [
+  {
+    title: 'Profile',
+    icon: ProfileIcon,
+    href: '/profile',
+  },
+  {
+    title: 'Projects',
+    icon: ProjectListIcon,
+    href: '/projects',
+  },
+  {
+    title: 'Marketplace',
+    icon: MarketplaceIcon,
     href: '/admin-marketplace',
   },
 ];
