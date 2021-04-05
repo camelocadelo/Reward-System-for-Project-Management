@@ -3,4 +3,6 @@ export interface MarketplaceProductProps {
   readonly name: string;
   readonly description: string;
   readonly onAddCart?: any;
+  readonly pk: any;
+  readonly addedCartItemState?: boolean;
 }

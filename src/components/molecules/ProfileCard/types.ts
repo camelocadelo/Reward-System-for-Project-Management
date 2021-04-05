@@ -7,6 +7,6 @@ export interface ProfileCardProps {
   readonly onChangeUserInfo: any;
   readonly onSendBonuses: any;
   readonly onAddGithub: any;
-  readonly onAddSlack: any;
+  readonly onAddSlack?: any;
   readonly onAddJira: any;
 }

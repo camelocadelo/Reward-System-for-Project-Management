@@ -29,7 +29,7 @@ export const Sidebar: FC = () => {
   };
 
   const isAdmin = localStorage.getItem('is_admin');
-  console.log('is admin from sidebar: ', isAdmin);
+  // console.log('is admin from sidebar: ', isAdmin);
 
   return (
     <>
@@ -49,7 +49,18 @@ export const Sidebar: FC = () => {
                     <img
                       src={p.icon}
                       alt={p.title}
-                      style={p.title === 'Marketplace' ? { opacity: '0.25' } : { opacity: '1.0' }}
+                      // width={20}
+                      // height={20}
+                      style={
+                        p.title === 'Cart' || p.title === 'Marketplace'
+                          ? {
+                              opacity: '0.25',
+                              // height: '20px',
+                              // width: '20px',
+                              // border: '2px solid grey',
+                            }
+                          : { opacity: '1.0' }
+                      }
                     />
                   </div>
                 </Link>
@@ -60,7 +71,18 @@ export const Sidebar: FC = () => {
                     <img
                       src={p.icon}
                       alt={p.title}
-                      style={p.title === 'Marketplace' ? { opacity: '0.25' } : { opacity: '1.0' }}
+                      width={25}
+                      height={25}
+                      style={
+                        p.title === 'Cart' || p.title === 'Marketplace'
+                          ? {
+                              opacity: '0.25',
+                              // height: '20px',
+                              // width: '20px',
+                              // border: '2px solid grey',
+                            }
+                          : { opacity: '1.0' }
+                      }
                     />
                   </div>
                 </Link>

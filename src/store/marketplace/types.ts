@@ -15,3 +15,15 @@ export const DELETE_MARKETPLACE_PRODUCT = {
   success: 'DELETE_MARKETPLACE_PRODUCT_SUCCESS',
   failed: 'DELETE_MARKETPLACE_PRODUCT_FAILED',
 };
+
+export const GET_CART_ITEMS = {
+  started: 'GET_CART_ITEMS_STARTED',
+  success: 'GET_CART_ITEMS_SUCCESS',
+  failed: 'GET_CART_ITEMS_FAILED',
+};
+
+export const ADD_TO_CART = {
+  started: 'ADD_TO_CART_STARTED',
+  success: 'ADD_TO_CART_SUCCESS',
+  failed: 'ADD_TO_CART_FAILED',
+};
