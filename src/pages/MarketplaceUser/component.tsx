@@ -11,16 +11,29 @@ import MarketplaceProduct from 'components/molecules/MarketplaceProduct/componen
 import { photoUrls } from './consts';
 
 function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
-  const { onGetMarketplaceProducts, marketplaceProducts } = props;
+  const { onGetMarketplaceProducts, marketplaceProducts, onAddToCart } = props;
 
   useEffect(() => {
     onGetMarketplaceProducts();
   }, []);
 
-  console.log('the marketplace user products: ', marketplaceProducts);
+  // console.log('the marketplace user products: ', marketplaceProducts);
 
-  const handleAddCart = () => {
-    console.log('adding to cart');
+  const handleAddCart = (pk: any, size: any) => {
+    onAddToCart &&
+      onAddToCart(
+        {
+          product_pk: pk,
+          quantity: 1,
+          chosen_size: size,
+        },
+        {
+          onSuccess: (response: any) => {
+            console.log('the returned success response: ', response);
+            // const { data } = response?.createdTagState;
+          },
+        }
+      );
   };
 
   return (
@@ -34,6 +47,7 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
             marketplaceProducts.map((p: any, i: number) => (
               <div key={p.pk} style={{ marginRight: '22px' }}>
                 <MarketplaceProduct
+                  pk={p.pk}
                   name={p.name}
                   description={p.description}
                   onAddCart={handleAddCart}
@@ -55,6 +69,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   onGetMarketplaceProducts: marketplaceActions.getMarketplaceProducts,
+  onAddToCart: marketplaceActions.addToCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarketplaceUserPage);

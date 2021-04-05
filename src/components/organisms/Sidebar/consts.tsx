@@ -1,6 +1,7 @@
 import ProfileIcon from 'assets/images/profileIcon.png';
 import ProjectListIcon from 'assets/images/projectListIcon.png';
-import MarketplaceIcon from 'assets/images/marketplaceIcon.svg';
+import CartIcon from 'assets/images/marketplaceIcon.svg';
+import MarketplaceIcon2 from 'assets/images/shopping-bag.svg';
 
 export const pages = [
   {
@@ -15,8 +16,13 @@ export const pages = [
   },
   {
     title: 'Marketplace',
-    icon: MarketplaceIcon,
+    icon: MarketplaceIcon2,
     href: '/marketplace',
+  },
+  {
+    title: 'Cart',
+    icon: CartIcon,
+    href: '/cart',
   },
 ];
 
@@ -33,7 +39,7 @@ export const adminPages = [
   },
   {
     title: 'Marketplace',
-    icon: MarketplaceIcon,
+    icon: CartIcon,
     href: '/admin-marketplace',
   },
 ];

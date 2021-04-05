@@ -5,6 +5,8 @@ import {
   GET_MARKETPLACE_PRODUCTS,
   ADD_MARKETPLACE_PRODUCT,
   DELETE_MARKETPLACE_PRODUCT,
+  GET_CART_ITEMS,
+  ADD_TO_CART,
 } from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
@@ -49,8 +51,34 @@ export const deleteMarketplaceProduct = (productPk: number, callbacks?: any) => 
   });
 };
 
+export const getCartItems = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_CART_ITEMS,
+    apiCall: () => {
+      return api.getCartItems();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const addToCart = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: ADD_TO_CART,
+    apiCall: () => {
+      return api.addtoCart(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
   deleteMarketplaceProduct,
+  getCartItems,
+  addToCart,
 };

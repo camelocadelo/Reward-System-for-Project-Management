@@ -9,6 +9,7 @@ import JiraIcon from 'assets/images/jiraIcon.png';
 import BorderedButton from 'components/atoms/BorderedButton/component';
 import PopUpMessage from 'components/atoms/PopUpMessage/component';
 import { useOutsideClick } from 'hooks/useOutsideClick';
+import SlackIcon from 'assets/images/slackIcon.png';
 
 function ProfileCard(props: ProfileCardProps): JSX.Element {
   const {
@@ -20,7 +21,7 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
     onChangeUserInfo,
     onSendBonuses,
     // onAddGithub,
-    // onAddSlack,
+    onAddSlack,
     // onAddJira,
   } = props;
 
@@ -89,10 +90,11 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
                 style={{ marginRight: '10px', cursor: 'pointer' }}
               />
               <img
-                src={TelegramIcon}
-                alt="Add Telegram"
-                width="20px"
+                src={SlackIcon}
+                alt="Add Slack"
+                width="40px"
                 style={{ cursor: 'pointer' }}
+                onClick={onAddSlack}
               />
             </div>
           </div>
