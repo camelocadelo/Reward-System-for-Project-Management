@@ -30,3 +30,11 @@ export const addtoCart = (data: any) =>
     token: access_token,
     data,
   });
+
+const deleteFromCartUrl = `${API_URL}/marketplace/deleteFromCart/${my_pk}`;
+export const deleteFromCart = (data: any) =>
+  API.stdApiDELETE({
+    url: deleteFromCartUrl,
+    token: access_token,
+    data,
+  });

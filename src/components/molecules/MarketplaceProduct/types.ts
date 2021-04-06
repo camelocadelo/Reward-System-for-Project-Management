@@ -5,4 +5,6 @@ export interface MarketplaceProductProps {
   readonly onAddCart?: any;
   readonly pk: any;
   readonly addedCartItemState?: boolean;
+  readonly price?: any;
+  readonly available_sizes?: any;
 }

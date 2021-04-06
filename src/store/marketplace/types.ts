@@ -27,3 +27,9 @@ export const ADD_TO_CART = {
   success: 'ADD_TO_CART_SUCCESS',
   failed: 'ADD_TO_CART_FAILED',
 };
+
+export const DELETE_FROM_CART = {
+  started: 'DELETE_FROM_CART_STARTED',
+  success: 'DELETE_FROM_CART_SUCCESS',
+  failed: 'DELETE_FROM_CART_FAILED',
+};

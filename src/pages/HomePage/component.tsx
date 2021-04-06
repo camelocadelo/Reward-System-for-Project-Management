@@ -281,7 +281,13 @@ function HomePage(props: any) {
           </div>
         </div>
       </div>
-      {isRegisterSuccess && <RegisterSuccessModal onClickModalOk={handleCloseModal} />}
+      {isRegisterSuccess && (
+        <RegisterSuccessModal
+          titleText="You have successfully registered"
+          bodyText="Check your email to activate your account"
+          onClickModalOk={handleCloseModal}
+        />
+      )}
     </div>
   );
 }
