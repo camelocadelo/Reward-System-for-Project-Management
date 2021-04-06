@@ -58,7 +58,7 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
             cartItems.map((p: any, i: number) => (
               <div key={p.pk} style={{ marginRight: '22px' }}>
                 <CartItem
-                  pk={p.pk}
+                  pk={p.product}
                   name={p.product_name}
                   quantity={p.quantity}
                   chosen_size={p.chosen_size}
