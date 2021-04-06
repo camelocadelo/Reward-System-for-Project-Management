@@ -7,6 +7,7 @@ import {
   DELETE_MARKETPLACE_PRODUCT,
   GET_CART_ITEMS,
   ADD_TO_CART,
+  DELETE_FROM_CART,
 } from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
@@ -75,10 +76,23 @@ export const addToCart = (data: any, callbacks?: any) => (dispatch: any, getStat
   });
 };
 
+export const deleteFromCart = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_FROM_CART,
+    apiCall: () => {
+      return api.deleteFromCart(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
   deleteMarketplaceProduct,
   getCartItems,
   addToCart,
+  deleteFromCart,
 };

@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import marketplaceActions from 'store/marketplace/actions';
-// import ProjectCard from 'components/molecules/ProjectCard/component';
 import { MainTemplate } from 'components/organisms/MainTemplate';
 import './index.scss';
-// import MainButton from 'components/atoms/MainButton/component';
-// import ProjectModal from 'components/molecules/ProjectModal/component';
 import { MarketplaceUserProps } from './types';
 import MarketplaceProduct from 'components/molecules/MarketplaceProduct/component';
 import { photoUrls } from './consts';
+import RegisterSuccessModal from 'components/molecules/RegisterSuccessModal/component';
 
 function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
   const { onGetMarketplaceProducts, marketplaceProducts, onAddToCart } = props;
+
+  const [isSuccessModal, setIsSuccessModal] = useState<boolean>(false);
 
   useEffect(() => {
     onGetMarketplaceProducts();
@@ -19,22 +19,34 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
 
   // console.log('the marketplace user products: ', marketplaceProducts);
 
-  const handleAddCart = (pk: any, size: any) => {
+  const handleAddCart = (pk: any, size: any, selectedQuantity: any) => {
     onAddToCart &&
       onAddToCart(
         {
           product_pk: pk,
-          quantity: 1,
+          quantity: selectedQuantity,
           chosen_size: size,
         },
         {
           onSuccess: (response: any) => {
+            setIsSuccessModal(true);
             console.log('the returned success response: ', response);
             // const { data } = response?.createdTagState;
           },
         }
       );
   };
+
+  const handleModalOk = () => {
+    setIsSuccessModal(false);
+  };
+
+  // useEffect(() => {
+  //   if (registerData && !registerLoading) {
+  //     setIsRegisterSuccess(true);
+  //     console.log('the register data: ', registerData);
+  //   }
+  // }, [registerData, registerLoading]);
 
   return (
     <MainTemplate>
@@ -52,11 +64,19 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
                   description={p.description}
                   onAddCart={handleAddCart}
                   photo={photoUrls[i].icon}
+                  price={p.price}
+                  available_sizes={p.sizes_available}
                 />
               </div>
             ))}
         </div>
       </div>
+      {isSuccessModal && (
+        <RegisterSuccessModal
+          onClickModalOk={handleModalOk}
+          titleText="The product is successfully added to cart"
+        />
+      )}
     </MainTemplate>
   );
 }

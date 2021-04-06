@@ -10,12 +10,22 @@ import SizeTag from 'components/atoms/SizeTag/component';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 function MarketplaceProduct(props: MarketplaceProductProps): JSX.Element {
-  const { name, description, photo, onAddCart, pk, addedCartItemState } = props;
+  const {
+    name,
+    description,
+    photo,
+    onAddCart,
+    pk,
+    addedCartItemState,
+    price,
+    available_sizes,
+  } = props;
 
-  const available_sizes = ['xs', 'M', 'l', 'xl'];
+  const [availableSizes, setAvailableSizes] = useState<string[]>([]);
+  // const available_sizes = ['xs', 's', 'm', 'l', 'xl'];
 
-  const [selectedQuantity, setSelectedQuantity] = useState<number>();
-  const [selectedSize, setSelectedSize] = useState<string>(available_sizes[0]);
+  const [selectedQuantity, setSelectedQuantity] = useState<number>(0);
+  const [selectedSize, setSelectedSize] = useState<string>('');
 
   const handleChangeQuantity = (quantity: number) => {
     setSelectedQuantity(quantity);
@@ -29,7 +39,7 @@ function MarketplaceProduct(props: MarketplaceProductProps): JSX.Element {
   console.log('the added cart item state: ', addedCartItemState);
 
   const handleAddCart = () => {
-    onAddCart(pk, selectedSize);
+    onAddCart(pk, selectedSize, selectedQuantity);
   };
 
   const handleClickSize = (size: any) => {
@@ -63,18 +73,22 @@ function MarketplaceProduct(props: MarketplaceProductProps): JSX.Element {
               </span>
             </div>
             <div style={{ marginTop: '9px', display: 'flex' }}>
-              {available_sizes.map((av: any, i: number) => (
-                <div style={{ marginRight: '8px' }} key={i}>
-                  <SizeTag
-                    size={av}
-                    isSelected={selectedSize === av}
-                    onClickSize={handleClickSize}
-                  />
-                </div>
-              ))}
+              {available_sizes &&
+                available_sizes.map((av: any, i: number) => (
+                  <div style={{ marginRight: '8px' }} key={i}>
+                    <SizeTag
+                      size={av}
+                      isSelected={selectedSize === av}
+                      onClickSize={handleClickSize}
+                    />
+                  </div>
+                ))}
             </div>
             <div style={{ marginTop: '11px', display: 'flex', alignItems: 'flex-start' }}>
-              <Counter onChangeQuantity={handleChangeQuantity} />
+              <Counter onChangeQuantity={handleChangeQuantity} propQuantity={selectedQuantity} />
+            </div>
+            <div style={{ marginTop: '15px' }}>
+              <span className="typography__variant-coloredtext"> {price} $ </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <BorderedButton text="Add to cart" onSendBonuses={handleAddCart} color="#02A0FC" />
