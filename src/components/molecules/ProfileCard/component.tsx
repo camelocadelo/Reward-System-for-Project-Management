@@ -6,7 +6,7 @@ import MoreInfo from 'assets/images/moreInfo.png';
 import GithubIcon from 'assets/images/githubIcon.png';
 import TelegramIcon from 'assets/images/telegramIcon.png';
 import JiraIcon from 'assets/images/jiraIcon.png';
-import BorderedButton from 'components/atoms/BorderedButton/component';
+// import BorderedButton from 'components/atoms/BorderedButton/component';
 import PopUpMessage from 'components/atoms/PopUpMessage/component';
 import { useOutsideClick } from 'hooks/useOutsideClick';
 import SlackIcon from 'assets/images/slackIcon.png';
@@ -75,7 +75,7 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
           <span className="typography__variant-coloredtext"> {accountBonuses} </span>
           <span className="typography__variant-subtext"> Bonuses </span>
           <div style={{ marginTop: '18px' }} className="profile-card-footer">
-            <BorderedButton text="Send bonuses" onSendBonuses={onSendBonuses} color="#02A0FC" />
+            {/* <BorderedButton text="Send bonuses" onSendBonuses={onSendBonuses} color="#02A0FC" /> */}
             <div>
               <img
                 src={JiraIcon}
@@ -83,12 +83,19 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
                 width="20px"
                 style={{ marginRight: '10px', cursor: 'pointer' }}
               />
-              <img
-                src={GithubIcon}
-                alt="Add Github"
-                width="20px"
-                style={{ marginRight: '10px', cursor: 'pointer' }}
-              />
+              <a
+                href="https://github.com/login/oauth/authorize?client_id=01bd74491b2142e0a049"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={GithubIcon}
+                  alt="Add Github"
+                  width="20px"
+                  style={{ marginRight: '10px', cursor: 'pointer' }}
+                  // onClick={onAddGithub}
+                />
+              </a>
               <img
                 src={SlackIcon}
                 alt="Add Slack"

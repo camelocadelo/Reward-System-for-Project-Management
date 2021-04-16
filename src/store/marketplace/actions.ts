@@ -8,6 +8,7 @@ import {
   GET_CART_ITEMS,
   ADD_TO_CART,
   DELETE_FROM_CART,
+  MAKE_PURCHASE,
 } from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
@@ -88,6 +89,18 @@ export const deleteFromCart = (data: any, callbacks?: any) => (dispatch: any, ge
   });
 };
 
+export const makePurchase = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: MAKE_PURCHASE,
+    apiCall: () => {
+      return api.makePurchase();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
@@ -95,4 +108,5 @@ export default {
   getCartItems,
   addToCart,
   deleteFromCart,
+  makePurchase,
 };

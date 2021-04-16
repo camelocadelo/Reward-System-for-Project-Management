@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import marketplaceActions from 'store/marketplace/actions';
+import marketplaceActions, { makePurchase } from 'store/marketplace/actions';
 // import ProjectCard from 'components/molecules/ProjectCard/component';
 import { MainTemplate } from 'components/organisms/MainTemplate';
 import './index.scss';
@@ -11,9 +11,10 @@ import MainButton from 'components/atoms/MainButton/component';
 import RegisterSuccessModal from 'components/molecules/RegisterSuccessModal/component';
 
 function MarketplaceUserPage(props: CartPageProps): JSX.Element {
-  const { onGetCartItems, cartItems, onDeleteFromCart } = props;
+  const { onGetCartItems, cartItems, onDeleteFromCart, onMakePurchase } = props;
 
   const [isSuccessModal, setIsSuccessModal] = useState<boolean>(false);
+  const [isPurchasedModal, setIsPurchasedModal] = useState<boolean>(false);
 
   useEffect(() => {
     onGetCartItems();
@@ -21,8 +22,15 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
 
   console.log('the marketplace user products: ', cartItems);
 
-  const handleMakePurchase = () => {
-    console.log('HANDLE MAKE PURCHASE');
+  const handleMakePurchase = (pk: any, size: any, selectedQuantity: any) => {
+    onMakePurchase &&
+      onMakePurchase({
+        onSuccess: (response: any) => {
+          setIsPurchasedModal(true);
+          console.log('the returned success response: ', response);
+          // const { data } = response?.createdTagState;
+        },
+      });
   };
 
   const handleDeleteFromCart = (pk: any) => {
@@ -47,6 +55,10 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
     setIsSuccessModal(false);
   };
 
+  const handlePurchaseModalOk = () => {
+    setIsPurchasedModal(false);
+  };
+
   return (
     <MainTemplate>
       <div>
@@ -69,16 +81,31 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
               </div>
             ))}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '150px' }}>
-          <div style={{ width: 'fit-content' }}>
-            <MainButton buttonText="Buy" onCreateProject={handleMakePurchase} />
+        {cartItems && cartItems.length > 0 && (
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '150px' }}>
+            <div style={{ width: 'fit-content' }}>
+              <MainButton buttonText="Buy" onCreateProject={handleMakePurchase} />
+            </div>
           </div>
-        </div>
+        )}
+        {cartItems && cartItems.length === 0 && (
+          <div>
+            <span className="typography__variant-subtext" style={{ fontSize: '22px' }}>
+              Your cart is empty
+            </span>
+          </div>
+        )}
       </div>
       {isSuccessModal && (
         <RegisterSuccessModal
           titleText="You have successfully deleted the item from cart"
           onClickModalOk={handleModalOk}
+        />
+      )}
+      {isPurchasedModal && (
+        <RegisterSuccessModal
+          titleText="You have successfully puchased the items in your cart"
+          onClickModalOk={handlePurchaseModalOk}
         />
       )}
     </MainTemplate>
@@ -94,6 +121,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = {
   onGetCartItems: marketplaceActions.getCartItems,
   onDeleteFromCart: marketplaceActions.deleteFromCart,
+  onMakePurchase: marketplaceActions.makePurchase,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarketplaceUserPage);

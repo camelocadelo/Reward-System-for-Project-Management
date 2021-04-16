@@ -2,14 +2,14 @@ export type FormValues = {
   readonly firstName: string;
   readonly lastName: string;
   readonly userName: string;
-  readonly email: string;
+  // readonly email: string;
 };
 
 export enum FormInputs {
   FirstName = 'firstName',
   LastName = 'lastName',
   UserName = 'userName',
-  Email = 'email',
+  // Email = 'email',
 }
 
 export interface UserInfoModalProps {
