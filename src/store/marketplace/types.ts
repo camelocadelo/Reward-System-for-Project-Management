@@ -33,3 +33,9 @@ export const DELETE_FROM_CART = {
   success: 'DELETE_FROM_CART_SUCCESS',
   failed: 'DELETE_FROM_CART_FAILED',
 };
+
+export const MAKE_PURCHASE = {
+  started: 'MAKE_PURCHASE_STARTED',
+  success: 'MAKE_PURCHASE_SUCCESS',
+  failed: 'MAKE_PURCHASE_FAILED',
+};

@@ -38,3 +38,10 @@ export const deleteFromCart = (data: any) =>
     token: access_token,
     data,
   });
+
+const makePurchaseUrl = `${API_URL}/marketplace/makePurchase/${my_pk}`;
+export const makePurchase = () =>
+  API.stdApiPOST({
+    url: makePurchaseUrl,
+    token: access_token,
+  });
