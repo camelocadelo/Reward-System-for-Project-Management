@@ -12,6 +12,7 @@ const ProductCreationEdition = lazy(
 );
 const MarketplaceUserPage = lazy(() => import('pages/MarketplaceUser/component'));
 const CartPage = lazy(() => import('pages/CartPages/component'));
+const GithubAuthPage = lazy(() => import('pages/GithubAuthPage/component'));
 
 const RootRouter: FC = () => (
   <Router>
@@ -25,6 +26,7 @@ const RootRouter: FC = () => (
         <Route path="/admin-marketplace/product-creation" component={ProductCreationEdition} />
         <Route path="/marketplace" component={MarketplaceUserPage} />
         <Route path="/cart" component={CartPage} />
+        <Route path="/githubAuth" component={GithubAuthPage} />
       </Route>
     </Switch>
   </Router>
