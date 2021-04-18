@@ -2,6 +2,7 @@ import React from 'react';
 import { TableRowProps } from './types';
 import './index.scss';
 import TagItem from 'components/atoms/TagItem/component';
+import { format, parseISO } from 'date-fns';
 
 function TableRow(props: TableRowProps): JSX.Element {
   const { projectName, eventType, eventBonus, timestamp, comment } = props;
@@ -21,7 +22,7 @@ function TableRow(props: TableRowProps): JSX.Element {
         />
       </td>
       <td className="table-cell"> {eventBonus} </td>
-      <td className="table-cell"> {timestamp} </td>
+      <td className="table-cell"> {format(parseISO(timestamp), 'dd MMM, yyyy HH:mm')} </td>
       <td className="table-cell"> {comment} </td>
     </tr>
   );

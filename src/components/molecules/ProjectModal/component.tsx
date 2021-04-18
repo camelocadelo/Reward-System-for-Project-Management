@@ -8,23 +8,23 @@ import projectActions from 'store/project/actions';
 import { connect } from 'react-redux';
 
 function ProjectModal(props: ProjectModalProps): JSX.Element {
-  const { onCloseModal, createProject, projectData } = props;
+  const { onCloseModal, createProject, projectData, onProjectFormSubmit } = props;
 
   const { handleSubmit, register } = useForm<FormValues>({
     mode: 'onChange',
   });
 
-  const onFormSubmit = useCallback<SubmitHandler<FormValues>>(
-    (values) => {
-      createProject({
-        name: values.projectName,
-        telegram_bonus: parseInt(values.telegramBonus, 10),
-        git_bonus: parseInt(values.gitBonus, 10),
-        slack_bonus: parseInt(values.slackBonus, 10),
-      });
-    },
-    [createProject]
-  );
+  // const onFormSubmit = useCallback<SubmitHandler<FormValues>>(
+  //   (values) => {
+  //     createProject({
+  //       name: values.projectName,
+  //       telegram_bonus: parseInt(values.telegramBonus, 10),
+  //       git_bonus: parseInt(values.gitBonus, 10),
+  //       slack_bonus: parseInt(values.slackBonus, 10),
+  //     });
+  //   },
+  //   [createProject]
+  // );
 
   useEffect(() => {
     if (projectData) {
@@ -40,7 +40,7 @@ function ProjectModal(props: ProjectModalProps): JSX.Element {
           <img src={Close} alt="close" onClick={onCloseModal} />
         </div>
       </div>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
+      <form onSubmit={handleSubmit(onProjectFormSubmit)}>
         <div className="input-wrp">
           <span className=""> Project Name </span>
           <input
@@ -115,4 +115,4 @@ const mapDispatchToProps = {
   createProject: projectActions.createProject,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectModal);
+export default connect<any, any>(mapStateToProps, mapDispatchToProps)(ProjectModal);

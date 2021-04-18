@@ -1,8 +1,8 @@
 import React from 'react';
-import { NotificationTypes, IRenderBody } from 'components/molecules/Notification/types';
+import { NotificationTypesIProps, IRenderBody } from 'components/molecules/Notification/types';
 
 interface IContextProps {
-  add: (params: NotificationTypes.IProps) => void;
+  add: (params: NotificationTypesIProps) => void;
   remove: (id: string) => void;
   addStateNotification: (notification: IRenderBody) => void;
 }

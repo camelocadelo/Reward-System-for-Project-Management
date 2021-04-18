@@ -13,7 +13,8 @@ export enum FormInputs {
 }
 
 export interface ProjectModalProps {
-  onCloseModal(): void;
-  createProject: any;
-  projectData: any;
+  onCloseModal?: any;
+  createProject?: any;
+  projectData?: any;
+  onProjectFormSubmit?: any;
 }

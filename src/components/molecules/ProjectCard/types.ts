@@ -3,5 +3,5 @@ export interface ProjectCardProps {
   readonly name: string;
   readonly teamLead: string;
   readonly deletedProjectState?: any;
-  readonly onDeleteProject?: any;
+  readonly deleteProjectProps?: any;
 }
