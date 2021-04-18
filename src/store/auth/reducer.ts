@@ -63,7 +63,7 @@ const register = (state = { data: null, loading: false }, action: any): any => {
       return {
         data: null,
         loading: false,
-        errorMessage: action.emailError,
+        errorMessage: action.error,
       };
     default:
       return state;

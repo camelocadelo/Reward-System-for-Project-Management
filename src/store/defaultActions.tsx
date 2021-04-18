@@ -64,17 +64,17 @@ export const defaultAction = (
           break;
         case 400:
         case 404:
+        case 406:
         case 412:
           console.log('the response aha: ', response);
           response.json().then((val: any) => {
-            console.log('the val: ', val);
             dispatch({
               type: options.action.failed,
               ...options.onError({
-                message: val.message || 'serverError',
+                message: val || 'serverError',
                 status: val.status,
                 /* TODO: fix errors after back */
-                emailError: val,
+                // emailError: val,
               }),
             });
           });
