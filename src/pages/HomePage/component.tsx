@@ -26,13 +26,15 @@ function HomePage(props: any) {
     emailErrorMessage,
     registerData,
     registerLoading,
+    registerErrorMessage,
   } = props;
   const history = useHistory();
   const [isRegistration, setIsRegistration] = useState<boolean>(false);
   const [loginError, setLoginError] = useState(false);
   const [errMessage, setErrMessage] = useState('');
-  const [regEmailError, setRegEmailError] = useState('');
-  const [isRegEmailError, setIsRegEmailError] = useState(false);
+  const [regErrorMessage, setRegErrorMessage] = useState('');
+  // const [regEmailError, setRegEmailError] = useState('');
+  // const [isRegEmailError, setIsRegEmailError] = useState(false);
 
   const [isRegisterSuccess, setIsRegisterSuccess] = useState(false);
 
@@ -56,18 +58,24 @@ function HomePage(props: any) {
   useEffect(() => {
     if (loginErrorMessage) {
       setLoginError(true);
-      setErrMessage('Invalid credentials');
+      setErrMessage(loginErrorMessage.message);
       console.log('the error: ', loginErrorMessage);
     }
   }, [loginErrorMessage]);
 
   useEffect(() => {
-    if (emailErrorMessage) {
-      setIsRegEmailError(true);
-      setRegEmailError('Use your NU email');
-      console.log('the email email error: ', emailErrorMessage);
+    if (registerErrorMessage) {
+      setRegErrorMessage(registerErrorMessage.message);
     }
-  }, [emailErrorMessage]);
+  }, [registerErrorMessage]);
+
+  // useEffect(() => {
+  //   if (emailErrorMessage) {
+  //     setIsRegEmailError(true);
+  //     setRegEmailError('Use your NU email');
+  //     console.log('the email email error: ', emailErrorMessage);
+  //   }
+  // }, [emailErrorMessage]);
 
   const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>(
     (values) => {
@@ -172,7 +180,7 @@ function HomePage(props: any) {
                       placeholder="Enter email"
                       required
                     />
-                    {isRegEmailError && <span style={{ color: 'red' }}> {regEmailError} </span>}
+                    {/* {isRegEmailError && <span style={{ color: 'red' }}> {regEmailError} </span>} */}
                   </div>
                   <div className="input-wrp mt-8">
                     <span className="">Username</span>
@@ -222,6 +230,7 @@ function HomePage(props: any) {
                       required
                     />
                   </div>
+                  <span style={{ color: 'red' }}> {regErrorMessage} </span>
                   <button
                     className={classNames(['auth_button typography__variant-subtext'])}
                     style={{ marginTop: '32px', fontFamily: 'DM Sans' }}
@@ -298,8 +307,9 @@ const mapStateToProps = (state: any) => {
     userData: state.authReducer.login.data,
     registerData: state.authReducer.register.data,
     registerLoading: state.authReducer.register.loading,
+    registerErrorMessage: state.authReducer.register.errorMessage,
     loginErrorMessage: state.authReducer.login.errorMessage,
-    emailErrorMessage: state.authReducer.register.errorMessage,
+    // emailErrorMessage: state.authReducer.register.errorMessage,
   };
 };
 
