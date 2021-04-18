@@ -1,0 +1,41 @@
+.git-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.code-container {
+  display: flex;
+  //width: 100%;
+  justify-content: center;
+}
+
+.input-wrp {
+  display: flex;
+  //width: fit-content;
+  span {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 124.33%;
+    color: #52575C;
+  }
+  p {
+    color: #DC5B3F;
+  }
+}
+.input-wrp .inputText {
+  height: 48px;
+  width: 30%;
+  outline: none;
+  background: #E6E6EF;
+  border-radius: 10px;
+  box-shadow: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 2px solid #FFB200;
+
+  &::placeholder {
+    color: #CACCCF;
+  }
+
+}

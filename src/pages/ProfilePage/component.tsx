@@ -7,10 +7,21 @@ import ProfileCard from 'components/molecules/ProfileCard/component';
 import { ProfilePageProps } from './types';
 import UserInfoModal from 'components/molecules/UserInfoModal/component';
 import UserActivityTable from 'components/molecules/UserActivityTable/component';
+import { useLocation } from 'react-router-dom';
 
 function ProfilePage(props: ProfilePageProps) {
   const { userInfoData, onGetUserInfo, userActivitiesData, onGetUserActivities } = props;
   const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
+  const [code, setCode] = useState<string | null>(null);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.search) {
+      setCode(location.search.replace('?code=', ''));
+    }
+  }, [location.search]);
+  console.log('profile location: ', location);
+  console.log('the code sobsna: ', code);
 
   useEffect(() => {
     onGetUserInfo();
