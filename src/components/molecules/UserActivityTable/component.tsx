@@ -12,7 +12,7 @@ function UserActivityTable(props: UserActivityTableProps): JSX.Element {
       <table>
         <tr
           style={{
-            width: '1500px',
+            width: '1200px',
             display: 'flex',
             justifyContent: 'space-between',
             marginBottom: '23px',

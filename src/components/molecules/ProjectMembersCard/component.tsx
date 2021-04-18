@@ -22,14 +22,14 @@ function ProjectMembersCard(props: ProjectMembersCardProps): JSX.Element {
           <div key={m.pk} className="project-member">
             <div>
               <span> {m.username} </span>
-              <div
-                style={{
-                  backgroundColor: membersColors[index % 4],
-                  borderRadius: '10px',
-                  height: '10px',
-                  marginTop: '5px',
-                }}
-              ></div>
+              {/*<div*/}
+              {/*  style={{*/}
+              {/*    backgroundColor: membersColors[index % 4],*/}
+              {/*    borderRadius: '10px',*/}
+              {/*    height: '10px',*/}
+              {/*    marginTop: '5px',*/}
+              {/*  }}*/}
+              {/*>wtf</div>*/}
             </div>
           </div>
         ))}

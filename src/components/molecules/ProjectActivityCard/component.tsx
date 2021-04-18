@@ -2,6 +2,7 @@ import React from 'react';
 import TagItem from 'components/atoms/TagItem/component';
 import { ProjectActivityCardProps } from './types';
 import './index.scss';
+import { format, parseISO } from 'date-fns';
 
 function ProjectActivityCard(props: ProjectActivityCardProps): JSX.Element {
   const { eventType, username, timestamp, eventBonus, gitType, gitMeta, message } = props;
@@ -45,7 +46,9 @@ function ProjectActivityCard(props: ProjectActivityCardProps): JSX.Element {
         <span> {eventType === 'GitHub' ? `${gitType}: ${gitMeta}` : shortenMessage(message)} </span>
       </div>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-        <span style={{ fontSize: '14px' }}> {timestamp} </span>
+        <span style={{ fontSize: '14px' }}>
+          {format(parseISO(timestamp), 'dd MMM, yyyy HH:mm')}
+        </span>
       </div>
     </div>
   );

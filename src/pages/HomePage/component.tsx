@@ -42,9 +42,10 @@ function HomePage(props: any) {
     mode: 'onChange',
   });
 
-  const { handleSubmit: registerHandleSubmit, register: registerMethod } = useForm<
-    RegisterFormValues
-  >({
+  const {
+    handleSubmit: registerHandleSubmit,
+    register: registerMethod,
+  } = useForm<RegisterFormValues>({
     mode: 'onChange',
   });
 

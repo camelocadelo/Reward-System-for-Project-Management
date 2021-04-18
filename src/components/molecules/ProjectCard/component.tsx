@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import TagItem from 'components/atoms/TagItem/component';
 import './index.scss';
 import DeleteIcon from 'assets/images/trash.png';
-import ProjectDeleteModal from 'components/molecules/ProjectDeleteModal/component';
-import projectActions from 'store/project/actions';
-import { connect } from 'react-redux';
+// import ProjectDeleteModal from 'components/molecules/ProjectDeleteModal/component';
+// import projectActions from 'store/project/actions';
+// import { connect } from 'react-redux';
 
 function ProjectCard(props: ProjectCardProps): JSX.Element {
-  const { projectPK, name, teamLead, onDeleteProject, deletedProjectState } = props;
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const { projectPK, name, teamLead, deletedProjectState, deleteProjectProps } = props;
+  // const [isDeleteModal, setIsDeleteModal] = useState(false);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -19,20 +19,21 @@ function ProjectCard(props: ProjectCardProps): JSX.Element {
   const isShowButton = isAdmin === 'true' || isOrgOwner === 'true' || isManager === 'true';
 
   const handleDeleteProject = () => {
-    setIsDeleteModal(true);
+    deleteProjectProps(projectPK);
   };
 
-  const handleModalOk = () => {
-    setIsDeleteModal(false);
-    onDeleteProject && projectPK && onDeleteProject(projectPK);
-    //todo
-  };
+  // const handleModalOk = () => {
+  //   setIsDeleteModal(false);
+  //
+  //   onDeleteProject && projectPK && onDeleteProject(projectPK);
+  //   //todo
+  // };
+  //
+  // const handleModalCancel = () => {
+  //   setIsDeleteModal(false);
+  // };
 
-  const handleModalCancel = () => {
-    setIsDeleteModal(false);
-  };
-
-  console.log('the delete rpoejct: ', deletedProjectState);
+  // console.log('the delete rpoejct: ', deletedProjectState);
 
   return (
     <>
@@ -59,25 +60,25 @@ function ProjectCard(props: ProjectCardProps): JSX.Element {
           <span className="project-card-link"> View project </span>
         </Link>
       </div>
-      {isDeleteModal && (
-        <ProjectDeleteModal
-          text="Are you sure you want to delete this project?"
-          onClickCancel={handleModalCancel}
-          onClickModalOk={handleModalOk}
-        />
-      )}
+      {/*{isDeleteModal && (*/}
+      {/*  <ProjectDeleteModal*/}
+      {/*    text="Are you sure you want to delete this project?"*/}
+      {/*    onClickCancel={handleModalCancel}*/}
+      {/*    onClickModalOk={handleModalOk}*/}
+      {/*  />*/}
+      {/*)}*/}
     </>
   );
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    deleteProjectState: state.projectReducer.deletedProjectState.data,
-  };
-};
+// const mapStateToProps = (state: any) => {
+//   return {
+//     deleteProjectState: state.projectReducer.deletedProjectState.data,
+//   };
+// };
+//
+// const mapDispatchToProps = {
+//   onDeleteProject: projectActions.deleteProject,
+// };
 
-const mapDispatchToProps = {
-  onDeleteProject: projectActions.deleteProject,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectCard);
+export default ProjectCard;

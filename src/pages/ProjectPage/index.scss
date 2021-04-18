@@ -1,15 +1,23 @@
 .project-page {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .project-list {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .project-page-modal{
   display: flex;
   flex-direction: column;
   filter: blur(5px);
+}
+
+.project-item {
+  flex: 1 0 25%;
+  margin-bottom: 25px;
 }
