@@ -5,6 +5,7 @@ import {
   GET_CART_ITEMS,
   ADD_TO_CART,
   MAKE_PURCHASE,
+  VIEW_ALL_PURCHASES,
 } from 'store/marketplace/types';
 
 const marketplaceProducts = (state = { data: null, loading: false }, action: any): any => {
@@ -122,12 +123,36 @@ const purchasedItems = (state = { data: null, loading: false }, action: any): an
   }
 };
 
+const allPurchases = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case VIEW_ALL_PURCHASES.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case VIEW_ALL_PURCHASES.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case VIEW_ALL_PURCHASES.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const marketplaceReducer = combineReducers({
   marketplaceProducts,
   addedMarketplaceProduct,
   cartItems,
   addedCartItem,
   purchasedItems,
+  allPurchases,
 });
 
 export default marketplaceReducer;

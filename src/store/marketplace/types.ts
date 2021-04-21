@@ -39,3 +39,9 @@ export const MAKE_PURCHASE = {
   success: 'MAKE_PURCHASE_SUCCESS',
   failed: 'MAKE_PURCHASE_FAILED',
 };
+
+export const VIEW_ALL_PURCHASES = {
+  started: 'VIEW_ALL_PURCHASES_STARTED',
+  success: 'VIEW_ALL_PURCHASES_SUCCESS',
+  failed: 'VIEW_ALL_PURCHASES_FAILED',
+};

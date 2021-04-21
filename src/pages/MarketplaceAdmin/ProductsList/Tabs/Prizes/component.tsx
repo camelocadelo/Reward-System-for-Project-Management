@@ -16,7 +16,7 @@ function MarketplacePrizesTable(props: MarketplaceProductsProps): JSX.Element {
       <table>
         <tr
           style={{
-            width: '1500px',
+            maxWidth: '1200px',
             display: 'flex',
             justifyContent: 'space-between',
             marginBottom: '23px',
@@ -46,7 +46,7 @@ function MarketplacePrizesTable(props: MarketplaceProductsProps): JSX.Element {
             </th>
           ))}
         </tr>
-        <tbody className="table-body">
+        <tbody className="table-body" style={{ maxHeight: '250px', overflow: 'scroll' }}>
           {marketplaceProducts &&
             marketplaceProducts.map((p: any) => (
               <ProductRow

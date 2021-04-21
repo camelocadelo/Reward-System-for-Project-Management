@@ -1,5 +1,5 @@
 .table-row {
-  width: 1500px;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -7,17 +7,21 @@
   padding-bottom: 27px;
   margin-bottom: 44px;
   border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .table-body {
   display: flex;
   flex-direction: column;
+  max-width: 1200px;
+  max-height: 200px;
+  overflow-y: scroll;
 }
 
 .table-cell {
-  margin-left: 60px;
-  margin-right: 60px;
-  width: 240px;
+  margin-left: 33px;
+  margin-right: 30px;
+  width: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
