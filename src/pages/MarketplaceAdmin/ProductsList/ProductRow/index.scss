@@ -1,5 +1,5 @@
 .table-row {
-  width: 1500px;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -15,9 +15,9 @@
 }
 
 .table-cell {
-  margin-left: 60px;
-  margin-right: 60px;
-  width: 240px;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

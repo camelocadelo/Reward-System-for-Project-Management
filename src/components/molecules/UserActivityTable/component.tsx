@@ -23,7 +23,7 @@ function UserActivityTable(props: UserActivityTableProps): JSX.Element {
               className="table-header"
               style={{
                 width: '280px',
-                marginLeft: '60px',
+                marginLeft: '50px',
                 marginRight: '60px',
               }}
               key={i}

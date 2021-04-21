@@ -45,3 +45,7 @@ export const makePurchase = () =>
     url: makePurchaseUrl,
     token: access_token,
   });
+
+const viewAllPurchasesUrl = `${API_URL}/marketplace/viewAllPurchases`;
+export const viewAllPurchases = () =>
+  API.stdApiGET({ url: viewAllPurchasesUrl, token: access_token });

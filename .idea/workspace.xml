@@ -2,34 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6748e5f5-c705-46f8-ac1a-746035c08c9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/GithubAuthPage/component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/GithubAuthPage/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/GithubAuthPage/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/integration/actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/integration/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/integration/reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/integration/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/OrderRow/component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/OrderRow/index.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/OrderRow/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Orders/component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Orders/consts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Orders/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/NotificationContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/NotificationContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/consts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/consts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/useNotification.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/useNotification.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/Notification/withNotificationProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/Notification/withNotificationProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectActivityCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectActivityCard/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectCard/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectCard/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectCard/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/GithubAuthPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/GithubAuthPage/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/GithubAuthPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/GithubAuthPage/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/ProductRow/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/ProductRow/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/ProductRow/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/ProductRow/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Prizes/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Prizes/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProfilePage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectPage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectPage/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/generation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/generation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/marketplace/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/marketplace/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/marketplace/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/marketplace/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +38,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1qYgihAcZ3KcoifUQ80VICJlY1z" />
   <component name="ProjectViewState">
@@ -48,7 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../jmart/frontend-core" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -59,6 +67,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\pages\MarketplaceAdmin\ProductsList\Tabs\Orders" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\assets\images" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\components\molecules\Notification" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\utils" />
@@ -76,6 +85,10 @@
       <workItem from="1617262323745" duration="1185000" />
       <workItem from="1618734731213" duration="446000" />
       <workItem from="1618735181183" duration="15936000" />
+      <workItem from="1618861098884" duration="1704000" />
+      <workItem from="1618892887330" duration="1247000" />
+      <workItem from="1618942086938" duration="3946000" />
+      <workItem from="1618978739152" duration="24000" />
     </task>
     <servers />
   </component>

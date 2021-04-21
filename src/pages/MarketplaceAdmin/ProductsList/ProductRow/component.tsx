@@ -17,7 +17,7 @@ function ProductRow(props: ProductRowProps): JSX.Element {
     <tr className="table-row">
       <td
         className="table-cell"
-        style={{ width: '400px', justifyContent: 'flex-start', textAlign: 'start' }}
+        style={{ width: '150px', justifyContent: 'flex-start', textAlign: 'start' }}
       >
         <div style={{ marginRight: '15px' }}>
           <img

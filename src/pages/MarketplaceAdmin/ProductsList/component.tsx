@@ -8,15 +8,23 @@ import './index.scss';
 import { ProductsListProps } from './types';
 import { Link } from 'react-router-dom';
 import ProjectDeleteModal from 'components/molecules/ProjectDeleteModal/component';
+import MarketplaceOrdersTable from './Tabs/Orders/component';
 
 function ProductsList(props: ProductsListProps) {
-  const { marketplaceProducts, onGetMarketplaceProducts, onDeleteMarketplaceProduct } = props;
+  const {
+    marketplaceProducts,
+    onGetMarketplaceProducts,
+    onDeleteMarketplaceProduct,
+    viewAllPurchases,
+    allPurchases,
+  } = props;
   const [isOrdersTable, setIsOrdersTable] = useState<boolean>(false);
   const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
 
   const [deleteProductPk, setDeleteProductPk] = useState<number>(-1);
 
   console.log('the delete product pk: ', deleteProductPk);
+  console.log('ALL PURCHASES: ', allPurchases);
 
   const handleOrderTab = () => {
     setIsOrdersTable(true);
@@ -28,6 +36,7 @@ function ProductsList(props: ProductsListProps) {
 
   useEffect(() => {
     onGetMarketplaceProducts();
+    viewAllPurchases();
   }, []);
 
   const handleDeleteProduct = (pk: number) => {
@@ -84,17 +93,30 @@ function ProductsList(props: ProductsListProps) {
           </div>
         </div>
         <div className="marketplace-table">
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              maxWidth: '1200px',
+            }}
+          >
             <span className="typography__variant-h2">
               {isOrdersTable ? 'Orders' : 'Prizes'}
-              {marketplaceProducts ? ` (${marketplaceProducts.length})` : ' (0)'}
+              {isOrdersTable && allPurchases
+                ? ` (${allPurchases.length})`
+                : marketplaceProducts
+                ? ` (${marketplaceProducts.length})`
+                : ' (0)'}
             </span>
-            <a href="admin-marketplace/product-creation">
-              <MainButton buttonText="+ Create prize" />
-            </a>
+            {!isOrdersTable && (
+              <a href="admin-marketplace/product-creation">
+                <MainButton buttonText="+ Create prize" />
+              </a>
+            )}
           </div>
           {isOrdersTable ? (
-            <div> Marketplace orders table </div>
+            <MarketplaceOrdersTable marketplaceOrders={allPurchases} />
           ) : (
             <MarketplacePrizesTable
               marketplaceProducts={marketplaceProducts}
@@ -117,12 +139,14 @@ function ProductsList(props: ProductsListProps) {
 const mapStateToProps = (state: any) => {
   return {
     marketplaceProducts: state.marketplaceReducer.marketplaceProducts.data,
+    allPurchases: state.marketplaceReducer.allPurchases.data,
   };
 };
 
 const mapDispatchToProps = {
   onGetMarketplaceProducts: marketplaceActions.getMarketplaceProducts,
   onDeleteMarketplaceProduct: marketplaceActions.deleteMarketplaceProduct,
+  viewAllPurchases: marketplaceActions.viewAllPurchases,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
