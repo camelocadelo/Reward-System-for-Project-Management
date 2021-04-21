@@ -23,7 +23,11 @@ const RootRouter: FC = () => (
         <Route path="/profile" component={ProfilePage} />
         <Route path="/projects/:id" component={ProjectDetailPage} />
         <Route exact={true} path="/admin-marketplace" component={MarketplaceAdminList} />
-        <Route path="/admin-marketplace/product-creation" component={ProductCreationEdition} />
+        <Route
+          exact={true}
+          path="/admin-marketplace/product-creation"
+          component={ProductCreationEdition}
+        />
         <Route path="/marketplace" component={MarketplaceUserPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/githubAuth" component={GithubAuthPage} />

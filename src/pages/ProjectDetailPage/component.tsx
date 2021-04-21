@@ -72,9 +72,9 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '22px' }}>
-            {projectActivitiesState.length > 3 && <MainButton buttonText="See All" />}
-          </div>
+          {/*<div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '22px' }}>*/}
+          {/*  {projectActivitiesState.length > 3 && <MainButton buttonText="See All" />}*/}
+          {/*</div>*/}
         </div>
       )}
       {isShowButton && (

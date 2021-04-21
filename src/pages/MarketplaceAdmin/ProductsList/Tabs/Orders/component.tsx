@@ -21,10 +21,9 @@ function MarketplaceOrdersTable(props: MarketplaceOrdersProps): JSX.Element {
           {columns.map((c, i) => (
             <th
               className="table-header"
-              // style={{
-              //   marginLeft: '60px',
-              //   marginRight: '60px',
-              // }}
+              style={{
+                width: '100px',
+              }}
               key={i}
             >
               {c.title}

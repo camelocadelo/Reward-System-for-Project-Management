@@ -92,7 +92,7 @@ function HomePage(props: any) {
   );
 
   useEffect(() => {
-    if (userData && !userLoading) {
+    if (userData && !userLoading && localStorage.getItem('access_token') !== null) {
       console.log('the user data: ', userData);
       history.push('/profile');
     }
