@@ -8,10 +8,15 @@ import { ProductTypes } from './types';
 import AddImageButton from 'components/atoms/AddImageButton/component';
 import MainButton from 'components/atoms/MainButton/component';
 import TagItem from 'components/atoms/TagItem/component';
-
-function ProductCreationEdition(props: any) {
+import SizeTag from 'components/atoms/SizeTag/component';
+import { DEFAULT_NOTIFICATION_DATA } from 'components/molecules/Notification/consts';
+import useNotification from 'components/molecules/Notification/useNotification';
+import withNotificationProvider from 'components/molecules/Notification/withNotificationProvider';
+import { useHistory, withRouter } from 'react-router-dom';
+function ProductCreationEdition(props: any): JSX.Element {
   const { onAddMarketplaceProduct } = props;
-
+  const notification = useNotification();
+  const history = useHistory();
   const DEFAULT_PRODUCT_DATA: {
     name: string;
     description: string;
@@ -36,17 +41,6 @@ function ProductCreationEdition(props: any) {
   const [category, setCategory] = useState('');
   const [size, setSize] = useState<string[]>([]);
 
-  // console.log('the product data: ', productData);
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value, name } = event.target;
-  //   console.log(value, name);
-  //   if (name === 'price') {
-  //     setProductData({ ...productData, [name]: value });
-  //   }
-  //   setProductData({ ...productData, [name]: value });
-  // };
-
   const handleAddImage = () => {
     console.log('it is handle add image');
   };
@@ -54,14 +48,6 @@ function ProductCreationEdition(props: any) {
   const handleImageUpload = (event: any) => {
     if (event.target.files && event.target.files[0]) {
       const offerImage = event.target.files[0];
-      // setProductData({ ...productData, photo: offerImage });
-
-      // const reader = new FileReader();
-      // reader.onload = (e: any) => {
-      //   setImgPreview({ src: e.target.result });
-      // };
-      // reader.readAsDataURL(offerImage);
-      // offerData.set('image', offerImage);
     }
   };
 
@@ -84,13 +70,27 @@ function ProductCreationEdition(props: any) {
     // const data = new FormData();
     const isError = validate();
     if (!isError) {
-      onAddMarketplaceProduct(productData);
+      onAddMarketplaceProduct(productData, {
+        onSuccess: () => {
+          console.log('DUCCESS');
+          notification.add({
+            ...DEFAULT_NOTIFICATION_DATA,
+            title: 'Product created successfully!',
+            // description: 'Приз создан успешно',
+          });
+          setTimeout(() => {
+            history?.push('/admin-marketplace');
+          }, 400);
+          // onGetUserProjects();
+          // setPageLoading(false);
+          console.log('success 2');
+        },
+        onError: () => {
+          console.log('the one error part');
+        },
+      });
     }
   };
-
-  // useEffect(() => {
-  //   setProductData(new FormData());
-  // }, [setProductData]);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -116,9 +116,12 @@ function ProductCreationEdition(props: any) {
     const newSize = [...size];
     if (!size.includes(event.target.value)) {
       newSize.push(event.target.value);
+    } else {
+      const index = newSize.indexOf(event.target.value);
+      newSize.splice(index, 1);
     }
     setSize(newSize);
-    setProductData({ ...productData, sizes_available: size });
+    setProductData({ ...productData, sizes_available: newSize });
   };
 
   return (
@@ -180,14 +183,13 @@ function ProductCreationEdition(props: any) {
               <option value="l"> l </option>
               <option value="xl"> xl </option>
             </select>
-            {/* <div style={{ marginTop: '15px' }}>
-              {size.length > 0 &&
-                size.map((s, i) => (
-                  <div key={i}>
-                    <TagItem tag={s} bgColor="white" color="red" />
-                  </div>
-                ))}
-            </div> */}
+            <div style={{ marginTop: '10px', display: 'flex' }}>
+              {size.map((size) => (
+                <div key={size} style={{ marginRight: '5px' }}>
+                  <SizeTag size={size} />
+                </div>
+              ))}
+            </div>
           </div>
           <div style={{ marginTop: '15px' }}>
             <span
@@ -210,7 +212,7 @@ function ProductCreationEdition(props: any) {
         </div>
       </div>
       <div className="product-creation-footer">
-        <div>
+        <div style={{ marginBottom: '120px' }}>
           <MainButton buttonText="Create product" onCreateProject={handleAddProduct} />
         </div>
       </div>
@@ -228,4 +230,7 @@ const mapDispatchToProps = {
   onAddMarketplaceProduct: marketplaceActions.addMarketplaceProduct,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCreationEdition);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNotificationProvider(ProductCreationEdition));

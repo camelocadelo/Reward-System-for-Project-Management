@@ -5,6 +5,7 @@ import './index.scss';
 import editIcon from 'assets/images/editproduct.png';
 import deleteIcon from 'assets/images/trashproduct.png';
 import bookPhoto from 'assets/images/Dummy.jpg';
+import SizeTag from 'components/atoms/SizeTag/component';
 
 function ProductRow(props: ProductRowProps): JSX.Element {
   const { name, description, price, category, sizes_available, pk, onProductDelete } = props;
@@ -38,12 +39,14 @@ function ProductRow(props: ProductRowProps): JSX.Element {
           </div>
         </div>
       </td>
-      <td className="table-cell"> {price} </td>
+      <td className="table-cell">
+        <span className="typography__variant-coloredtext"> {price} $ </span>
+      </td>
       <td className="table-cell"> {category} </td>
       <td className="table-cell">
-        {sizes_available.map((s: any) => (
-          <div key={s}>
-            <span>{s}, </span>
+        {sizes_available.map((s: any, idx: any) => (
+          <div key={s} style={{ marginRight: '5px' }}>
+            <SizeTag size={s} />
           </div>
         ))}
       </td>
