@@ -15,4 +15,36 @@ export const photoUrls = [
     title: 'Marketplace',
     icon: bookPhoto,
   },
+  {
+    title: 'Marketplace',
+    icon: bookPhoto,
+  },
+  {
+    title: 'Marketplace',
+    icon: bookPhoto,
+  },
+  {
+    title: 'Marketplace',
+    icon: bookPhoto,
+  },
+  {
+    title: 'Profile',
+    icon: CTCI,
+  },
+  {
+    title: 'Profile',
+    icon: CTCI,
+  },
+  {
+    title: 'Profile',
+    icon: CTCI,
+  },
+  {
+    title: 'Profile',
+    icon: CTCI,
+  },
+  {
+    title: 'Profile',
+    icon: CTCI,
+  },
 ];

@@ -56,15 +56,11 @@ function CartItem(props: CartItemProps): JSX.Element {
               <span className="typography__variant-h2">{name}</span>
             </div>
             <div style={{ marginTop: '9px', display: 'flex' }}>
-              {available_sizes.map((av: any, i: number) => (
-                <div style={{ marginRight: '8px' }} key={i}>
-                  <SizeTag
-                    size={av}
-                    isSelected={selectedSize === av}
-                    onClickSize={handleClickSize}
-                  />
-                </div>
-              ))}
+              {chosen_size ? (
+                <SizeTag size={chosen_size} isSelected={true} onClickSize={handleClickSize} />
+              ) : (
+                <div style={{ marginTop: '30px' }}> </div>
+              )}
             </div>
             <div style={{ marginTop: '11px', display: 'flex', alignItems: 'flex-start' }}>
               <Counter onChangeQuantity={handleChangeQuantity} propQuantity={selectedQuantity} />

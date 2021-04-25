@@ -57,7 +57,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
             style={{ display: 'flex', flexDirection: 'row' }}
             className="project-detail-card-container"
           >
-            {projectActivitiesState.slice(0, 3).map((p: ProjectActivityResponse) => (
+            {projectActivitiesState.map((p: ProjectActivityResponse) => (
               <div key={p.pk} style={{ marginRight: '20px' }} className="project-detail-card">
                 <ProjectActivityCard
                   key={p.pk}
