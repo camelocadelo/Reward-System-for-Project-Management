@@ -10,6 +10,7 @@ import {
   DELETE_FROM_CART,
   MAKE_PURCHASE,
   VIEW_ALL_PURCHASES,
+  VIEW_USER_PURCHASES,
 } from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
@@ -114,6 +115,18 @@ export const viewAllPurchases = (callbacks?: any) => (dispatch: any, getState: a
   });
 };
 
+export const viewUserPurchases = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: VIEW_USER_PURCHASES,
+    apiCall: () => {
+      return api.viewUserPurchases();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
@@ -123,4 +136,5 @@ export default {
   deleteFromCart,
   makePurchase,
   viewAllPurchases,
+  viewUserPurchases,
 };

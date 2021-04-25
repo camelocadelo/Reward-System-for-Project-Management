@@ -45,3 +45,9 @@ export const VIEW_ALL_PURCHASES = {
   success: 'VIEW_ALL_PURCHASES_SUCCESS',
   failed: 'VIEW_ALL_PURCHASES_FAILED',
 };
+
+export const VIEW_USER_PURCHASES = {
+  started: 'VIEW_USER_PURCHASES_STARTED',
+  success: 'VIEW_USER_PURCHASES_SUCCESS',
+  failed: 'VIEW_USER_PURCHASES_FAILED',
+};

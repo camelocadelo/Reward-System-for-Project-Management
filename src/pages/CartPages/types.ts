@@ -3,4 +3,6 @@ export interface CartPageProps {
   cartItems: any;
   onDeleteFromCart?: any;
   onMakePurchase?: any;
+  userPurchases?: any;
+  onGetUserPurchases?: any;
 }

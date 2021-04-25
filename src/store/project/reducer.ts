@@ -6,6 +6,8 @@ import {
   ADD_TEAM_MEMBER,
   GET_PROJECT_MEMBERS,
   DELETE_PROJECT,
+  REMOVE_TEAM_MEMBER,
+  GET_STATISTICS,
 } from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
@@ -149,6 +151,53 @@ const deletedProjectState = (state = { data: null, loading: false }, action: any
   }
 };
 
+const removedTeamMemberState = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case REMOVE_TEAM_MEMBER.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case REMOVE_TEAM_MEMBER.success:
+      console.log(action.data);
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case REMOVE_TEAM_MEMBER.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+const projectStatistics = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_STATISTICS.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_STATISTICS.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case GET_STATISTICS.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
@@ -156,6 +205,8 @@ const projectReducer = combineReducers({
   addedTeamMemberState,
   projectMembers,
   deletedProjectState,
+  removedTeamMemberState,
+  projectStatistics,
 });
 
 export default projectReducer;

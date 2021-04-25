@@ -49,3 +49,7 @@ export const makePurchase = () =>
 const viewAllPurchasesUrl = `${API_URL}/marketplace/viewAllPurchases`;
 export const viewAllPurchases = () =>
   API.stdApiGET({ url: viewAllPurchasesUrl, token: access_token });
+
+const viewUserPurchasesUrl = `${API_URL}/marketplace/userPurchases/${my_pk}`;
+export const viewUserPurchases = () =>
+  API.stdApiGET({ url: viewUserPurchasesUrl, token: access_token });

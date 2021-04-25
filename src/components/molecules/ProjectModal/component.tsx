@@ -8,23 +8,11 @@ import projectActions from 'store/project/actions';
 import { connect } from 'react-redux';
 
 function ProjectModal(props: ProjectModalProps): JSX.Element {
-  const { onCloseModal, createProject, projectData, onProjectFormSubmit } = props;
+  const { onCloseModal, projectData, onProjectFormSubmit } = props;
 
   const { handleSubmit, register } = useForm<FormValues>({
     mode: 'onChange',
   });
-
-  // const onFormSubmit = useCallback<SubmitHandler<FormValues>>(
-  //   (values) => {
-  //     createProject({
-  //       name: values.projectName,
-  //       telegram_bonus: parseInt(values.telegramBonus, 10),
-  //       git_bonus: parseInt(values.gitBonus, 10),
-  //       slack_bonus: parseInt(values.slackBonus, 10),
-  //     });
-  //   },
-  //   [createProject]
-  // );
 
   useEffect(() => {
     if (projectData) {

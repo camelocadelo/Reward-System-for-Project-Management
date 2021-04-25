@@ -54,16 +54,16 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
         <div style={{ marginBottom: '30px' }}>
           <span className="typography__variant-h1"> Marketplace </span>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {marketplaceProducts &&
             marketplaceProducts.map((p: any, i: number) => (
-              <div key={p.pk} style={{ marginRight: '22px' }}>
+              <div key={p.pk} style={{ marginRight: '22px', flex: '0 0 30%' }}>
                 <MarketplaceProduct
                   pk={p.pk}
                   name={p.name}
                   description={p.description}
                   onAddCart={handleAddCart}
-                  photo={photoUrls[i].icon}
+                  photo={photoUrls[i % 5].icon}
                   price={p.price}
                   available_sizes={p.sizes_available}
                 />
