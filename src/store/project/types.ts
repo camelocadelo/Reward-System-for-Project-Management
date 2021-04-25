@@ -34,11 +34,28 @@ export const DELETE_PROJECT = {
   failed: 'DELETE_PROJECT_FAILED',
 };
 
+export const REMOVE_TEAM_MEMBER = {
+  started: 'REMOVE_TEAM_MEMBER_STARTED',
+  success: 'REMOVE_TEAM_MEMBER_SUCCESS',
+  failed: 'REMOVE_TEAM_MEMBER_FAILED',
+};
+
+export const SET_TEAM_LEAD = {
+  started: 'SET_TEAM_LEAD_STARTED',
+  success: 'SET_TEAM_LEAD_SUCCESS',
+  failed: 'SET_TEAM_LEAD_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;
   readonly git_bonus: number;
   readonly slack_bonus: number;
+};
+
+export type RemoveTeamMemberRequest = {
+  readonly pk: number;
+  readonly username: string;
 };
 
 export type ProjectActivityResponse = {
@@ -55,4 +72,15 @@ export type ProjectActivityResponse = {
 export type AddTeamMemberRequest = {
   readonly pk: number;
   readonly username: string;
+};
+
+export type GetStatisticsBody = {
+  readonly pk: number;
+  readonly time_frame: string;
+};
+
+export const GET_STATISTICS = {
+  started: 'GET_STATISTICS_STARTED',
+  success: 'GET_STATISTICS_SUCCESS',
+  failed: 'GET_STATISTICS_FAILED',
 };

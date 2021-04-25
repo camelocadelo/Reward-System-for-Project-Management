@@ -5,4 +5,9 @@ export interface ProjectDetailPageProps {
   addedTeamMemberState: any;
   onGetProjectMembers: any;
   projectMembersState: any;
+  onRemoveTeamMember?: any;
+  onSetTeamLead?: any;
+  projectStatistics?: any;
+  // onGetStatistics?: any;
+  onGetStatistics?(data: any, callbacks?: any): void;
 }

@@ -2,17 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6748e5f5-c705-46f8-ac1a-746035c08c9c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/index.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/CartItem/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/CartItem/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPages/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPages/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceUser/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceUser/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceUser/consts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceUser/consts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/atoms/PopUpMessage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/PopUpMessage/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/marketplace/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/marketplace/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/marketplace/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/marketplace/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/project/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/project/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/project/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/project/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../jmart/frontend-core" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/molecules/TeamLeadModal" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -50,6 +56,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\components\molecules\TeamLeadModal" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\pages\MarketplaceAdmin\ProductsList\Tabs\Orders" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\assets\images" />
       <recent name="C:\Users\kkenzhekhankyzy\kam\Reward-System-for-Project-Management\src\components\molecules\Notification" />
@@ -74,6 +81,7 @@
       <workItem from="1618978739152" duration="24000" />
       <workItem from="1619027118355" duration="9162000" />
       <workItem from="1619065944495" duration="26000" />
+      <workItem from="1619326962125" duration="14222000" />
     </task>
     <servers />
   </component>

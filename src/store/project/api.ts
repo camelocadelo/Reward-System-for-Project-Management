@@ -24,3 +24,16 @@ export const getProjectMembers = (projectPk: number) =>
 const deleteProjectUrl = `${API_URL}/op/delete-project/`;
 export const deleteProject = (projectPk: number) =>
   API.stdApiDELETE({ url: `${deleteProjectUrl}${projectPk}`, token: access_token });
+
+const removeTeamMemberUrl = `${API_URL}/op/remove_team_member`;
+export const removeTeamMember = (data: any) => API.stdApiDELETE({ data, url: removeTeamMemberUrl });
+
+const setTeamLeadUrl = `${API_URL}/op/set_team_lead`;
+export const setTeamLead = (data: any) => API.stdApiPOST({ data, url: setTeamLeadUrl });
+
+const getStatisticsUrl = `${API_URL}/op/get-statistics/`;
+export const getStatistics = (data: any) =>
+  API.stdApiGET({
+    url: `${getStatisticsUrl}${data.pk}&time_frame=${data.time_frame}`,
+    token: access_token,
+  });

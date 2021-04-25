@@ -1,5 +1,7 @@
 export interface ProjectMembersCardProps {
   readonly members?: ProjectMember[];
+  readonly onDeleteMember?: any;
+  readonly onSettingTeamLead?: any;
 }
 
 export type ProjectMember = {
