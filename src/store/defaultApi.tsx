@@ -10,10 +10,12 @@ export const STD_HEADERS = {
 const modifyHeader = (options: any) => {
   const headers = STD_HEADERS;
 
+  // if (options.formData) {
+  //   headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
+  // }
   if (options.formData) {
-    headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
+    delete headers['Content-Type'];
   }
-
   if (!!options.token) {
     const str = options.token.replace(/"/g, '');
     headers['Authorization'] = `Bearer ${str}`;

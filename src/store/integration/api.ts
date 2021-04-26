@@ -12,3 +12,13 @@ export const sendGithubCode = (data: any) =>
     token: access_token,
     data,
   });
+
+const bindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
+export const bindTelegramProfile = (data: any) =>
+  API.stdApiPOST({
+    url: bindTelegramProfileUrl,
+    token: access_token,
+    formData: true,
+    raw: data.rawData,
+    rawHeader: data.rawHeader,
+  });
