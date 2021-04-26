@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6748e5f5-c705-46f8-ac1a-746035c08c9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/TeamLeadModal/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/atoms/PopUpMessage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/atoms/PopUpMessage/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectModal/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectModal/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/project/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/project/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/project/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/project/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/defaultApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/defaultApi.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +67,7 @@
       <workItem from="1618978739152" duration="24000" />
       <workItem from="1619027118355" duration="9162000" />
       <workItem from="1619065944495" duration="26000" />
-      <workItem from="1619326962125" duration="14222000" />
+      <workItem from="1619326962125" duration="16007000" />
     </task>
     <servers />
   </component>
