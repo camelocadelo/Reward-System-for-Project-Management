@@ -4,8 +4,9 @@ import './index.scss';
 import ProfilePhoto from 'assets/images/profileAron.jpg';
 import MoreInfo from 'assets/images/moreInfo.png';
 import GithubIcon from 'assets/images/githubIcon.png';
-import TelegramIcon from 'assets/images/telegramIcon.png';
+// import TelegramIcon from 'assets/images/telegramIcon.png';
 import JiraIcon from 'assets/images/jiraIcon.png';
+import TelegramIcon from 'assets/images/telegram-icon.png';
 // import BorderedButton from 'components/atoms/BorderedButton/component';
 import PopUpMessage from 'components/atoms/PopUpMessage/component';
 import { useOutsideClick } from 'hooks/useOutsideClick';
@@ -19,10 +20,8 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
     email,
     accountBonuses,
     onChangeUserInfo,
-    onSendBonuses,
-    // onAddGithub,
     onAddSlack,
-    // onAddJira,
+    onAddTelegram,
   } = props;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -78,10 +77,11 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
             {/* <BorderedButton text="Send bonuses" onSendBonuses={onSendBonuses} color="#02A0FC" /> */}
             <div>
               <img
-                src={JiraIcon}
-                alt="Add Jira"
+                src={TelegramIcon}
+                alt="Add Telegram"
                 width="20px"
                 style={{ marginRight: '10px', cursor: 'pointer' }}
+                onClick={onAddTelegram}
               />
               <a
                 href="https://github.com/login/oauth/authorize?client_id=01bd74491b2142e0a049"

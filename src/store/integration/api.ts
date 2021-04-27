@@ -15,10 +15,27 @@ export const sendGithubCode = (data: any) =>
 
 const bindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
 export const bindTelegramProfile = (data: any) =>
-  API.stdApiPOST({
+  API.apiFormData({
     url: bindTelegramProfileUrl,
     token: access_token,
     formData: true,
-    raw: data.rawData,
-    rawHeader: data.rawHeader,
+    data,
+  });
+
+const bindSlackProfileUrl = `${API_URL}/slack/bind_profile_platform`;
+export const bindSlackProfile = (data: any) =>
+  API.apiFormData({
+    url: bindSlackProfileUrl,
+    token: access_token,
+    formData: true,
+    data,
+  });
+
+const bindTelegramChatUrl = `${API_URL}/tg/bind_group_platform`;
+export const bindTelegramProject = (data: any) =>
+  API.apiFormData({
+    url: `${bindTelegramChatUrl}/10`,
+    token: access_token,
+    formData: true,
+    data,
   });

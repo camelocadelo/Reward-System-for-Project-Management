@@ -3,4 +3,6 @@ export interface ProfilePageProps {
   onGetUserInfo(): void;
   userActivitiesData: any;
   onGetUserActivities(): void;
+  onBindTelegramProfile(data: any): any;
+  onBindSlackProfile(data: any): any;
 }

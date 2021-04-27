@@ -34,6 +34,6 @@ export const setTeamLead = (data: any) => API.stdApiPOST({ data, url: setTeamLea
 const getStatisticsUrl = `${API_URL}/op/get-statistics/`;
 export const getStatistics = (data: any) =>
   API.stdApiGET({
-    url: `${getStatisticsUrl}${data.pk}&time_frame=${data.time_frame}`,
+    url: `${getStatisticsUrl}${data.pk}?time_frame=${data.time_frame}`,
     token: access_token,
   });

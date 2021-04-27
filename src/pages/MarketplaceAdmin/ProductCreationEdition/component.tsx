@@ -45,9 +45,22 @@ function ProductCreationEdition(props: any): JSX.Element {
     console.log('it is handle add image');
   };
 
+  const newProductData = new FormData();
+  newProductData.append('name', 'myname');
+  newProductData.append('description', 'mynam11');
+  newProductData.append('category', 'categoru');
+  newProductData.append('price', '120');
+  newProductData.append('sizes_available', 'xs');
+
   const handleImageUpload = (event: any) => {
     if (event.target.files && event.target.files[0]) {
       const offerImage = event.target.files[0];
+      const reader = new FileReader();
+      // reader.onload = (e: any) => {
+      //   setImgPreview({ src: e.target.result });
+      // };
+      reader.readAsDataURL(offerImage);
+      newProductData.set('photo', offerImage);
     }
   };
 
@@ -64,15 +77,13 @@ function ProductCreationEdition(props: any): JSX.Element {
     return false;
   };
 
-  console.log('the product data: ', productData);
-
+  console.log('the product data: ', newProductData);
   const handleAddProduct = () => {
     // const data = new FormData();
     const isError = validate();
-    if (!isError) {
-      onAddMarketplaceProduct(productData, {
+    if (isError) {
+      onAddMarketplaceProduct(newProductData, {
         onSuccess: () => {
-          console.log('DUCCESS');
           notification.add({
             ...DEFAULT_NOTIFICATION_DATA,
             title: 'Product created successfully!',
@@ -199,14 +210,9 @@ function ProductCreationEdition(props: any): JSX.Element {
               Images
             </span>
             <div style={{ marginTop: '10px' }}>
-              <AddImageButton text="Add image">
-                <input
-                  name="photo"
-                  type="file"
-                  style={{ display: 'none' }}
-                  onChange={handleImageUpload}
-                />
-              </AddImageButton>
+              {/*<AddImageButton text="Add image">*/}
+              <input name="photo" type="file" onChange={handleImageUpload} />
+              {/*</AddImageButton>*/}
             </div>
           </div>
         </div>
