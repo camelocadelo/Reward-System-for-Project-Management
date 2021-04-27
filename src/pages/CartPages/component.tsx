@@ -26,14 +26,10 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
   const [step, setStep] = useState(0);
   const tabs = ['My Cart', ' My Purchases'];
 
-  console.log('the user purchases: ', userPurchases);
-
   useEffect(() => {
     onGetCartItems();
     onGetUserPurchases();
   }, []);
-
-  console.log('the marketplace user products: ', cartItems);
 
   const handleMakePurchase = (pk: any, size: any, selectedQuantity: any) => {
     onMakePurchase &&
@@ -106,7 +102,7 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
                       quantity={p.quantity}
                       chosen_size={p.chosen_size}
                       // description={p.description}
-                      photo={photoUrls[i].icon}
+                      photo={p.photo}
                       onRemoveFromCart={handleDeleteFromCart}
                     />
                   </div>

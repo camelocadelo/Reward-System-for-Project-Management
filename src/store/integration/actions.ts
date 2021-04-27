@@ -6,6 +6,9 @@ import {
   SEND_GITHUB_CODE,
   BIND_TELEGRAM_PROFILE,
   BIND_TELEGRAM_PROJECT,
+  BIND_SLACK_PROJECT,
+  UNBIND_SLACK_PROFILE,
+  UNBIND_TELEGRAM_PROFILE,
 } from './types';
 
 export const sendGithubCode = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
@@ -62,9 +65,48 @@ export const bindTelegramProject = (data: any, callbacks?: any) => (
   });
 };
 
+export const bindSlackProject = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: BIND_SLACK_PROJECT,
+    apiCall: () => {
+      return api.bindSlackProject(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const unbindSlackProfile = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: UNBIND_SLACK_PROFILE,
+    apiCall: () => {
+      return api.unbindSlackProfile();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const unbindTelegramProfile = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: UNBIND_TELEGRAM_PROFILE,
+    apiCall: () => {
+      return api.unbindTelegramProfile();
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   sendGithubCode,
   bindTelegramProfile,
   bindSlackProfile,
   bindTelegramProject,
+  bindSlackProject,
+  unbindSlackProfile,
+  unbindTelegramProfile,
 };

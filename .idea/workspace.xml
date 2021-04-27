@@ -2,23 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6748e5f5-c705-46f8-ac1a-746035c08c9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/StatisticsTable/component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/StatisticsTable/consts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/molecules/StatisticsTable/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/AddTeamMember/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/AddTeamMember/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/organisms/Sidebar/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/organisms/Sidebar/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/BindSlackProfileModal/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/BindSlackProfileModal/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/BindTelegramProfileModal/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/BindTelegramProfileModal/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductCreationEdition/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductCreationEdition/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Orders/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/Tabs/Orders/component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceUser/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceUser/component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProfilePage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePage/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePage/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectDetailPage/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/project/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/project/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/integration/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/integration/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +84,7 @@
       <workItem from="1619326962125" duration="16007000" />
       <workItem from="1619459002702" duration="105000" />
       <workItem from="1619496657070" duration="8789000" />
-      <workItem from="1619531150080" duration="14160000" />
+      <workItem from="1619531150080" duration="19881000" />
     </task>
     <servers />
   </component>

@@ -5,4 +5,6 @@ export interface ProfilePageProps {
   onGetUserActivities(): void;
   onBindTelegramProfile(data: any): any;
   onBindSlackProfile(data: any): any;
+  onUnbindSlackProfile?: any;
+  onUnbindTelegramProfile?: any;
 }

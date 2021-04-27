@@ -34,6 +34,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     projectStatisticsData,
     onGetStatistics,
     onBindTelegramProject,
+    onBindSlackProject,
   } = props;
 
   const [isAddTeamMember, setIsAddTeamMember] = useState(false);
@@ -68,13 +69,6 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     helperFunction(projectStatisticsData.state);
 
   console.log('the ress: ', resultArray);
-  //
-  // useEffect(() => {
-  //   if (projectStatisticsData && projectStatisticsData.length > 0) {
-  //     const arrayVersion = projectStatisticsData[0][firstMemeber];
-  //     console.log('hhh', arrayVersion);
-  //   }
-  // }, [projectStatisticsData]);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -152,7 +146,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   };
   const handleAddSlackChannel = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
-    onBindSlackProfile(SlackFormData);
+    onBindSlackProject && onBindSlackProject(SlackFormData);
     console.log('HANDLE ADD SLACK');
   };
 
@@ -293,6 +287,7 @@ const mapDispatchToProps = {
   onSetTeamLead: projectActions.setTeamLead,
   onGetStatistics: projectActions.getStatistics,
   onBindTelegramProject: integrationActions.bindTelegramProject,
+  onBindSlackProject: integrationActions.bindSlackProject,
 };
 
 export default connect(

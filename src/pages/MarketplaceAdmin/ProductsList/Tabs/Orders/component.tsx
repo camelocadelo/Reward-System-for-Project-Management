@@ -30,7 +30,7 @@ function MarketplaceOrdersTable(props: MarketplaceOrdersProps): JSX.Element {
             </th>
           ))}
         </tr>
-        <tbody className="table-body" style={{ maxHeight: '250px', overflow: 'scroll' }}>
+        <tbody className="table-body" style={{ maxHeight: '600px', overflow: 'scroll' }}>
           {marketplaceOrders &&
             marketplaceOrders.map((p: any) => (
               <OrderRow

@@ -22,7 +22,7 @@ function BindSlackProfileModal(props: BindSlackProfileModalProps): JSX.Element {
       </div>
       <form onSubmit={handleSubmit(onSlackProfileFormSubmit)}>
         <div className="input-wrp">
-          <span className=""> Binding Slack Profile </span>
+          <span className=""> Binding with Slack </span>
           <input
             name={FormInputs.slackProfileCode}
             id={FormInputs.slackProfileCode}
