@@ -39,3 +39,20 @@ export const bindTelegramProject = (data: any) =>
     formData: true,
     data,
   });
+
+const bindSlackChatUrl = `${API_URL}/slack/bind_channel_platform`;
+export const bindSlackProject = (data: any) =>
+  API.apiFormData({
+    url: `${bindSlackChatUrl}/10`,
+    token: access_token,
+    formData: true,
+    data,
+  });
+
+const unbindSlackProfileUrl = `${API_URL}/slack/bind_profile_platform`;
+export const unbindSlackProfile = () =>
+  API.stdApiDELETE({ url: unbindSlackProfileUrl, token: access_token });
+
+const unbindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
+export const unbindTelegramProfile = () =>
+  API.stdApiDELETE({ url: unbindTelegramProfileUrl, token: access_token });

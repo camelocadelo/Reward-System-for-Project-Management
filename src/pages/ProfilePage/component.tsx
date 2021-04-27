@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import integrationActions from 'store/integration/actions';
 import BindTelegramProfileModal from 'components/molecules/BindTelegramProfileModal/component';
 import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/component';
+import ProjectDeleteModal from 'components/molecules/ProjectDeleteModal/component';
 
 function ProfilePage(props: ProfilePageProps) {
   const {
@@ -20,12 +21,17 @@ function ProfilePage(props: ProfilePageProps) {
     onGetUserActivities,
     onBindTelegramProfile,
     onBindSlackProfile,
+    onUnbindSlackProfile,
+    onUnbindTelegramProfile,
   } = props;
   const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
   const [code, setCode] = useState<string | null>(null);
 
   const [isTelegramModal, setIsTelegramModal] = useState(false);
   const [isSlackModal, setIsSlackModal] = useState(false);
+
+  const [isUnbindSlack, setIsUnbindSlack] = useState(false);
+  const [isUnbindTelegram, setIsUnbindTelegram] = useState(false);
 
   const location = useLocation();
   useEffect(() => {
@@ -63,31 +69,54 @@ function ProfilePage(props: ProfilePageProps) {
     console.log('HANDLE ADD GITHUB');
   };
 
-  /* TODO: add addSlack method after back*/
   const handleAddSlack = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
     onBindSlackProfile(SlackFormData);
     console.log('HANDLE ADD SLACK');
   };
 
-  /*TODO: add addJira method after back */
   const handleAddTelegram = (form: any) => {
     TelegramFormData.append('code', form.telegramProfileCode);
     onBindTelegramProfile(TelegramFormData);
     console.log('HANDLE ADD JIRA');
   };
 
-  /* TODO: add sendBonuses method after back*/
   const handleSendBonuses = () => {
     console.log('HANDLE SEND BONUSES');
   };
   console.log(isTelegramModal, isSlackModal);
 
+  const openDeleteSlack = () => {
+    setIsUnbindSlack(true);
+  };
+
+  const openSlack = () => {
+    setIsSlackModal(true);
+  };
+
+  const handleUnbindSlack = () => {
+    onUnbindSlackProfile && onUnbindSlackProfile();
+  };
+
+  const openTelegram = () => {
+    setIsTelegramModal(true);
+  };
+
+  const openDeleteTelegram = () => {
+    setIsUnbindTelegram(true);
+  };
+
+  const handleUnbindTelegram = () => {
+    onUnbindTelegramProfile && onUnbindTelegramProfile();
+  };
+
   return (
     <MainTemplate>
       <div
         className={
-          userInfoModal || isSlackModal || isTelegramModal ? 'profile-page-modal' : 'profile-page'
+          userInfoModal || isSlackModal || isTelegramModal || isUnbindSlack || isUnbindTelegram
+            ? 'profile-page-modal'
+            : 'profile-page'
         }
       >
         {userInfoData && (
@@ -99,8 +128,8 @@ function ProfilePage(props: ProfilePageProps) {
             accountBonuses={userInfoData.account_bonus}
             onChangeUserInfo={handleChangeUserInfo}
             onAddGithub={handleAddGithub}
-            onAddSlack={() => setIsSlackModal(true)}
-            onAddTelegram={() => setIsTelegramModal(true)}
+            onAddSlack={userInfoData.isSlackBind ? openDeleteSlack : openSlack}
+            onAddTelegram={userInfoData.isTelegramBind ? openDeleteTelegram : openTelegram}
             onSendBonuses={handleSendBonuses}
           />
         )}
@@ -123,6 +152,20 @@ function ProfilePage(props: ProfilePageProps) {
           onSlackProfileFormSubmit={handleAddSlack}
         />
       )}
+      {isUnbindSlack && (
+        <ProjectDeleteModal
+          text="Are you sure you want to unbind your account from Slack?"
+          onClickCancel={() => setIsUnbindSlack(false)}
+          onClickModalOk={handleUnbindSlack}
+        />
+      )}
+      {isUnbindTelegram && (
+        <ProjectDeleteModal
+          text="Are you sure you want to unbind your account from Telegram?"
+          onClickCancel={() => setIsUnbindTelegram(false)}
+          onClickModalOk={handleUnbindTelegram}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -139,6 +182,8 @@ const mapDispatchToProps = {
   onGetUserActivities: userActions.getUserActivities,
   onBindTelegramProfile: integrationActions?.bindTelegramProfile,
   onBindSlackProfile: integrationActions.bindSlackProfile,
+  onUnbindSlackProfile: integrationActions.unbindSlackProfile,
+  onUnbindTelegramProfile: integrationActions.unbindTelegramProfile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

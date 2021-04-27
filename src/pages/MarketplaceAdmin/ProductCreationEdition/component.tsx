@@ -46,11 +46,11 @@ function ProductCreationEdition(props: any): JSX.Element {
   };
 
   const newProductData = new FormData();
-  newProductData.append('name', 'myname');
-  newProductData.append('description', 'mynam11');
-  newProductData.append('category', 'categoru');
-  newProductData.append('price', '120');
-  newProductData.append('sizes_available', 'xs');
+  // newProductData.append('name', '');
+  // newProductData.append('description', '');
+  // newProductData.append('category', '');
+  // newProductData.append('price', '');
+  // newProductData.append('sizes_available', 'xs');
 
   const handleImageUpload = (event: any) => {
     if (event.target.files && event.target.files[0]) {
@@ -81,7 +81,15 @@ function ProductCreationEdition(props: any): JSX.Element {
   const handleAddProduct = () => {
     // const data = new FormData();
     const isError = validate();
-    if (isError) {
+    if (!isError) {
+      newProductData.append('name', name);
+      newProductData.append('description', description);
+      newProductData.append('category', category);
+      newProductData.append('price', price);
+      size.map((s) => {
+        newProductData.append('sizes_available', s);
+      });
+      // newProductData.append('sizes_available', 'xs');
       onAddMarketplaceProduct(newProductData, {
         onSuccess: () => {
           notification.add({
@@ -105,21 +113,25 @@ function ProductCreationEdition(props: any): JSX.Element {
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
+    newProductData.set('name', event.target.value);
     setProductData({ ...productData, name: event.target.value });
   };
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(event.target.value);
+    newProductData.set('description', event.target.value);
     setProductData({ ...productData, description: event.target.value });
   };
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(event.target.value);
+    newProductData.set('price', event.target.value);
     setProductData({ ...productData, price: event.target.value });
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
+    newProductData.set('category', event.target.value);
     setProductData({ ...productData, category: event.target.value });
   };
 

@@ -22,7 +22,7 @@ function BindTelegramProfileModal(props: BindTelegramProfileModalProps): JSX.Ele
       </div>
       <form onSubmit={handleSubmit(onTelegramProfileFormSubmit)}>
         <div className="input-wrp">
-          <span className=""> Binding Telegram Profile </span>
+          <span className=""> Binding with Telegram </span>
           <input
             name={FormInputs.telegramProfileCode}
             id={FormInputs.telegramProfileCode}

@@ -12,4 +12,5 @@ export interface ProjectDetailPageProps {
   onGetStatistics?(data: any, callbacks?: any): void;
   onBindTelegramProject?(data: any, callbacks?: any): any;
   projectMembers: any;
+  onBindSlackProject?(data: any, callbacks?: any): any;
 }

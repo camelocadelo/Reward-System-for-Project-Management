@@ -17,8 +17,6 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
     onGetMarketplaceProducts();
   }, []);
 
-  // console.log('the marketplace user products: ', marketplaceProducts);
-
   const handleAddCart = (pk: any, size: any, selectedQuantity: any) => {
     onAddToCart &&
       onAddToCart(
@@ -41,13 +39,6 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
     setIsSuccessModal(false);
   };
 
-  // useEffect(() => {
-  //   if (registerData && !registerLoading) {
-  //     setIsRegisterSuccess(true);
-  //     console.log('the register data: ', registerData);
-  //   }
-  // }, [registerData, registerLoading]);
-
   return (
     <MainTemplate>
       <div>
@@ -63,7 +54,7 @@ function MarketplaceUserPage(props: MarketplaceUserProps): JSX.Element {
                   name={p.name}
                   description={p.description}
                   onAddCart={handleAddCart}
-                  photo={photoUrls[i % 5].icon}
+                  photo={p.photo}
                   price={p.price}
                   available_sizes={p.sizes_available}
                 />
