@@ -18,6 +18,8 @@ import TeamLeadModal from 'components/molecules/TeamLeadModal/component';
 import BindTelegramProfileModal from 'components/molecules/BindTelegramProfileModal/component';
 import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/component';
 import integrationActions from 'store/integration/actions';
+import StatisticsTable from 'components/molecules/StatisticsTable/component';
+
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
   const { id } = useParams();
@@ -29,7 +31,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     projectMembersState,
     onRemoveTeamMember,
     onSetTeamLead,
-    projectStatistics,
+    projectStatisticsData,
     onGetStatistics,
     onBindTelegramProject,
   } = props;
@@ -38,8 +40,41 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   useEffect(() => {
     id && onGetProjectActivities && onGetProjectActivities(id);
     id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
-    id && onGetStatistics && onGetStatistics({ pk: id, time_frame: '2_weeks' });
+    id && onGetStatistics && onGetStatistics({ pk: id, time_frame: '1_week' });
   }, [id, onGetProjectActivities, onGetProjectMembers, onGetStatistics]);
+  const y_axis =
+    projectStatisticsData?.yAxis?.Git && Object.keys(projectStatisticsData?.yAxis?.Git);
+  console.log(y_axis, 'hey');
+
+  const resultArray: any[] = [];
+
+  const helperFunction = (tableData: any) => {
+    const members = projectStatisticsData?.members;
+    console.log('memebers: ', members);
+    y_axis.forEach((y) => {
+      const dataEntry: {
+        [key: string]: string;
+      } = {};
+      dataEntry['name'] = y;
+      members.forEach((m: string) => {
+        const memberObjData = tableData.find((obj: any) => obj.hasOwnProperty(m));
+        dataEntry[m] = memberObjData[m]['Slack'][y];
+      });
+      resultArray.push(dataEntry);
+    });
+  };
+  projectStatisticsData &&
+    projectStatisticsData.state &&
+    helperFunction(projectStatisticsData.state);
+
+  console.log('the ress: ', resultArray);
+  //
+  // useEffect(() => {
+  //   if (projectStatisticsData && projectStatisticsData.length > 0) {
+  //     const arrayVersion = projectStatisticsData[0][firstMemeber];
+  //     console.log('hhh', arrayVersion);
+  //   }
+  // }, [projectStatisticsData]);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -115,9 +150,6 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
       }
     );
   };
-
-  console.log('PROJECT STATTATAT: ', projectStatistics);
-
   const handleAddSlackChannel = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
     onBindSlackProfile(SlackFormData);
@@ -201,13 +233,21 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
             )}
           </div>
         )}
-        {projectMembersState && (
-          <ProjectMembersCard
-            members={projectMembersState}
-            onDeleteMember={handleDeleteMember}
-            onSettingTeamLead={handleSettingTeamLead}
-          />
-        )}
+        <div style={{ display: 'flex', maxWidth: '1200px' }}>
+          {projectMembersState && (
+            <ProjectMembersCard
+              members={projectMembersState}
+              onDeleteMember={handleDeleteMember}
+              onSettingTeamLead={handleSettingTeamLead}
+            />
+          )}
+          {resultArray && resultArray.length > 0 && (
+            <div style={{ marginBottom: '30px', width: 'fit-content' }}>
+              <div style={{ textAlign: 'center' }}> Telegram Chart </div>
+              <StatisticsTable data={resultArray} />
+            </div>
+          )}
+        </div>
       </div>
       {isDeleteModal && (
         <ProjectDeleteModal
@@ -242,7 +282,7 @@ const mapStateToProps = (state: any) => {
   return {
     projectActivitiesState: state.projectReducer.projectActivities.data,
     projectMembersState: state.projectReducer.projectMembers.data,
-    projectStatistics: state.projectReducer.projectStatistics.data,
+    projectStatisticsData: state.projectReducer.projectStatistics.data,
   };
 };
 

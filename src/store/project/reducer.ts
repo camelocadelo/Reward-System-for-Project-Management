@@ -184,8 +184,14 @@ const projectStatistics = (state = { data: null, loading: false }, action: any):
       };
     case GET_STATISTICS.success:
       const data = action.data;
+      const first_member = Object.keys(data)[0];
+      const tableData = Object.entries(data).map((e) => ({ [e[0]]: e[1] }));
       return {
-        data: data,
+        data: {
+          members: Object.keys(data),
+          state: Object.entries(data).map((e) => ({ [e[0]]: e[1] })),
+          yAxis: tableData[0][first_member],
+        },
         loading: false,
       };
     case GET_STATISTICS.failed:

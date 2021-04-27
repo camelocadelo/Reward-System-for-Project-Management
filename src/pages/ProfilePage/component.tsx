@@ -104,7 +104,7 @@ function ProfilePage(props: ProfilePageProps) {
             onSendBonuses={handleSendBonuses}
           />
         )}
-        {userActivitiesData && (
+        {userActivitiesData && userActivitiesData.length > 0 && (
           <div style={{ marginTop: '40px' }}>
             <UserActivityTable userActivityState={userActivitiesData} />
           </div>

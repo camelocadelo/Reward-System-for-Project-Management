@@ -20,6 +20,7 @@ export const Sidebar: FC = () => {
   const handleModalOk = () => {
     setIsLogoutModal(false);
     localStorage.removeItem('access_token');
+    localStorage.removeItem('pk');
     // window.location.href = '';
     history.push('/');
   };

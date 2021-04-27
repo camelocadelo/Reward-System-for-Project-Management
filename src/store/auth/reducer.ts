@@ -15,7 +15,6 @@ const login = (state = { data: null, loading: false }, action: any): any => {
         errorMesage: undefined,
       };
     case GET_USER.success:
-      console.log(action.data);
       const data = action.data;
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('pk', data.pk);
@@ -24,9 +23,6 @@ const login = (state = { data: null, loading: false }, action: any): any => {
       localStorage.setItem('is_organizationOwner', data.is_organizationOwner);
       localStorage.setItem('is_marketplace_admin', data.is_marketplace_admin);
       localStorage.setItem('username', data.username);
-      // const parsedData = parseUserInfo(data);
-      // localStorage.setItem('user', JSON.stringify(parsedData.token));
-      // localStorage.setItem('user_role', JSON.stringify(parsedData.user.role));
       return {
         data: data,
         loading: false,

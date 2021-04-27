@@ -7,8 +7,9 @@ export interface ProjectDetailPageProps {
   projectMembersState: any;
   onRemoveTeamMember?: any;
   onSetTeamLead?: any;
-  projectStatistics?: any;
+  projectStatisticsData?: any;
   // onGetStatistics?: any;
   onGetStatistics?(data: any, callbacks?: any): void;
   onBindTelegramProject?(data: any, callbacks?: any): any;
+  projectMembers: any;
 }
