@@ -8,7 +8,7 @@ import bookPhoto from 'assets/images/Dummy.jpg';
 import SizeTag from 'components/atoms/SizeTag/component';
 
 function ProductRow(props: ProductRowProps): JSX.Element {
-  const { name, description, price, category, sizes_available, pk, onProductDelete } = props;
+  const { name, description, price, category, sizes_available, pk, onProductDelete, photo } = props;
 
   const handleProductDelete = () => {
     onProductDelete(pk);
@@ -22,7 +22,7 @@ function ProductRow(props: ProductRowProps): JSX.Element {
       >
         <div style={{ marginRight: '15px' }}>
           <img
-            src={bookPhoto}
+            src={photo || bookPhoto}
             alt="edit"
             width="50px"
             height="50px"

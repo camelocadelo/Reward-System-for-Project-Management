@@ -7,4 +7,5 @@ export interface ProductRowProps {
   readonly sizes_available?: any;
   readonly category?: any;
   readonly onProductDelete?: any;
+  readonly photo?: any;
 }

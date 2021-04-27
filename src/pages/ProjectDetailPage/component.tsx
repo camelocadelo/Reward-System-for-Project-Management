@@ -15,7 +15,9 @@ import { DEFAULT_NOTIFICATION_DATA } from 'components/molecules/Notification/con
 import useNotification from 'components/molecules/Notification/useNotification';
 import withNotificationProvider from 'components/molecules/Notification/withNotificationProvider';
 import TeamLeadModal from 'components/molecules/TeamLeadModal/component';
-
+import BindTelegramProfileModal from 'components/molecules/BindTelegramProfileModal/component';
+import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/component';
+import integrationActions from 'store/integration/actions';
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
   const { id } = useParams();
@@ -29,6 +31,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     onSetTeamLead,
     projectStatistics,
     onGetStatistics,
+    onBindTelegramProject,
   } = props;
 
   const [isAddTeamMember, setIsAddTeamMember] = useState(false);
@@ -44,6 +47,14 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
   const [deleteMemberUsername, setDeleteMemberUsername] = useState<string>('');
   const [isTeamLeadModal, setIsTeamLeadModal] = useState<boolean>(false);
+
+  const [isSlackModal, setIsSlackModal] = useState(false);
+  const [isTelegramModal, setIsTelegramModal] = useState(false);
+  const [isGithubModal, setIsGithubModal] = useState(false);
+
+  const TelegramFormData = new FormData();
+
+  const SlackFormData = new FormData();
 
   const isShowButton = isAdmin === 'true' || isOrgOwner === 'true' || isManager === 'true';
 
@@ -107,9 +118,27 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
 
   console.log('PROJECT STATTATAT: ', projectStatistics);
 
+  const handleAddSlackChannel = (form: any) => {
+    SlackFormData.append('code', form.slackProfileCode);
+    onBindSlackProfile(SlackFormData);
+    console.log('HANDLE ADD SLACK');
+  };
+
+  /*TODO: add addJira method after back */
+  const handleAddTelegramChat = (form: any) => {
+    TelegramFormData.append('code', form.telegramProfileCode);
+    onBindTelegramProject && onBindTelegramProject(TelegramFormData);
+    console.log('HANDLE ADD JIRA');
+  };
   return (
     <MainTemplate>
-      <div className={isTeamLeadModal ? 'project-detail-page-modal' : 'project-detail-page'}>
+      <div
+        className={
+          isTeamLeadModal || isTelegramModal || isSlackModal
+            ? 'project-detail-page-modal'
+            : 'project-detail-page'
+        }
+      >
         {projectActivitiesState && (
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div
@@ -131,9 +160,32 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
                 </div>
               ))}
             </div>
-            {/*<div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: '22px' }}>*/}
-            {/*  {projectActivitiesState.length > 3 && <MainButton buttonText="See All" />}*/}
-            {/*</div>*/}
+          </div>
+        )}
+        {isShowButton && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: '20px',
+              maxWidth: '1200px',
+            }}
+          >
+            <MainButton
+              buttonText={'+ Bind Slack'}
+              onCreateProject={() => setIsSlackModal(true)}
+              bgColor={'#34B53A'}
+            />
+            <MainButton
+              buttonText={'+ Bind Telegram'}
+              onCreateProject={() => setIsTelegramModal(true)}
+              bgColor={'#34B53A'}
+            />
+            <MainButton
+              buttonText={'+ Bind Github'}
+              onCreateProject={() => setIsGithubModal(true)}
+              bgColor={'#34B53A'}
+            />
           </div>
         )}
         {isShowButton && (
@@ -170,6 +222,18 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
           onTeamLeadFormSubmit={handleTeamLeadFormSubmit}
         />
       )}
+      {isTelegramModal && (
+        <BindTelegramProfileModal
+          onCloseModal={() => setIsTelegramModal(false)}
+          onTelegramProfileFormSubmit={handleAddTelegramChat}
+        />
+      )}
+      {isSlackModal && (
+        <BindSlackProfileModal
+          onCloseModal={() => setIsSlackModal(false)}
+          onSlackProfileFormSubmit={handleAddSlackChannel}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -188,6 +252,7 @@ const mapDispatchToProps = {
   onRemoveTeamMember: projectActions.removeTeamMember,
   onSetTeamLead: projectActions.setTeamLead,
   onGetStatistics: projectActions.getStatistics,
+  onBindTelegramProject: integrationActions.bindTelegramProject,
 };
 
 export default connect(

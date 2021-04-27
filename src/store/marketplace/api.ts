@@ -10,10 +10,11 @@ export const getMarketplaceProducts = () =>
 
 const addMarketplaceProductUrl = `${API_URL}/marketplace/addProduct`;
 export const addMarketplaceProduct = (data: any) =>
-  API.stdApiPOST({
+  API.apiFormData({
     url: addMarketplaceProductUrl,
     token: access_token,
     data,
+    formData: true,
   });
 
 const deleteMarketplaceProductUrl = `${API_URL}/marketplace/deleteProduct/`;

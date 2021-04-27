@@ -50,6 +50,7 @@ function MarketplacePrizesTable(props: MarketplaceProductsProps): JSX.Element {
           {marketplaceProducts &&
             marketplaceProducts.map((p: any) => (
               <ProductRow
+                photo={p.photo}
                 key={p.pk}
                 pk={p.pk}
                 name={p.name}

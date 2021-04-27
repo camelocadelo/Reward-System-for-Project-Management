@@ -10,4 +10,5 @@ export interface ProjectDetailPageProps {
   projectStatistics?: any;
   // onGetStatistics?: any;
   onGetStatistics?(data: any, callbacks?: any): void;
+  onBindTelegramProject?(data: any, callbacks?: any): any;
 }

@@ -8,11 +8,24 @@ import { ProfilePageProps } from './types';
 import UserInfoModal from 'components/molecules/UserInfoModal/component';
 import UserActivityTable from 'components/molecules/UserActivityTable/component';
 import { useLocation } from 'react-router-dom';
+import integrationActions from 'store/integration/actions';
+import BindTelegramProfileModal from 'components/molecules/BindTelegramProfileModal/component';
+import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/component';
 
 function ProfilePage(props: ProfilePageProps) {
-  const { userInfoData, onGetUserInfo, userActivitiesData, onGetUserActivities } = props;
+  const {
+    userInfoData,
+    onGetUserInfo,
+    userActivitiesData,
+    onGetUserActivities,
+    onBindTelegramProfile,
+    onBindSlackProfile,
+  } = props;
   const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
   const [code, setCode] = useState<string | null>(null);
+
+  const [isTelegramModal, setIsTelegramModal] = useState(false);
+  const [isSlackModal, setIsSlackModal] = useState(false);
 
   const location = useLocation();
   useEffect(() => {
@@ -22,6 +35,10 @@ function ProfilePage(props: ProfilePageProps) {
   }, [location.search]);
   console.log('profile location: ', location);
   console.log('the code sobsna: ', code);
+
+  const TelegramFormData = new FormData();
+
+  const SlackFormData = new FormData();
 
   useEffect(() => {
     onGetUserInfo();
@@ -47,12 +64,16 @@ function ProfilePage(props: ProfilePageProps) {
   };
 
   /* TODO: add addSlack method after back*/
-  const handleAddSlack = () => {
+  const handleAddSlack = (form: any) => {
+    SlackFormData.append('code', form.slackProfileCode);
+    onBindSlackProfile(SlackFormData);
     console.log('HANDLE ADD SLACK');
   };
 
   /*TODO: add addJira method after back */
-  const handleAddJira = () => {
+  const handleAddTelegram = (form: any) => {
+    TelegramFormData.append('code', form.telegramProfileCode);
+    onBindTelegramProfile(TelegramFormData);
     console.log('HANDLE ADD JIRA');
   };
 
@@ -60,10 +81,15 @@ function ProfilePage(props: ProfilePageProps) {
   const handleSendBonuses = () => {
     console.log('HANDLE SEND BONUSES');
   };
+  console.log(isTelegramModal, isSlackModal);
 
   return (
     <MainTemplate>
-      <div className={userInfoModal ? 'profile-page-modal' : 'profile-page'}>
+      <div
+        className={
+          userInfoModal || isSlackModal || isTelegramModal ? 'profile-page-modal' : 'profile-page'
+        }
+      >
         {userInfoData && (
           <ProfileCard
             firstName={userInfoData.first_name}
@@ -73,8 +99,8 @@ function ProfilePage(props: ProfilePageProps) {
             accountBonuses={userInfoData.account_bonus}
             onChangeUserInfo={handleChangeUserInfo}
             onAddGithub={handleAddGithub}
-            onAddSlack={handleAddSlack}
-            onAddJira={handleAddJira}
+            onAddSlack={() => setIsSlackModal(true)}
+            onAddTelegram={() => setIsTelegramModal(true)}
             onSendBonuses={handleSendBonuses}
           />
         )}
@@ -85,6 +111,18 @@ function ProfilePage(props: ProfilePageProps) {
         )}
       </div>
       {userInfoModal && <UserInfoModal onCloseModal={handleModalClose} />}
+      {isTelegramModal && (
+        <BindTelegramProfileModal
+          onCloseModal={() => setIsTelegramModal(false)}
+          onTelegramProfileFormSubmit={handleAddTelegram}
+        />
+      )}
+      {isSlackModal && (
+        <BindSlackProfileModal
+          onCloseModal={() => setIsSlackModal(false)}
+          onSlackProfileFormSubmit={handleAddSlack}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -99,6 +137,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = {
   onGetUserInfo: userActions.getUserInfo,
   onGetUserActivities: userActions.getUserActivities,
+  onBindTelegramProfile: integrationActions?.bindTelegramProfile,
+  onBindSlackProfile: integrationActions.bindSlackProfile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

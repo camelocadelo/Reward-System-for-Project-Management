@@ -8,5 +8,5 @@ export interface ProfileCardProps {
   readonly onSendBonuses: any;
   readonly onAddGithub: any;
   readonly onAddSlack?: any;
-  readonly onAddJira: any;
+  readonly onAddTelegram: any;
 }
