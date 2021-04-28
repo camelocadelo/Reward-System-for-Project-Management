@@ -50,7 +50,7 @@ export const bindSlackProfile = (data: any, callbacks?: any) => (dispatch: any, 
   });
 };
 
-export const bindTelegramProject = (data: any, callbacks?: any) => (
+export const bindTelegramProject = (data: any, id: any, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
@@ -58,19 +58,22 @@ export const bindTelegramProject = (data: any, callbacks?: any) => (
     callbacks,
     action: BIND_TELEGRAM_PROJECT,
     apiCall: () => {
-      return api.bindTelegramProject(data);
+      return api.bindTelegramProject(data, id);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
   });
 };
 
-export const bindSlackProject = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+export const bindSlackProject = (data: any, arg2: any, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: BIND_SLACK_PROJECT,
     apiCall: () => {
-      return api.bindSlackProject(data);
+      return api.bindSlackProject(data, arg2);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),

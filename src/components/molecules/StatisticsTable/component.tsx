@@ -1,10 +1,10 @@
 import React from 'react';
 import { LineChart, CartesianGrid, XAxis, YAxis, Legend, Tooltip, Line } from 'recharts';
-// import { data } from './consts';
+import { strokeColors } from './consts';
 import { StatisticsTableProps } from './types';
 
 function StatisticsTable(props: StatisticsTableProps): JSX.Element {
-  const { data } = props;
+  const { data, members } = props;
   return (
     <div>
       <LineChart
@@ -18,9 +18,9 @@ function StatisticsTable(props: StatisticsTableProps): JSX.Element {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="camelocadelo1" stroke="#8884d8" />
-        <Line type="monotone" dataKey="lenakuka" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="mmfrxx" stroke="red" />
+        {members.map((m, i) => (
+          <Line key={m} type="monotone" dataKey={m} stroke={strokeColors[i]} />
+        ))}
       </LineChart>
     </div>
   );

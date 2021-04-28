@@ -32,18 +32,18 @@ export const bindSlackProfile = (data: any) =>
   });
 
 const bindTelegramChatUrl = `${API_URL}/tg/bind_group_platform`;
-export const bindTelegramProject = (data: any) =>
+export const bindTelegramProject = (data: any, id: any) =>
   API.apiFormData({
-    url: `${bindTelegramChatUrl}/10`,
+    url: `${bindTelegramChatUrl}/${id}`,
     token: access_token,
     formData: true,
     data,
   });
 
 const bindSlackChatUrl = `${API_URL}/slack/bind_channel_platform`;
-export const bindSlackProject = (data: any) =>
+export const bindSlackProject = (data: any, arg2: any) =>
   API.apiFormData({
-    url: `${bindSlackChatUrl}/10`,
+    url: `${bindSlackChatUrl}/${arg2}`,
     token: access_token,
     formData: true,
     data,

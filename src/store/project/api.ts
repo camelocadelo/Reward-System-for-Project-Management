@@ -37,3 +37,10 @@ export const getStatistics = (data: any) =>
     url: `${getStatisticsUrl}${data.pk}?time_frame=${data.time_frame}`,
     token: access_token,
   });
+
+const getProjectBindInfoUrl = `${API_URL}/op/get-info-project`;
+export const getProjectBindInfo = (id: any) =>
+  API.stdApiGET({
+    url: `${getProjectBindInfoUrl}/${id}`,
+    token: access_token,
+  });

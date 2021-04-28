@@ -46,6 +46,12 @@ export const SET_TEAM_LEAD = {
   failed: 'SET_TEAM_LEAD_FAILED',
 };
 
+export const GET_PROJECT_BIND_INFO = {
+  started: 'GET_PROJECT_BIND_INFO_STARTED',
+  success: 'GET_PROJECT_BIND_INFO_SUCCESS',
+  failed: 'GET_PROJECT_BIND_INFO_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;

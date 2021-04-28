@@ -35,19 +35,33 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     onGetStatistics,
     onBindTelegramProject,
     onBindSlackProject,
+    bindSlackProject,
+    projectBindInfo,
+    getProjectBindInfo,
   } = props;
+
+  console.log('bin info: ', projectBindInfo);
 
   const [isAddTeamMember, setIsAddTeamMember] = useState(false);
   useEffect(() => {
     id && onGetProjectActivities && onGetProjectActivities(id);
     id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
     id && onGetStatistics && onGetStatistics({ pk: id, time_frame: '1_week' });
+    id && getProjectBindInfo && getProjectBindInfo(id);
   }, [id, onGetProjectActivities, onGetProjectMembers, onGetStatistics]);
   const y_axis =
     projectStatisticsData?.yAxis?.Git && Object.keys(projectStatisticsData?.yAxis?.Git);
   console.log(y_axis, 'hey');
 
-  const resultArray: any[] = [];
+  const [isUnbindSlackModal, setIsUnbindSlackModal] = useState(false);
+  const [isUnbindTelegramModal, setIsUnbindTelegramModal] = useState(false);
+  const [isUnbindGithubModal, setIsUnbindGithubModal] = useState(false);
+
+  const TelegramResultArray: any[] = [];
+  const GithubResultArray: any[] = [];
+  const SlackResultArray: any[] = [];
+
+  const membersArray = projectStatisticsData?.members;
 
   const helperFunction = (tableData: any) => {
     const members = projectStatisticsData?.members;
@@ -59,16 +73,52 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
       dataEntry['name'] = y;
       members.forEach((m: string) => {
         const memberObjData = tableData.find((obj: any) => obj.hasOwnProperty(m));
+        dataEntry[m] = memberObjData[m]['Telegram'][y];
+      });
+      TelegramResultArray.push(dataEntry);
+    });
+  };
+  const helperSlackFunction = (tableData: any) => {
+    const members = projectStatisticsData?.members;
+    console.log('memebers: ', members);
+    y_axis.forEach((y) => {
+      const dataEntry: {
+        [key: string]: string;
+      } = {};
+      dataEntry['name'] = y;
+      members.forEach((m: string) => {
+        const memberObjData = tableData.find((obj: any) => obj.hasOwnProperty(m));
         dataEntry[m] = memberObjData[m]['Slack'][y];
       });
-      resultArray.push(dataEntry);
+      SlackResultArray.push(dataEntry);
+    });
+  };
+  const helperGithubFunction = (tableData: any) => {
+    const members = projectStatisticsData?.members;
+    console.log('memebers: ', members);
+    y_axis.forEach((y) => {
+      const dataEntry: {
+        [key: string]: string;
+      } = {};
+      dataEntry['name'] = y;
+      members.forEach((m: string) => {
+        const memberObjData = tableData.find((obj: any) => obj.hasOwnProperty(m));
+        dataEntry[m] = memberObjData[m]['Git'][y];
+      });
+      GithubResultArray.push(dataEntry);
     });
   };
   projectStatisticsData &&
     projectStatisticsData.state &&
     helperFunction(projectStatisticsData.state);
+  projectStatisticsData &&
+    projectStatisticsData.state &&
+    helperSlackFunction(projectStatisticsData.state);
+  projectStatisticsData &&
+    projectStatisticsData.state &&
+    helperGithubFunction(projectStatisticsData.state);
 
-  console.log('the ress: ', resultArray);
+  console.log('the telegram: ', TelegramResultArray);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -146,16 +196,67 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   };
   const handleAddSlackChannel = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
-    onBindSlackProject && onBindSlackProject(SlackFormData);
+    onBindSlackProject &&
+      onBindSlackProject(SlackFormData, id, {
+        onSuccess: () => {
+          console.log('scucsef');
+          setIsSlackModal(false);
+        },
+      });
     console.log('HANDLE ADD SLACK');
   };
+
+  const handleAddGithubRepo = (form: any) => {
+    console.log(form);
+  };
+
+  useEffect(() => {
+    if (bindSlackProject) {
+      setIsSlackModal(false);
+    }
+  }, [bindSlackProject]);
 
   /*TODO: add addJira method after back */
   const handleAddTelegramChat = (form: any) => {
     TelegramFormData.append('code', form.telegramProfileCode);
-    onBindTelegramProject && onBindTelegramProject(TelegramFormData);
+    onBindTelegramProject &&
+      onBindTelegramProject(TelegramFormData, id, {
+        onSuccess: () => {
+          console.log('scucsef');
+          setIsTelegramModal(false);
+        },
+      });
     console.log('HANDLE ADD JIRA');
   };
+
+  const handleAddSlackModal = () => {
+    setIsSlackModal(true);
+  };
+
+  const handleDeleteSlackModal = () => {
+    setIsUnbindSlackModal(true);
+  };
+
+  const handleAddTelegramModal = () => {
+    setIsTelegramModal(true);
+  };
+
+  const handleDeleteTelegramModal = () => {
+    setIsUnbindTelegramModal(true);
+  };
+
+  const handleAddGithubModal = () => {
+    setIsGithubModal(true);
+  };
+
+  const handleDeleteGithubModal = () => {
+    setIsUnbindGithubModal(true);
+  };
+
+  const handleUnbindSlack = () => {
+    console.log('handle unbind slack');
+  };
+
   return (
     <MainTemplate>
       <div
@@ -198,18 +299,24 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
             }}
           >
             <MainButton
-              buttonText={'+ Bind Slack'}
-              onCreateProject={() => setIsSlackModal(true)}
+              buttonText={projectBindInfo?.isSlackBind ? 'Unbind Slack' : '+ Bind Slack'}
+              onCreateProject={
+                projectBindInfo?.isSlackBind ? handleDeleteSlackModal : handleAddSlackModal
+              }
               bgColor={'#34B53A'}
             />
             <MainButton
-              buttonText={'+ Bind Telegram'}
-              onCreateProject={() => setIsTelegramModal(true)}
+              buttonText={projectBindInfo?.isTelegramBind ? 'Unbind Telegram' : '+ Bind Telegram'}
+              onCreateProject={
+                projectBindInfo?.isTelegramBind ? handleDeleteTelegramModal : handleAddTelegramModal
+              }
               bgColor={'#34B53A'}
             />
             <MainButton
-              buttonText={'+ Bind Github'}
-              onCreateProject={() => setIsGithubModal(true)}
+              buttonText={projectBindInfo?.isGithubBind ? 'Unbind Github' : '+ Bind Github'}
+              onCreateProject={
+                projectBindInfo?.isGithubBind ? handleDeleteGithubModal : handleAddGithubModal
+              }
               bgColor={'#34B53A'}
             />
           </div>
@@ -235,10 +342,24 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
               onSettingTeamLead={handleSettingTeamLead}
             />
           )}
-          {resultArray && resultArray.length > 0 && (
+          {TelegramResultArray && TelegramResultArray.length > 0 && (
             <div style={{ marginBottom: '30px', width: 'fit-content' }}>
               <div style={{ textAlign: 'center' }}> Telegram Chart </div>
-              <StatisticsTable data={resultArray} />
+              <StatisticsTable data={TelegramResultArray} members={membersArray} />
+            </div>
+          )}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '1200px' }}>
+          {SlackResultArray && SlackResultArray.length > 0 && (
+            <div style={{ marginBottom: '30px', width: 'fit-content' }}>
+              <div style={{ textAlign: 'center' }}> Slack Chart </div>
+              <StatisticsTable data={SlackResultArray} members={membersArray} />
+            </div>
+          )}
+          {GithubResultArray && GithubResultArray.length > 0 && (
+            <div style={{ marginBottom: '30px', width: 'fit-content' }}>
+              <div style={{ textAlign: 'center' }}> Github Chart </div>
+              <StatisticsTable data={GithubResultArray} members={membersArray} />
             </div>
           )}
         </div>
@@ -268,6 +389,33 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
           onSlackProfileFormSubmit={handleAddSlackChannel}
         />
       )}
+      {isGithubModal && (
+        <BindSlackProfileModal
+          onCloseModal={() => setIsSlackModal(false)}
+          onSlackProfileFormSubmit={handleAddGithubRepo}
+        />
+      )}
+      {isUnbindSlackModal && (
+        <ProjectDeleteModal
+          text="Are you sure you want unbind from Slack?"
+          onClickCancel={() => setIsUnbindSlackModal(false)}
+          onClickModalOk={handleUnbindSlack}
+        />
+      )}
+      {isUnbindTelegramModal && (
+        <ProjectDeleteModal
+          text="Are you sure you want unbind from Telegram?"
+          onClickCancel={() => setIsUnbindTelegramModal(false)}
+          onClickModalOk={handleModalOk}
+        />
+      )}
+      {isUnbindGithubModal && (
+        <ProjectDeleteModal
+          text="Are you sure you want unbind from Github?"
+          onClickCancel={() => setIsUnbindGithubModal(false)}
+          onClickModalOk={handleModalOk}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -277,6 +425,8 @@ const mapStateToProps = (state: any) => {
     projectActivitiesState: state.projectReducer.projectActivities.data,
     projectMembersState: state.projectReducer.projectMembers.data,
     projectStatisticsData: state.projectReducer.projectStatistics.data,
+    bindSlackProject: state.integrationReducer.bindSlackProject.data,
+    projectBindInfo: state.projectReducer.projectBindInfo.data,
   };
 };
 
@@ -288,6 +438,7 @@ const mapDispatchToProps = {
   onGetStatistics: projectActions.getStatistics,
   onBindTelegramProject: integrationActions.bindTelegramProject,
   onBindSlackProject: integrationActions.bindSlackProject,
+  getProjectBindInfo: projectActions.getProjectBindInfo,
 };
 
 export default connect(

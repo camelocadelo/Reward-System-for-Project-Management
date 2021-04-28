@@ -11,4 +11,5 @@ export type ProjectMember = {
   readonly last_name: string;
   readonly email: string;
   readonly account_bonus: number;
+  readonly is_team_lead: any;
 };

@@ -8,6 +8,7 @@ import {
   DELETE_PROJECT,
   REMOVE_TEAM_MEMBER,
   GET_STATISTICS,
+  GET_PROJECT_BIND_INFO,
 } from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
@@ -204,6 +205,29 @@ const projectStatistics = (state = { data: null, loading: false }, action: any):
   }
 };
 
+const projectBindInfo = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_PROJECT_BIND_INFO.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_PROJECT_BIND_INFO.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case GET_PROJECT_BIND_INFO.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
@@ -213,6 +237,7 @@ const projectReducer = combineReducers({
   deletedProjectState,
   removedTeamMemberState,
   projectStatistics,
+  projectBindInfo,
 });
 
 export default projectReducer;

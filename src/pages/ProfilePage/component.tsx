@@ -71,13 +71,23 @@ function ProfilePage(props: ProfilePageProps) {
 
   const handleAddSlack = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
-    onBindSlackProfile(SlackFormData);
+    onBindSlackProfile(SlackFormData, {
+      onSuccess: () => {
+        setIsSlackModal(false);
+        onGetUserInfo && onGetUserInfo();
+      },
+    });
     console.log('HANDLE ADD SLACK');
   };
 
   const handleAddTelegram = (form: any) => {
     TelegramFormData.append('code', form.telegramProfileCode);
-    onBindTelegramProfile(TelegramFormData);
+    onBindTelegramProfile(TelegramFormData, {
+      onSuccess: () => {
+        setIsTelegramModal(false);
+        onGetUserInfo && onGetUserInfo();
+      },
+    });
     console.log('HANDLE ADD JIRA');
   };
 
@@ -95,7 +105,13 @@ function ProfilePage(props: ProfilePageProps) {
   };
 
   const handleUnbindSlack = () => {
-    onUnbindSlackProfile && onUnbindSlackProfile();
+    onUnbindSlackProfile &&
+      onUnbindSlackProfile({
+        onSuccess: () => {
+          setIsUnbindSlack(false);
+          onGetUserInfo && onGetUserInfo();
+        },
+      });
   };
 
   const openTelegram = () => {
@@ -107,7 +123,13 @@ function ProfilePage(props: ProfilePageProps) {
   };
 
   const handleUnbindTelegram = () => {
-    onUnbindTelegramProfile && onUnbindTelegramProfile();
+    onUnbindTelegramProfile &&
+      onUnbindTelegramProfile({
+        onSuccess: () => {
+          setIsUnbindTelegram(false);
+          onGetUserInfo && onGetUserInfo();
+        },
+      });
   };
 
   return (

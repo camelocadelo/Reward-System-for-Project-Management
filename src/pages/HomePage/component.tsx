@@ -294,7 +294,7 @@ function HomePage(props: any) {
       {isRegisterSuccess && (
         <RegisterSuccessModal
           titleText="You have successfully registered"
-          bodyText="Check your email to activate your account"
+          bodyText=""
           onClickModalOk={handleCloseModal}
         />
       )}

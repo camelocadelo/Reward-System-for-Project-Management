@@ -6,6 +6,7 @@ import { membersColors } from 'components/molecules/ProjectMembersCard/consts';
 import deleteIcon from 'assets/images/trashproduct.png';
 import PopUpMessage from 'components/atoms/PopUpMessage/component';
 import { useOutsideClick } from 'hooks/useOutsideClick';
+import TagItem from 'components/atoms/TagItem/component';
 
 function ProjectMembersCard(props: ProjectMembersCardProps): JSX.Element {
   const { members, onDeleteMember, onSettingTeamLead } = props;
@@ -51,7 +52,10 @@ function ProjectMembersCard(props: ProjectMembersCardProps): JSX.Element {
                 alignItems: 'center',
               }}
             >
-              <span> {m.username} </span>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '5px' }}> {m.username} </span>
+                {!m.is_team_lead && <TagItem tag={'Team Lead'} bgColor="#FFE5D3" color={'red'} />}
+              </div>
               <img
                 src={deleteIcon}
                 alt={'Delete team member'}

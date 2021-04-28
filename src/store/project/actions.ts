@@ -13,17 +13,18 @@ import {
   RemoveTeamMemberRequest,
   SET_TEAM_LEAD,
   GET_STATISTICS,
+  GET_PROJECT_BIND_INFO,
 } from './types';
 
-export const createProject = (data: RemoveTeamMemberRequest, callbacks?: any) => (
+export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: REMOVE_TEAM_MEMBER,
+    action: CREATE_PROJECT,
     apiCall: () => {
-      return api.removeTeamMember(data);
+      return api.createProject(data);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -102,13 +103,13 @@ export const deleteProject = (projectPk: number, callbacks?: any) => (
   });
 };
 
-export const removeTeamMember = (data: CreateProjectRequest, callbacks?: any) => (
+export const removeTeamMember = (data: RemoveTeamMemberRequest, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: CREATE_PROJECT,
+    action: REMOVE_TEAM_MEMBER,
     apiCall: () => {
       return api.removeTeamMember(data);
     },
@@ -141,6 +142,21 @@ export const getStatistics = (data: any, callbacks?: any) => (dispatch: any, get
   });
 };
 
+export const getProjectBindInfo = (projectPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECT_BIND_INFO,
+    apiCall: () => {
+      return api.getProjectBindInfo(projectPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
   getProjects,
@@ -151,4 +167,5 @@ export default {
   removeTeamMember,
   setTeamLead,
   getStatistics,
+  getProjectBindInfo,
 };
