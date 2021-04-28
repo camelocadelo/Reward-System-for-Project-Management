@@ -90,3 +90,15 @@ export const GET_STATISTICS = {
   success: 'GET_STATISTICS_SUCCESS',
   failed: 'GET_STATISTICS_FAILED',
 };
+
+export const GET_SLACK_STATISTICS = {
+  started: 'GET_SLACK_STATISTICS_STARTED',
+  success: 'GET_SLACK_STATISTICS_SUCCESS',
+  failed: 'GET_SLACK_STATISTICS_FAILED',
+};
+
+export const GET_GIT_STATISTICS = {
+  started: 'GET_GIT_STATISTICS_STARTED',
+  success: 'GET_GIT_STATISTICS_SUCCESS',
+  failed: 'GET_GIT_STATISTICS_FAILED',
+};

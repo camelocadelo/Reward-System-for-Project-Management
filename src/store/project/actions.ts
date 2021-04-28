@@ -13,6 +13,8 @@ import {
   RemoveTeamMemberRequest,
   SET_TEAM_LEAD,
   GET_STATISTICS,
+  GET_SLACK_STATISTICS,
+  GET_GIT_STATISTICS,
   GET_PROJECT_BIND_INFO,
 } from './types';
 
@@ -130,6 +132,21 @@ export const setTeamLead = (data: any, callbacks?: any) => (dispatch: any, getSt
   });
 };
 
+export const getProjectBindInfo = (projectPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECT_BIND_INFO,
+    apiCall: () => {
+      return api.getProjectBindInfo(projectPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export const getStatistics = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
@@ -142,15 +159,27 @@ export const getStatistics = (data: any, callbacks?: any) => (dispatch: any, get
   });
 };
 
-export const getProjectBindInfo = (projectPk: number, callbacks?: any) => (
+export const getSlackStatistics = (data: any, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: GET_PROJECT_BIND_INFO,
+    action: GET_SLACK_STATISTICS,
     apiCall: () => {
-      return api.getProjectBindInfo(projectPk);
+      return api.getStatistics(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const getGitStatistics = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_GIT_STATISTICS,
+    apiCall: () => {
+      return api.getStatistics(data);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -168,4 +197,6 @@ export default {
   setTeamLead,
   getStatistics,
   getProjectBindInfo,
+  getSlackStatistics,
+  getGitStatistics,
 };

@@ -22,7 +22,7 @@ function GithubAuthPage(props: GithubAuthPageProps): JSX.Element {
   console.log('profile location: ', location);
   console.log('the code sobsna: ', code);
   const handleBindGithub = () => {
-    sendGithubCode({ code: code, pk: my_pk });
+    sendGithubCode({ code: code });
   };
   return (
     <MainTemplate>

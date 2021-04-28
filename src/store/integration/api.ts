@@ -5,9 +5,9 @@ const access_token = localStorage.getItem('access_token');
 const my_pk = localStorage.getItem('pk');
 
 /*  TODO: add the correct endpoint */
-const sendGithubCodeUrl = `${API_URL}/github/sendCode`;
+const sendGithubCodeUrl = `${API_URL}/github/code`;
 export const sendGithubCode = (data: any) =>
-  API.stdApiPOST({
+  API.stdApiGET({
     url: sendGithubCodeUrl,
     token: access_token,
     data,
@@ -56,3 +56,21 @@ export const unbindSlackProfile = () =>
 const unbindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
 export const unbindTelegramProfile = () =>
   API.stdApiDELETE({ url: unbindTelegramProfileUrl, token: access_token });
+
+const bindRepoToProjectUrl = `${API_URL}/github/connect_to_repo`;
+export const bindRepoToProject = (data: any) =>
+  API.stdApiPOST({
+    url: `${bindRepoToProjectUrl}/${data.id}`,
+    token: access_token,
+    data: {
+      repo: data.repo,
+    },
+  });
+
+const unbindTelegramChatUrl = `${API_URL}/tg/bind_group_platform`;
+export const unbindTelegramProject = (id: any) =>
+  API.stdApiDELETE({ url: `${unbindTelegramChatUrl}/${id}`, token: access_token });
+
+const unbindSlackChatUrl = `${API_URL}/slack/bind_channel_platform`;
+export const unbindSlackProject = (id: any) =>
+  API.stdApiDELETE({ url: `${unbindSlackChatUrl}/${id}`, token: access_token });

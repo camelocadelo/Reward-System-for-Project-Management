@@ -54,7 +54,7 @@ function ProjectMembersCard(props: ProjectMembersCardProps): JSX.Element {
             >
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ marginRight: '5px' }}> {m.username} </span>
-                {!m.is_team_lead && <TagItem tag={'Team Lead'} bgColor="#FFE5D3" color={'red'} />}
+                {m.is_team_lead && <TagItem tag={'Team Lead'} bgColor="#FFE5D3" color={'red'} />}
               </div>
               <img
                 src={deleteIcon}

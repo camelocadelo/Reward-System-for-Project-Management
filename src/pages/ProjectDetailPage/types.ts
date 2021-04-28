@@ -16,4 +16,11 @@ export interface ProjectDetailPageProps {
   bindSlackProject?: any;
   getProjectBindInfo(data: any, callbacks?: any): any;
   projectBindInfo: any;
+  unbindSlackProject(id: any, callbacks?: any): any;
+  unbindTelegramProject(id: any, callbacks?: any): any;
+  bindRepoToProject(data: any, callbacks?: any): any;
+  projectSlackStatisticsData?: any;
+  projectGitStatisticsData?: any;
+  onGetSlackStatistics?(data: any, callbacks?: any): void;
+  onGetGitStatistics?(data: any, callbacks?: any): void;
 }

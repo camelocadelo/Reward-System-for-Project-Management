@@ -102,7 +102,7 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
                       quantity={p.quantity}
                       chosen_size={p.chosen_size}
                       // description={p.description}
-                      photo={p.photo}
+                      photo={p.product_photo}
                       onRemoveFromCart={handleDeleteFromCart}
                     />
                   </div>

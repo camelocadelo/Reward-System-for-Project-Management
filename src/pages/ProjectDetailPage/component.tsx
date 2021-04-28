@@ -17,6 +17,7 @@ import withNotificationProvider from 'components/molecules/Notification/withNoti
 import TeamLeadModal from 'components/molecules/TeamLeadModal/component';
 import BindTelegramProfileModal from 'components/molecules/BindTelegramProfileModal/component';
 import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/component';
+import BindGithubModal from 'components/molecules/BindGithubModal/component';
 import integrationActions from 'store/integration/actions';
 import StatisticsTable from 'components/molecules/StatisticsTable/component';
 
@@ -38,6 +39,13 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     bindSlackProject,
     projectBindInfo,
     getProjectBindInfo,
+    unbindSlackProject,
+    unbindTelegramProject,
+    bindRepoToProject,
+    projectGitStatisticsData,
+    projectSlackStatisticsData,
+    onGetGitStatistics,
+    onGetSlackStatistics,
   } = props;
 
   console.log('bin info: ', projectBindInfo);
@@ -47,11 +55,18 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     id && onGetProjectActivities && onGetProjectActivities(id);
     id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
     id && onGetStatistics && onGetStatistics({ pk: id, time_frame: '1_week' });
+    id && onGetSlackStatistics && onGetSlackStatistics({ pk: id, time_frame: '1_week' });
+    id && onGetGitStatistics && onGetGitStatistics({ pk: id, time_frame: '1_week' });
     id && getProjectBindInfo && getProjectBindInfo(id);
-  }, [id, onGetProjectActivities, onGetProjectMembers, onGetStatistics]);
-  const y_axis =
+  }, [id, onGetProjectActivities, onGetProjectMembers]);
+  const y_telegram_axis =
     projectStatisticsData?.yAxis?.Git && Object.keys(projectStatisticsData?.yAxis?.Git);
-  console.log(y_axis, 'hey');
+
+  const y_slack_axis =
+    projectSlackStatisticsData?.yAxis?.Git && Object.keys(projectSlackStatisticsData?.yAxis?.Git);
+
+  const y_git_axis =
+    projectGitStatisticsData?.yAxis?.Git && Object.keys(projectGitStatisticsData?.yAxis?.Git);
 
   const [isUnbindSlackModal, setIsUnbindSlackModal] = useState(false);
   const [isUnbindTelegramModal, setIsUnbindTelegramModal] = useState(false);
@@ -66,7 +81,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   const helperFunction = (tableData: any) => {
     const members = projectStatisticsData?.members;
     console.log('memebers: ', members);
-    y_axis.forEach((y) => {
+    y_telegram_axis.forEach((y) => {
       const dataEntry: {
         [key: string]: string;
       } = {};
@@ -79,9 +94,9 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     });
   };
   const helperSlackFunction = (tableData: any) => {
-    const members = projectStatisticsData?.members;
+    const members = projectSlackStatisticsData?.members;
     console.log('memebers: ', members);
-    y_axis.forEach((y) => {
+    y_slack_axis.forEach((y) => {
       const dataEntry: {
         [key: string]: string;
       } = {};
@@ -94,9 +109,9 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     });
   };
   const helperGithubFunction = (tableData: any) => {
-    const members = projectStatisticsData?.members;
+    const members = projectGitStatisticsData?.members;
     console.log('memebers: ', members);
-    y_axis.forEach((y) => {
+    y_git_axis.forEach((y) => {
       const dataEntry: {
         [key: string]: string;
       } = {};
@@ -108,17 +123,18 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
       GithubResultArray.push(dataEntry);
     });
   };
+
   projectStatisticsData &&
     projectStatisticsData.state &&
     helperFunction(projectStatisticsData.state);
-  projectStatisticsData &&
-    projectStatisticsData.state &&
-    helperSlackFunction(projectStatisticsData.state);
-  projectStatisticsData &&
-    projectStatisticsData.state &&
-    helperGithubFunction(projectStatisticsData.state);
+  projectSlackStatisticsData &&
+    projectSlackStatisticsData.state &&
+    helperSlackFunction(projectSlackStatisticsData.state);
+  projectGitStatisticsData &&
+    projectGitStatisticsData.state &&
+    helperGithubFunction(projectGitStatisticsData.state);
 
-  console.log('the telegram: ', TelegramResultArray);
+  // console.log('the telegram: ', TelegramResultArray);
 
   const isAdmin = localStorage.getItem('is_admin');
   const isOrgOwner = localStorage.getItem('is_organizationOwner');
@@ -143,6 +159,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
 
   const handleCloseAddTeamMember = () => {
     setIsAddTeamMember(false);
+    id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
   };
 
   const handleDeleteMember = (username: any) => {
@@ -201,13 +218,22 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         onSuccess: () => {
           console.log('scucsef');
           setIsSlackModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
         },
       });
     console.log('HANDLE ADD SLACK');
   };
 
   const handleAddGithubRepo = (form: any) => {
-    console.log(form);
+    bindRepoToProject(
+      { id: id, repo: form.githubLink },
+      {
+        onSuccess: () => {
+          setIsGithubModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -224,6 +250,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         onSuccess: () => {
           console.log('scucsef');
           setIsTelegramModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
         },
       });
     console.log('HANDLE ADD JIRA');
@@ -254,7 +281,44 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   };
 
   const handleUnbindSlack = () => {
-    console.log('handle unbind slack');
+    id &&
+      unbindSlackProject(id, {
+        onSuccess: () => {
+          setIsUnbindSlackModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
+        },
+      });
+  };
+
+  const handleUnbindTelegram = () => {
+    id &&
+      unbindTelegramProject(id, {
+        onSuccess: () => {
+          setIsUnbindTelegramModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
+        },
+      });
+  };
+
+  const handleChangeTelegramFrame = (timeFrame: any) => {
+    id && onGetStatistics && onGetStatistics({ pk: id, time_frame: timeFrame });
+    projectStatisticsData &&
+      projectStatisticsData.state &&
+      helperFunction(projectStatisticsData.state);
+  };
+
+  const handleChangeSlackFrame = (timeFrame: any) => {
+    id && onGetSlackStatistics && onGetSlackStatistics({ pk: id, time_frame: timeFrame });
+    projectSlackStatisticsData &&
+      projectSlackStatisticsData.state &&
+      helperSlackFunction(projectSlackStatisticsData.state);
+  };
+
+  const handleChangeGitFrame = (timeFrame: any) => {
+    id && onGetGitStatistics && onGetGitStatistics({ pk: id, time_frame: timeFrame });
+    projectGitStatisticsData &&
+      projectGitStatisticsData.state &&
+      helperGithubFunction(projectGitStatisticsData.state);
   };
 
   return (
@@ -334,34 +398,48 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
             )}
           </div>
         )}
-        <div style={{ display: 'flex', maxWidth: '1200px' }}>
-          {projectMembersState && (
-            <ProjectMembersCard
-              members={projectMembersState}
-              onDeleteMember={handleDeleteMember}
-              onSettingTeamLead={handleSettingTeamLead}
-            />
-          )}
-          {TelegramResultArray && TelegramResultArray.length > 0 && (
+        <div style={{ display: 'flex', maxWidth: '1100px', justifyContent: 'space-between' }}>
+          <div>
+            {projectMembersState && (
+              <ProjectMembersCard
+                members={projectMembersState}
+                onDeleteMember={handleDeleteMember}
+                onSettingTeamLead={handleSettingTeamLead}
+              />
+            )}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '30px', width: 'fit-content' }}>
-              <div style={{ textAlign: 'center' }}> Telegram Chart </div>
-              <StatisticsTable data={TelegramResultArray} members={membersArray} />
+              {/*<div style={{ textAlign: 'center' }}> Telegram Chart </div>*/}
+              <StatisticsTable
+                members={membersArray}
+                projectPK={id}
+                chartType={'Telegram'}
+                onChangeTimeFrame={handleChangeTelegramFrame}
+                data={TelegramResultArray}
+              />
             </div>
-          )}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '1200px' }}>
-          {SlackResultArray && SlackResultArray.length > 0 && (
             <div style={{ marginBottom: '30px', width: 'fit-content' }}>
-              <div style={{ textAlign: 'center' }}> Slack Chart </div>
-              <StatisticsTable data={SlackResultArray} members={membersArray} />
+              {/*<div style={{ textAlign: 'center' }}> Slack Chart </div>*/}
+              <StatisticsTable
+                members={membersArray}
+                projectPK={id}
+                chartType={'Slack'}
+                onChangeTimeFrame={handleChangeSlackFrame}
+                data={SlackResultArray}
+              />
             </div>
-          )}
-          {GithubResultArray && GithubResultArray.length > 0 && (
             <div style={{ marginBottom: '30px', width: 'fit-content' }}>
-              <div style={{ textAlign: 'center' }}> Github Chart </div>
-              <StatisticsTable data={GithubResultArray} members={membersArray} />
+              {/*<div style={{ textAlign: 'center' }}> Github Chart </div>*/}
+              <StatisticsTable
+                members={membersArray}
+                projectPK={id}
+                chartType={'Git'}
+                onChangeTimeFrame={handleChangeGitFrame}
+                data={GithubResultArray}
+              />
             </div>
-          )}
+          </div>
         </div>
       </div>
       {isDeleteModal && (
@@ -390,9 +468,9 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         />
       )}
       {isGithubModal && (
-        <BindSlackProfileModal
-          onCloseModal={() => setIsSlackModal(false)}
-          onSlackProfileFormSubmit={handleAddGithubRepo}
+        <BindGithubModal
+          onCloseModal={() => setIsGithubModal(false)}
+          onGithubFormSubmit={handleAddGithubRepo}
         />
       )}
       {isUnbindSlackModal && (
@@ -406,7 +484,7 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         <ProjectDeleteModal
           text="Are you sure you want unbind from Telegram?"
           onClickCancel={() => setIsUnbindTelegramModal(false)}
-          onClickModalOk={handleModalOk}
+          onClickModalOk={handleUnbindTelegram}
         />
       )}
       {isUnbindGithubModal && (
@@ -427,6 +505,8 @@ const mapStateToProps = (state: any) => {
     projectStatisticsData: state.projectReducer.projectStatistics.data,
     bindSlackProject: state.integrationReducer.bindSlackProject.data,
     projectBindInfo: state.projectReducer.projectBindInfo.data,
+    projectSlackStatisticsData: state.projectReducer.projectSlackStatistics.data,
+    projectGitStatisticsData: state.projectReducer.projectGitStatistics.data,
   };
 };
 
@@ -436,9 +516,14 @@ const mapDispatchToProps = {
   onRemoveTeamMember: projectActions.removeTeamMember,
   onSetTeamLead: projectActions.setTeamLead,
   onGetStatistics: projectActions.getStatistics,
-  onBindTelegramProject: integrationActions.bindTelegramProject,
+  onBindTelegramProject: integrationActions?.bindTelegramProject,
   onBindSlackProject: integrationActions.bindSlackProject,
   getProjectBindInfo: projectActions.getProjectBindInfo,
+  unbindTelegramProject: integrationActions.unbindTelegramProject,
+  unbindSlackProject: integrationActions.unbindSlackProject,
+  bindRepoToProject: integrationActions.bindRepoToProject,
+  onGetSlackStatistics: projectActions.getSlackStatistics,
+  onGetGitStatistics: projectActions.getGitStatistics,
 };
 
 export default connect(
