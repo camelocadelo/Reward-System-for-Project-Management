@@ -27,6 +27,7 @@ function ProjectPage(props: ProjectPageProps): JSX.Element {
 
   const my_pk = localStorage.getItem('pk');
 
+  console.log('commit');
   const handleOpenModal = () => {
     setIsCreateModal(true);
   };
