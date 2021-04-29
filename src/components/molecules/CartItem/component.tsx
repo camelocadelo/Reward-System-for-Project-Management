@@ -9,7 +9,7 @@ import SizeTag from 'components/atoms/SizeTag/component';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 function CartItem(props: CartItemProps): JSX.Element {
-  const { pk, name, photo, quantity, chosen_size, onRemoveFromCart } = props;
+  const { pk, name, photo, quantity, chosen_size, onRemoveFromCart, updateQuantity } = props;
 
   // const [curQuantity, setCurQuantity] = useState<any>(quantity);
 
@@ -20,6 +20,10 @@ function CartItem(props: CartItemProps): JSX.Element {
 
   const handleChangeQuantity = (quantity: number) => {
     setSelectedQuantity(quantity);
+    updateQuantity({
+      product_pk: pk,
+      quantity: quantity,
+    });
   };
 
   // const [selectedSizes, setSelectedSizes] = useState<string[]>([available_sizes[0]]);
@@ -83,6 +87,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   removeFromCart: marketplaceActions.addToCart,
+  updateQuantity: marketplaceActions.updateQuantity,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

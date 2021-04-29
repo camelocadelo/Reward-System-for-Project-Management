@@ -6,27 +6,27 @@ const my_pk = localStorage.getItem('pk');
 
 /*  TODO: add the correct endpoint */
 const sendGithubCodeUrl = `${API_URL}/github/code`;
-export const sendGithubCode = (data: any) =>
-  API.stdApiGET({
+export const sendGithubCode = (data: any, token: any) =>
+  API.stdApiPOST({
     url: sendGithubCodeUrl,
-    token: access_token,
+    token: token,
     data,
   });
 
 const bindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
-export const bindTelegramProfile = (data: any) =>
+export const bindTelegramProfile = (data: any, token: any) =>
   API.apiFormData({
     url: bindTelegramProfileUrl,
-    token: access_token,
+    token: token,
     formData: true,
     data,
   });
 
 const bindSlackProfileUrl = `${API_URL}/slack/bind_profile_platform`;
-export const bindSlackProfile = (data: any) =>
+export const bindSlackProfile = (data: any, token: any) =>
   API.apiFormData({
     url: bindSlackProfileUrl,
-    token: access_token,
+    token: token,
     formData: true,
     data,
   });
@@ -50,12 +50,12 @@ export const bindSlackProject = (data: any, arg2: any) =>
   });
 
 const unbindSlackProfileUrl = `${API_URL}/slack/bind_profile_platform`;
-export const unbindSlackProfile = () =>
-  API.stdApiDELETE({ url: unbindSlackProfileUrl, token: access_token });
+export const unbindSlackProfile = (token: any) =>
+  API.stdApiDELETE({ url: unbindSlackProfileUrl, token: token });
 
 const unbindTelegramProfileUrl = `${API_URL}/tg/bind_profile_platform`;
-export const unbindTelegramProfile = () =>
-  API.stdApiDELETE({ url: unbindTelegramProfileUrl, token: access_token });
+export const unbindTelegramProfile = (token: any) =>
+  API.stdApiDELETE({ url: unbindTelegramProfileUrl, token: token });
 
 const bindRepoToProjectUrl = `${API_URL}/github/connect_to_repo`;
 export const bindRepoToProject = (data: any) =>
@@ -74,3 +74,19 @@ export const unbindTelegramProject = (id: any) =>
 const unbindSlackChatUrl = `${API_URL}/slack/bind_channel_platform`;
 export const unbindSlackProject = (id: any) =>
   API.stdApiDELETE({ url: `${unbindSlackChatUrl}/${id}`, token: access_token });
+
+const unbindGitProfileUrl = `${API_URL}/github/unbind_github_account`;
+export const unbindGitProfile = (token: any) =>
+  API.stdApiDELETE({ url: unbindGitProfileUrl, token: token });
+
+const unbindGitProjectUrl = `${API_URL}/github/remove_webhook`;
+export const unbindGitProject = (id: any) =>
+  API.stdApiDELETE({ url: `${unbindGitProjectUrl}/${id}`, token: access_token });
+
+const sendGitTokenUrl = `${API_URL}/github/personal_acces_token`;
+export const sendGitToken = (data: any, token: any) =>
+  API.stdApiPOST({
+    url: sendGitTokenUrl,
+    token: token,
+    data,
+  });

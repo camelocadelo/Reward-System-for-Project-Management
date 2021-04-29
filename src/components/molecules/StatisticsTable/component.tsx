@@ -5,6 +5,7 @@ import { StatisticsTableProps } from './types';
 import { connect } from 'react-redux';
 import projectActions from 'store/project/actions';
 import SizeTag from 'components/atoms/SizeTag/component';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 function StatisticsTable(props: StatisticsTableProps): JSX.Element {
   const { data, chartType, members, onChangeTimeFrame } = props;
@@ -83,7 +84,7 @@ function StatisticsTable(props: StatisticsTableProps): JSX.Element {
 
   return (
     <div>
-      {data && data.length > 0 && (
+      {data && data.length > 0 ? (
         <div>
           <div style={{ textAlign: 'center' }}> {chartType} Chart </div>
           <div
@@ -106,7 +107,7 @@ function StatisticsTable(props: StatisticsTableProps): JSX.Element {
               ))}
           </div>
           <LineChart
-            width={730}
+            width={650}
             height={250}
             data={data}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -122,6 +123,8 @@ function StatisticsTable(props: StatisticsTableProps): JSX.Element {
               ))}
           </LineChart>
         </div>
+      ) : (
+        <Skeleton variant="text" width={520} height={230} animation="wave" />
       )}
     </div>
   );

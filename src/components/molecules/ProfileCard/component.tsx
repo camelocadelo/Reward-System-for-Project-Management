@@ -22,8 +22,11 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
     onChangeUserInfo,
     onAddSlack,
     onAddTelegram,
+    onUnbindGithub,
+    isGithubBound,
   } = props;
 
+  console.log('iii: ', isGithubBound);
   const ref = useRef<HTMLDivElement>(null);
   const [isChangeUserInfo, setIsChangeUserInfo] = useState<boolean>(false);
 
@@ -83,19 +86,29 @@ function ProfileCard(props: ProfileCardProps): JSX.Element {
                 style={{ marginRight: '10px', cursor: 'pointer' }}
                 onClick={onAddTelegram}
               />
-              <a
-                href="https://github.com/login/oauth/authorize?client_id=01bd74491b2142e0a049"
-                target="_blank"
-                rel="noreferrer"
-              >
+              {isGithubBound ? (
                 <img
                   src={GithubIcon}
                   alt="Add Github"
                   width="20px"
                   style={{ marginRight: '10px', cursor: 'pointer' }}
-                  // onClick={onAddGithub}
+                  onClick={onUnbindGithub}
                 />
-              </a>
+              ) : (
+                <a
+                  href="https://github.com/login/oauth/authorize?client_id=01bd74491b2142e0a049"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={GithubIcon}
+                    alt="Add Github"
+                    width="20px"
+                    style={{ marginRight: '10px', cursor: 'pointer' }}
+                    // onClick={onAddGithub}
+                  />
+                </a>
+              )}
               <img
                 src={SlackIcon}
                 alt="Add Slack"

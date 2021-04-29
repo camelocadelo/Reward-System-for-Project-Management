@@ -57,3 +57,21 @@ export const UNBIND_TELEGRAM_PROJECT = {
   success: 'UNBIND_TELEGRAM_PROJECT_SUCCESS',
   failed: 'UNBIND_TELEGRAM_PROJECT_FAILED',
 };
+
+export const UNBIND_GIT_PROFILE = {
+  started: 'UNBIND_GIT_PROFILE_STARTED',
+  success: 'UNBIND_GIT_PROFILE_SUCCESS',
+  failed: 'UNBIND_GIT_PROFILE_FAILED',
+};
+
+export const UNBIND_GIT_PROJECT = {
+  started: 'UNBIND_GIT_PROJECT_STARTED',
+  success: 'UNBIND_GIT_PROJECT_SUCCESS',
+  failed: 'UNBIND_GIT_PROJECT_FAILED',
+};
+
+export const SEND_GIT_TOKEN = {
+  started: 'SEND_GIT_TOKEN_STARTED',
+  success: 'SEND_GIT_TOKEN_SUCCESS',
+  failed: 'SEND_GIT_TOKEN_FAILED',
+};

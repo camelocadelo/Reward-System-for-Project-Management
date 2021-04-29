@@ -102,3 +102,15 @@ export const GET_GIT_STATISTICS = {
   success: 'GET_GIT_STATISTICS_SUCCESS',
   failed: 'GET_GIT_STATISTICS_FAILED',
 };
+
+export const REDUCE_POINTS = {
+  started: 'REDUCE_POINTS_STARTED',
+  success: 'REDUCE_POINTS_SUCCESS',
+  failed: 'REDUCE_POINTS_FAILED',
+};
+
+export const DELETE_TEAM_LEAD = {
+  started: 'DELETE_TEAM_LEAD_STARTED',
+  success: 'DELETE_TEAM_LEAD_SUCCESS',
+  failed: 'DELETE_TEAM_LEAD_FAILED',
+};

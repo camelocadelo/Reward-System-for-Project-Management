@@ -70,14 +70,6 @@ function HomePage(props: any) {
     }
   }, [registerErrorMessage]);
 
-  // useEffect(() => {
-  //   if (emailErrorMessage) {
-  //     setIsRegEmailError(true);
-  //     setRegEmailError('Use your NU email');
-  //     console.log('the email email error: ', emailErrorMessage);
-  //   }
-  // }, [emailErrorMessage]);
-
   const onRegisterFormSubmit = useCallback<SubmitHandler<RegisterFormValues>>(
     (values) => {
       return onRegister({
@@ -92,7 +84,12 @@ function HomePage(props: any) {
   );
 
   useEffect(() => {
-    if (userData && !userLoading && localStorage.getItem('access_token') !== null) {
+    if (
+      userData &&
+      !userLoading &&
+      localStorage.getItem('access_token') !== null &&
+      localStorage.getItem('pk') !== null
+    ) {
       console.log('the user data: ', userData);
       history.push('/profile');
     }

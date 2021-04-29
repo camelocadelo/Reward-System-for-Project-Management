@@ -20,6 +20,7 @@ import BindSlackProfileModal from 'components/molecules/BindSlackProfileModal/co
 import BindGithubModal from 'components/molecules/BindGithubModal/component';
 import integrationActions from 'store/integration/actions';
 import StatisticsTable from 'components/molecules/StatisticsTable/component';
+import ReducePointsModal from 'components/molecules/ReducePointsModal/component';
 
 function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
   /*  TODO: warning  */
@@ -46,11 +47,16 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     projectSlackStatisticsData,
     onGetGitStatistics,
     onGetSlackStatistics,
+    unbindGitProject,
+    reducePoints,
+    deleteTeamLead,
   } = props;
 
   console.log('bin info: ', projectBindInfo);
 
   const [isAddTeamMember, setIsAddTeamMember] = useState(false);
+  const [isReduceModal, setIsReduceModal] = useState(false);
+  const [isDeleteTeamLead, setIsDeleteTeamLead] = useState(false);
   useEffect(() => {
     id && onGetProjectActivities && onGetProjectActivities(id);
     id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
@@ -59,6 +65,8 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     id && onGetGitStatistics && onGetGitStatistics({ pk: id, time_frame: '1_week' });
     id && getProjectBindInfo && getProjectBindInfo(id);
   }, [id, onGetProjectActivities, onGetProjectMembers]);
+
+  const [reduceUsername, setReduceUsername] = useState('');
   const y_telegram_axis =
     projectStatisticsData?.yAxis?.Git && Object.keys(projectStatisticsData?.yAxis?.Git);
 
@@ -300,6 +308,16 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
       });
   };
 
+  const handleUnbindGit = () => {
+    id &&
+      unbindGitProject(id, {
+        onSuccess: () => {
+          setIsUnbindGithubModal(false);
+          id && getProjectBindInfo && getProjectBindInfo(id);
+        },
+      });
+  };
+
   const handleChangeTelegramFrame = (timeFrame: any) => {
     id && onGetStatistics && onGetStatistics({ pk: id, time_frame: timeFrame });
     projectStatisticsData &&
@@ -319,6 +337,41 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
     projectGitStatisticsData &&
       projectGitStatisticsData.state &&
       helperGithubFunction(projectGitStatisticsData.state);
+  };
+
+  const handleReducePoints = (username: any) => {
+    setReduceUsername(username);
+    setIsReduceModal(true);
+  };
+
+  const handlePointsForm = (form: any) => {
+    reducePoints(
+      {
+        pk: id,
+        username: reduceUsername,
+        points: parseInt(form.bonus_amount),
+      },
+      {
+        onSuccess: () => {
+          setIsReduceModal(false);
+          id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
+        },
+      }
+    );
+  };
+
+  const handleDeleteTeamLead = () => {
+    deleteTeamLead(
+      {
+        pk: id,
+      },
+      {
+        onSuccess: () => {
+          setIsDeleteTeamLead(false);
+          id && onGetProjectMembers && onGetProjectMembers(parseInt(id, 10));
+        },
+      }
+    );
   };
 
   return (
@@ -353,38 +406,36 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
             </div>
           </div>
         )}
-        {isShowButton && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginBottom: '20px',
-              maxWidth: '1200px',
-            }}
-          >
-            <MainButton
-              buttonText={projectBindInfo?.isSlackBind ? 'Unbind Slack' : '+ Bind Slack'}
-              onCreateProject={
-                projectBindInfo?.isSlackBind ? handleDeleteSlackModal : handleAddSlackModal
-              }
-              bgColor={'#34B53A'}
-            />
-            <MainButton
-              buttonText={projectBindInfo?.isTelegramBind ? 'Unbind Telegram' : '+ Bind Telegram'}
-              onCreateProject={
-                projectBindInfo?.isTelegramBind ? handleDeleteTelegramModal : handleAddTelegramModal
-              }
-              bgColor={'#34B53A'}
-            />
-            <MainButton
-              buttonText={projectBindInfo?.isGithubBind ? 'Unbind Github' : '+ Bind Github'}
-              onCreateProject={
-                projectBindInfo?.isGithubBind ? handleDeleteGithubModal : handleAddGithubModal
-              }
-              bgColor={'#34B53A'}
-            />
-          </div>
-        )}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '20px',
+            maxWidth: '1200px',
+          }}
+        >
+          <MainButton
+            buttonText={projectBindInfo?.isSlackBind ? 'Unbind Slack' : '+ Bind Slack'}
+            onCreateProject={
+              projectBindInfo?.isSlackBind ? handleDeleteSlackModal : handleAddSlackModal
+            }
+            bgColor={'#34B53A'}
+          />
+          <MainButton
+            buttonText={projectBindInfo?.isTelegramBind ? 'Unbind Telegram' : '+ Bind Telegram'}
+            onCreateProject={
+              projectBindInfo?.isTelegramBind ? handleDeleteTelegramModal : handleAddTelegramModal
+            }
+            bgColor={'#34B53A'}
+          />
+          <MainButton
+            buttonText={projectBindInfo?.isGithubBind ? 'Unbind Github' : '+ Bind Github'}
+            onCreateProject={
+              projectBindInfo?.isGithubBind ? handleDeleteGithubModal : handleAddGithubModal
+            }
+            bgColor={'#34B53A'}
+          />
+        </div>
         {isShowButton && (
           <div style={{ marginBottom: '22px' }}>
             {isAddTeamMember ? (
@@ -399,15 +450,6 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
           </div>
         )}
         <div style={{ display: 'flex', maxWidth: '1100px', justifyContent: 'space-between' }}>
-          <div>
-            {projectMembersState && (
-              <ProjectMembersCard
-                members={projectMembersState}
-                onDeleteMember={handleDeleteMember}
-                onSettingTeamLead={handleSettingTeamLead}
-              />
-            )}
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '30px', width: 'fit-content' }}>
               {/*<div style={{ textAlign: 'center' }}> Telegram Chart </div>*/}
@@ -439,6 +481,17 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
                 data={GithubResultArray}
               />
             </div>
+          </div>
+          <div>
+            {projectMembersState && (
+              <ProjectMembersCard
+                members={projectMembersState}
+                onDeleteMember={handleDeleteMember}
+                onSettingTeamLead={handleSettingTeamLead}
+                onReducePoints={handleReducePoints}
+                onDeleteTeamLead={() => setIsDeleteTeamLead(true)}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -491,7 +544,20 @@ function ProjectDetailPage(props: ProjectDetailPageProps): JSX.Element {
         <ProjectDeleteModal
           text="Are you sure you want unbind from Github?"
           onClickCancel={() => setIsUnbindGithubModal(false)}
-          onClickModalOk={handleModalOk}
+          onClickModalOk={handleUnbindGit}
+        />
+      )}
+      {isReduceModal && (
+        <ReducePointsModal
+          onCloseModal={() => setIsReduceModal(false)}
+          onReducePointsFormSubmit={handlePointsForm}
+        />
+      )}
+      {isDeleteTeamLead && (
+        <ProjectDeleteModal
+          text="Are you sure you want delete Team Lead?"
+          onClickCancel={() => setIsDeleteTeamLead(false)}
+          onClickModalOk={handleDeleteTeamLead}
         />
       )}
     </MainTemplate>
@@ -524,6 +590,9 @@ const mapDispatchToProps = {
   bindRepoToProject: integrationActions.bindRepoToProject,
   onGetSlackStatistics: projectActions.getSlackStatistics,
   onGetGitStatistics: projectActions.getGitStatistics,
+  unbindGitProject: integrationActions.unbindGitProject,
+  reducePoints: projectActions.reducePoints,
+  deleteTeamLead: projectActions.deleteTeamLead,
 };
 
 export default connect(

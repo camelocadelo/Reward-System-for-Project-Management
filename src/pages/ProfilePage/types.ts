@@ -1,10 +1,11 @@
 export interface ProfilePageProps {
   userInfoData: any;
-  onGetUserInfo(): void;
+  onGetUserInfo(pk: any): void;
   userActivitiesData: any;
-  onGetUserActivities(): void;
-  onBindTelegramProfile(data: any, callbacks?: any): any;
-  onBindSlackProfile(data: any, callbacks?: any): any;
-  onUnbindSlackProfile(callbacks?: any): any;
-  onUnbindTelegramProfile(callbacks?: any): any;
+  onGetUserActivities(pk: any, token: any, callbacks?: any): void;
+  onBindTelegramProfile(data: any, token: any, callbacks?: any): any;
+  onBindSlackProfile(data: any, token: any, callbacks?: any): any;
+  onUnbindSlackProfile(token: any, callbacks?: any): any;
+  onUnbindTelegramProfile(token: any, callbacks?: any): any;
+  onUnbindGit(token: any, callbacks?: any): any;
 }

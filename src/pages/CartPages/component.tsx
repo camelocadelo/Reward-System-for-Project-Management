@@ -31,6 +31,13 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
     onGetUserPurchases();
   }, []);
 
+  useEffect(() => {
+    onGetCartItems();
+    onGetUserPurchases();
+  }, [step]);
+
+  console.log('step');
+
   const handleMakePurchase = (pk: any, size: any, selectedQuantity: any) => {
     onMakePurchase &&
       onMakePurchase({

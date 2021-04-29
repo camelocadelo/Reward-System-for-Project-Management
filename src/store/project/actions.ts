@@ -16,6 +16,8 @@ import {
   GET_SLACK_STATISTICS,
   GET_GIT_STATISTICS,
   GET_PROJECT_BIND_INFO,
+  REDUCE_POINTS,
+  DELETE_TEAM_LEAD,
 } from './types';
 
 export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
@@ -33,12 +35,12 @@ export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   });
 };
 
-export const getProjects = (callbacks?: any) => (dispatch: any, getState: any) => {
+export const getProjects = (pk: any, callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_PROJECTS,
     apiCall: () => {
-      return api.getProjects();
+      return api.getProjects(pk);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -186,6 +188,30 @@ export const getGitStatistics = (data: any, callbacks?: any) => (dispatch: any, 
   });
 };
 
+export const reducePoints = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: REDUCE_POINTS,
+    apiCall: () => {
+      return api.reducePoints(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const deleteTeamLead = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_TEAM_LEAD,
+    apiCall: () => {
+      return api.deleteTeamLead(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   createProject,
   getProjects,
@@ -199,4 +225,6 @@ export default {
   getProjectBindInfo,
   getSlackStatistics,
   getGitStatistics,
+  reducePoints,
+  deleteTeamLead,
 };

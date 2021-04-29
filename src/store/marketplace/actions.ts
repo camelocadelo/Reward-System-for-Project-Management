@@ -11,6 +11,7 @@ import {
   MAKE_PURCHASE,
   VIEW_ALL_PURCHASES,
   VIEW_USER_PURCHASES,
+  UPDATE_QUANTITY,
 } from './types';
 
 export const getMarketplaceProducts = (callbacks?: any) => (dispatch: any, getState: any) => {
@@ -127,6 +128,18 @@ export const viewUserPurchases = (callbacks?: any) => (dispatch: any, getState: 
   });
 };
 
+export const updateQuantity = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: UPDATE_QUANTITY,
+    apiCall: () => {
+      return api.updateQuantity(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export default {
   getMarketplaceProducts,
   addMarketplaceProduct,
@@ -137,4 +150,5 @@ export default {
   makePurchase,
   viewAllPurchases,
   viewUserPurchases,
+  updateQuantity,
 };

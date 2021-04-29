@@ -9,4 +9,6 @@ export interface ProfileCardProps {
   readonly onAddGithub: any;
   readonly onAddSlack?: any;
   readonly onAddTelegram: any;
+  readonly isGithubBound?: any;
+  readonly onUnbindGithub?: any;
 }

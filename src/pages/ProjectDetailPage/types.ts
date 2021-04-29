@@ -23,4 +23,7 @@ export interface ProjectDetailPageProps {
   projectGitStatisticsData?: any;
   onGetSlackStatistics?(data: any, callbacks?: any): void;
   onGetGitStatistics?(data: any, callbacks?: any): void;
+  unbindGitProject(id: any, callbacks?: any): any;
+  reducePoints(data: any, callbacks?: any): any;
+  deleteTeamLead(data: any, callbacks?: any): any;
 }

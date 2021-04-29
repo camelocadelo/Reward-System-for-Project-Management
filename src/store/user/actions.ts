@@ -7,12 +7,12 @@ import {
   ChangeUserInfoRequest,
 } from 'store/user/types';
 
-export const getUserInfo = (callbacks?: any) => (dispatch: any, getState: any) => {
+export const getUserInfo = (pk: any, callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_USERINFO,
     apiCall: () => {
-      return api.getUserInfo();
+      return api.getUserInfo(pk);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -34,12 +34,15 @@ export const changeUserInfo = (data: ChangeUserInfoRequest, callbacks?: any) => 
   });
 };
 
-export const getUserActivities = (callbacks?: any) => (dispatch: any, getState: any) => {
+export const getUserActivities = (pk: any, token: any, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_USER_ACTIVITIES,
     apiCall: () => {
-      return api.getUserActivities();
+      return api.getUserActivities(pk, token);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
