@@ -7,10 +7,16 @@ import MainButton from 'components/atoms/MainButton/component';
 import integrationActions from 'store/integration/actions';
 import { connect } from 'react-redux';
 import { GithubAuthPageProps } from './types';
+import { FormInputs } from './types';
+import classNames from 'classnames';
+import { useForm } from 'react-hook-form';
+import { FormValues } from './types';
 
 function GithubAuthPage(props: GithubAuthPageProps): JSX.Element {
-  const { sendGithubCode, sentGithubCode } = props;
+  const { sendGithubCode, sendGitToken } = props;
   const location = useLocation();
+  const my_access_token = localStorage.getItem('access_token');
+
   console.log('the location naa: ', location);
   const [code, setCode] = useState('');
   const my_pk = localStorage.getItem('pk');
@@ -22,8 +28,21 @@ function GithubAuthPage(props: GithubAuthPageProps): JSX.Element {
   console.log('profile location: ', location);
   console.log('the code sobsna: ', code);
   const handleBindGithub = () => {
-    sendGithubCode({ code: code, pk: my_pk });
+    sendGithubCode({ code: code }, my_access_token);
   };
+  const { handleSubmit, register } = useForm<FormValues>({
+    mode: 'onChange',
+  });
+
+  const onTokenSubmit = (form: any) => {
+    sendGitToken(
+      {
+        personal_access_token: form.gitToken,
+      },
+      my_access_token
+    );
+  };
+
   return (
     <MainTemplate>
       <div className="git-page-container">
@@ -58,6 +77,45 @@ function GithubAuthPage(props: GithubAuthPageProps): JSX.Element {
             </div>
           </div>
         </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            width: '50%',
+            alignItems: 'flex-start',
+          }}
+        >
+          <form onSubmit={handleSubmit(onTokenSubmit)}>
+            <div className="input-wrp" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div>
+                <span className=""> Send Git Personal Token </span>
+              </div>
+              <div style={{ width: '100%' }}>
+                <input
+                  name={FormInputs.gitToken}
+                  id={FormInputs.gitToken}
+                  type="text"
+                  className="inputText typography__variant-text my-8 mr-8"
+                  ref={register({
+                    required: 'Required',
+                  })}
+                  placeholder="Enter the token"
+                  required
+                />
+              </div>
+            </div>
+            <div style={{ width: '100%' }}>
+              <button
+                className={classNames(['main-button typography__variant-subtext'])}
+                style={{ marginTop: '32px', fontFamily: 'DM Sans' }}
+                type="submit"
+              >
+                Bind
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
       {/*</div>*/}
     </MainTemplate>
@@ -72,6 +130,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   sendGithubCode: integrationActions.sendGithubCode,
+  sendGitToken: integrationActions.sendGitToken,
 };
 
 export default connect<any, any>(mapStateToProps, mapDispatchToProps)(GithubAuthPage);

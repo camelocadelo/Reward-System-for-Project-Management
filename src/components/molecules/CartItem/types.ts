@@ -6,4 +6,5 @@ export interface CartItemProps {
   readonly quantity?: any;
   readonly chosen_size?: any;
   readonly onRemoveFromCart?: any;
+  updateQuantity(data: any): any;
 }

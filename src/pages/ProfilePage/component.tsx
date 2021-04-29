@@ -23,6 +23,7 @@ function ProfilePage(props: ProfilePageProps) {
     onBindSlackProfile,
     onUnbindSlackProfile,
     onUnbindTelegramProfile,
+    onUnbindGit,
   } = props;
   const [userInfoModal, setUserInfoModal] = useState<boolean>(false);
   const [code, setCode] = useState<string | null>(null);
@@ -32,6 +33,9 @@ function ProfilePage(props: ProfilePageProps) {
 
   const [isUnbindSlack, setIsUnbindSlack] = useState(false);
   const [isUnbindTelegram, setIsUnbindTelegram] = useState(false);
+  const [isUnbindGit, setIsUnbindGit] = useState(false);
+
+  const my_access_token = localStorage.getItem('access_token');
 
   const location = useLocation();
   useEffect(() => {
@@ -46,9 +50,11 @@ function ProfilePage(props: ProfilePageProps) {
 
   const SlackFormData = new FormData();
 
+  const my_pk = localStorage.getItem('pk');
+
   useEffect(() => {
-    onGetUserInfo();
-    onGetUserActivities();
+    onGetUserInfo(my_pk);
+    onGetUserActivities(my_pk, my_access_token);
   }, []);
 
   const handleChangeUserInfo = () => {
@@ -60,8 +66,8 @@ function ProfilePage(props: ProfilePageProps) {
     if (userInfoData) {
       localStorage.setItem('username', userInfoData.username);
     }
-    onGetUserInfo();
-    onGetUserActivities();
+    onGetUserInfo(my_pk);
+    onGetUserActivities(my_pk, my_access_token);
   };
 
   /* TODO: add addGithub method after back*/
@@ -71,13 +77,23 @@ function ProfilePage(props: ProfilePageProps) {
 
   const handleAddSlack = (form: any) => {
     SlackFormData.append('code', form.slackProfileCode);
-    onBindSlackProfile(SlackFormData);
+    onBindSlackProfile(SlackFormData, my_access_token, {
+      onSuccess: () => {
+        setIsSlackModal(false);
+        onGetUserInfo && onGetUserInfo(my_pk);
+      },
+    });
     console.log('HANDLE ADD SLACK');
   };
 
   const handleAddTelegram = (form: any) => {
     TelegramFormData.append('code', form.telegramProfileCode);
-    onBindTelegramProfile(TelegramFormData);
+    onBindTelegramProfile(TelegramFormData, my_access_token, {
+      onSuccess: () => {
+        setIsTelegramModal(false);
+        onGetUserInfo && onGetUserInfo(my_pk);
+      },
+    });
     console.log('HANDLE ADD JIRA');
   };
 
@@ -95,7 +111,23 @@ function ProfilePage(props: ProfilePageProps) {
   };
 
   const handleUnbindSlack = () => {
-    onUnbindSlackProfile && onUnbindSlackProfile();
+    onUnbindSlackProfile &&
+      onUnbindSlackProfile(my_access_token, {
+        onSuccess: () => {
+          setIsUnbindSlack(false);
+          onGetUserInfo && onGetUserInfo(my_pk);
+        },
+      });
+  };
+
+  const handleUnbindGit = () => {
+    onUnbindGit &&
+      onUnbindGit(my_access_token, {
+        onSuccess: () => {
+          setIsUnbindGit(false);
+          onGetUserInfo && onGetUserInfo(my_pk);
+        },
+      });
   };
 
   const openTelegram = () => {
@@ -107,7 +139,13 @@ function ProfilePage(props: ProfilePageProps) {
   };
 
   const handleUnbindTelegram = () => {
-    onUnbindTelegramProfile && onUnbindTelegramProfile();
+    onUnbindTelegramProfile &&
+      onUnbindTelegramProfile(my_access_token, {
+        onSuccess: () => {
+          setIsUnbindTelegram(false);
+          onGetUserInfo && onGetUserInfo(my_pk);
+        },
+      });
   };
 
   return (
@@ -131,6 +169,8 @@ function ProfilePage(props: ProfilePageProps) {
             onAddSlack={userInfoData.isSlackBind ? openDeleteSlack : openSlack}
             onAddTelegram={userInfoData.isTelegramBind ? openDeleteTelegram : openTelegram}
             onSendBonuses={handleSendBonuses}
+            isGithubBound={userInfoData.isGithubBind}
+            onUnbindGithub={() => setIsUnbindGit(true)}
           />
         )}
         {userActivitiesData && userActivitiesData.length > 0 && (
@@ -166,6 +206,13 @@ function ProfilePage(props: ProfilePageProps) {
           onClickModalOk={handleUnbindTelegram}
         />
       )}
+      {isUnbindGit && (
+        <ProjectDeleteModal
+          text="Are you sure you want to unbind your account from Git?"
+          onClickCancel={() => setIsUnbindGit(false)}
+          onClickModalOk={handleUnbindGit}
+        />
+      )}
     </MainTemplate>
   );
 }
@@ -184,6 +231,7 @@ const mapDispatchToProps = {
   onBindSlackProfile: integrationActions.bindSlackProfile,
   onUnbindSlackProfile: integrationActions.unbindSlackProfile,
   onUnbindTelegramProfile: integrationActions.unbindTelegramProfile,
+  onUnbindGit: integrationActions.unbindGitProfile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

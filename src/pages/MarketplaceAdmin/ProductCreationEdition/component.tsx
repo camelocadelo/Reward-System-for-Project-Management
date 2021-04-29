@@ -223,7 +223,10 @@ function ProductCreationEdition(props: any): JSX.Element {
             </span>
             <div style={{ marginTop: '10px' }}>
               {/*<AddImageButton text="Add image">*/}
-              <input name="photo" type="file" onChange={handleImageUpload} />
+              <label className="custom-file-upload">
+                <input name="photo" type="file" onChange={handleImageUpload} />
+                Add image
+              </label>
               {/*</AddImageButton>*/}
             </div>
           </div>

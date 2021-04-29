@@ -9,7 +9,7 @@ import DeleteIcon from 'assets/images/trash.png';
 // import { connect } from 'react-redux';
 
 function ProjectCard(props: ProjectCardProps): JSX.Element {
-  const { projectPK, name, teamLead, deletedProjectState, deleteProjectProps } = props;
+  const { projectPK, name, deletedProjectState, deleteProjectProps } = props;
   // const [isDeleteModal, setIsDeleteModal] = useState(false);
 
   const isAdmin = localStorage.getItem('is_admin');
@@ -39,7 +39,20 @@ function ProjectCard(props: ProjectCardProps): JSX.Element {
     <>
       <div className="project-card">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <TagItem tag={teamLead} bgColor="#FFE5D3" />
+          {/*<TagItem tag={teamLead} bgColor="#FFE5D3" />*/}
+          <div> </div>
+        </div>
+        <div
+          style={{
+            // marginTop: '18px',
+            marginBottom: '18px',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <span className="typography__variant-h2" style={{ fontWeight: 400 }}>
+            {name}
+          </span>
           {isShowButton && (
             <img
               src={DeleteIcon}
@@ -50,11 +63,6 @@ function ProjectCard(props: ProjectCardProps): JSX.Element {
               onClick={handleDeleteProject}
             />
           )}
-        </div>
-        <div style={{ marginTop: '18px', marginBottom: '18px' }}>
-          <span className="typography__variant-h2" style={{ fontWeight: 400 }}>
-            {name}
-          </span>
         </div>
         <Link to={`/projects/${projectPK}`} style={{ textDecoration: 'none' }}>
           <span className="project-card-link"> View project </span>

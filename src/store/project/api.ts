@@ -7,8 +7,9 @@ const my_pk = localStorage.getItem('pk');
 const createProjectUrl = `${API_URL}/op/create_project`;
 export const createProject = (data: any) => API.stdApiPOST({ data, url: createProjectUrl });
 
-const getProjectsUrl = `${API_URL}/op/get-projects-for-user/${my_pk}`;
-export const getProjects = () => API.stdApiGET({ url: getProjectsUrl, token: access_token });
+const getProjectsUrl = `${API_URL}/op/get-projects-for-user`;
+export const getProjects = (pk: any) =>
+  API.stdApiGET({ url: `${getProjectsUrl}/${pk}`, token: access_token });
 
 const getProjectActivitiesUrl = `${API_URL}/op/get_project_activities/`;
 export const getProjectActivities = (data: any) =>
@@ -37,3 +38,16 @@ export const getStatistics = (data: any) =>
     url: `${getStatisticsUrl}${data.pk}?time_frame=${data.time_frame}`,
     token: access_token,
   });
+
+const getProjectBindInfoUrl = `${API_URL}/op/get-info-project`;
+export const getProjectBindInfo = (id: any) =>
+  API.stdApiGET({
+    url: `${getProjectBindInfoUrl}/${id}`,
+    token: access_token,
+  });
+
+const reducePointsUrl = `${API_URL}/op/reduce-points`;
+export const reducePoints = (data: any) => API.stdApiPOST({ data, url: reducePointsUrl });
+
+const deleteTeamLeadUrl = `${API_URL}/op/delete_team_lead`;
+export const deleteTeamLead = (data: any) => API.stdApiDELETE({ data, url: deleteTeamLeadUrl });

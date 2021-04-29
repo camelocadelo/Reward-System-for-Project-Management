@@ -46,6 +46,12 @@ export const SET_TEAM_LEAD = {
   failed: 'SET_TEAM_LEAD_FAILED',
 };
 
+export const GET_PROJECT_BIND_INFO = {
+  started: 'GET_PROJECT_BIND_INFO_STARTED',
+  success: 'GET_PROJECT_BIND_INFO_SUCCESS',
+  failed: 'GET_PROJECT_BIND_INFO_FAILED',
+};
+
 export type CreateProjectRequest = {
   readonly name: string;
   readonly telegram_bonus: number;
@@ -83,4 +89,28 @@ export const GET_STATISTICS = {
   started: 'GET_STATISTICS_STARTED',
   success: 'GET_STATISTICS_SUCCESS',
   failed: 'GET_STATISTICS_FAILED',
+};
+
+export const GET_SLACK_STATISTICS = {
+  started: 'GET_SLACK_STATISTICS_STARTED',
+  success: 'GET_SLACK_STATISTICS_SUCCESS',
+  failed: 'GET_SLACK_STATISTICS_FAILED',
+};
+
+export const GET_GIT_STATISTICS = {
+  started: 'GET_GIT_STATISTICS_STARTED',
+  success: 'GET_GIT_STATISTICS_SUCCESS',
+  failed: 'GET_GIT_STATISTICS_FAILED',
+};
+
+export const REDUCE_POINTS = {
+  started: 'REDUCE_POINTS_STARTED',
+  success: 'REDUCE_POINTS_SUCCESS',
+  failed: 'REDUCE_POINTS_FAILED',
+};
+
+export const DELETE_TEAM_LEAD = {
+  started: 'DELETE_TEAM_LEAD_STARTED',
+  success: 'DELETE_TEAM_LEAD_SUCCESS',
+  failed: 'DELETE_TEAM_LEAD_FAILED',
 };

@@ -8,6 +8,9 @@ import {
   DELETE_PROJECT,
   REMOVE_TEAM_MEMBER,
   GET_STATISTICS,
+  GET_PROJECT_BIND_INFO,
+  GET_SLACK_STATISTICS,
+  GET_GIT_STATISTICS,
 } from 'store/project/types';
 
 const createProjectState = (state = { data: null, loading: false }, action: any): any => {
@@ -204,6 +207,87 @@ const projectStatistics = (state = { data: null, loading: false }, action: any):
   }
 };
 
+const projectSlackStatistics = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_SLACK_STATISTICS.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_SLACK_STATISTICS.success:
+      const data = action.data;
+      const first_member = Object.keys(data)[0];
+      const tableData = Object.entries(data).map((e) => ({ [e[0]]: e[1] }));
+      return {
+        data: {
+          members: Object.keys(data),
+          state: Object.entries(data).map((e) => ({ [e[0]]: e[1] })),
+          yAxis: tableData[0][first_member],
+        },
+        loading: false,
+      };
+    case GET_SLACK_STATISTICS.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+const projectGitStatistics = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_GIT_STATISTICS.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_GIT_STATISTICS.success:
+      const data = action.data;
+      const first_member = Object.keys(data)[0];
+      const tableData = Object.entries(data).map((e) => ({ [e[0]]: e[1] }));
+      return {
+        data: {
+          members: Object.keys(data),
+          state: Object.entries(data).map((e) => ({ [e[0]]: e[1] })),
+          yAxis: tableData[0][first_member],
+        },
+        loading: false,
+      };
+    case GET_GIT_STATISTICS.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+const projectBindInfo = (state = { data: null, loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_PROJECT_BIND_INFO.started:
+      return {
+        data: null,
+        loading: true,
+      };
+    case GET_PROJECT_BIND_INFO.success:
+      const data = action.data;
+      return {
+        data: data,
+        loading: false,
+      };
+    case GET_PROJECT_BIND_INFO.failed:
+      return {
+        data: null,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const projectReducer = combineReducers({
   createProjectState,
   userProjects,
@@ -213,6 +297,9 @@ const projectReducer = combineReducers({
   deletedProjectState,
   removedTeamMemberState,
   projectStatistics,
+  projectBindInfo,
+  projectSlackStatistics,
+  projectGitStatistics,
 });
 
 export default projectReducer;

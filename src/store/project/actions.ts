@@ -13,29 +13,34 @@ import {
   RemoveTeamMemberRequest,
   SET_TEAM_LEAD,
   GET_STATISTICS,
+  GET_SLACK_STATISTICS,
+  GET_GIT_STATISTICS,
+  GET_PROJECT_BIND_INFO,
+  REDUCE_POINTS,
+  DELETE_TEAM_LEAD,
 } from './types';
 
-export const createProject = (data: RemoveTeamMemberRequest, callbacks?: any) => (
+export const createProject = (data: CreateProjectRequest, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: REMOVE_TEAM_MEMBER,
+    action: CREATE_PROJECT,
     apiCall: () => {
-      return api.removeTeamMember(data);
+      return api.createProject(data);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
   });
 };
 
-export const getProjects = (callbacks?: any) => (dispatch: any, getState: any) => {
+export const getProjects = (pk: any, callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_PROJECTS,
     apiCall: () => {
-      return api.getProjects();
+      return api.getProjects(pk);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -102,13 +107,13 @@ export const deleteProject = (projectPk: number, callbacks?: any) => (
   });
 };
 
-export const removeTeamMember = (data: CreateProjectRequest, callbacks?: any) => (
+export const removeTeamMember = (data: RemoveTeamMemberRequest, callbacks?: any) => (
   dispatch: any,
   getState: any
 ) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: CREATE_PROJECT,
+    action: REMOVE_TEAM_MEMBER,
     apiCall: () => {
       return api.removeTeamMember(data);
     },
@@ -129,12 +134,78 @@ export const setTeamLead = (data: any, callbacks?: any) => (dispatch: any, getSt
   });
 };
 
+export const getProjectBindInfo = (projectPk: number, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROJECT_BIND_INFO,
+    apiCall: () => {
+      return api.getProjectBindInfo(projectPk);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
 export const getStatistics = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_STATISTICS,
     apiCall: () => {
       return api.getStatistics(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const getSlackStatistics = (data: any, callbacks?: any) => (
+  dispatch: any,
+  getState: any
+) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_SLACK_STATISTICS,
+    apiCall: () => {
+      return api.getStatistics(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const getGitStatistics = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_GIT_STATISTICS,
+    apiCall: () => {
+      return api.getStatistics(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const reducePoints = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: REDUCE_POINTS,
+    apiCall: () => {
+      return api.reducePoints(data);
+    },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ ...response }),
+  });
+};
+
+export const deleteTeamLead = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_TEAM_LEAD,
+    apiCall: () => {
+      return api.deleteTeamLead(data);
     },
     onSuccess: (response: any) => ({ data: response }),
     onError: (response: any) => ({ ...response }),
@@ -151,4 +222,9 @@ export default {
   removeTeamMember,
   setTeamLead,
   getStatistics,
+  getProjectBindInfo,
+  getSlackStatistics,
+  getGitStatistics,
+  reducePoints,
+  deleteTeamLead,
 };

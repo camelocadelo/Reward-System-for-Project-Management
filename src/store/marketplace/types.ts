@@ -51,3 +51,9 @@ export const VIEW_USER_PURCHASES = {
   success: 'VIEW_USER_PURCHASES_SUCCESS',
   failed: 'VIEW_USER_PURCHASES_FAILED',
 };
+
+export const UPDATE_QUANTITY = {
+  started: 'UPDATE_QUANTITY_STARTED',
+  success: 'UPDATE_QUANTITY_SUCCESS',
+  failed: 'UPDATE_QUANTITY_FAILED',
+};

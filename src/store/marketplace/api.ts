@@ -54,3 +54,11 @@ export const viewAllPurchases = () =>
 const viewUserPurchasesUrl = `${API_URL}/marketplace/userPurchases/${my_pk}`;
 export const viewUserPurchases = () =>
   API.stdApiGET({ url: viewUserPurchasesUrl, token: access_token });
+
+const updateQuantityInCart = `${API_URL}/marketplace/updateQuanitity`;
+export const updateQuantity = (data: any) =>
+  API.stdApiPOST({
+    url: `${updateQuantityInCart}/${my_pk}`,
+    token: access_token,
+    data: data,
+  });
