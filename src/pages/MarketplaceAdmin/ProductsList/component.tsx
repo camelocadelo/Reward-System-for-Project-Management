@@ -48,9 +48,14 @@ function ProductsList(props: ProductsListProps) {
   console.log('the marketplace products: ', marketplaceProducts);
 
   const handleModalOk = () => {
-    onDeleteMarketplaceProduct && deleteProductPk && onDeleteMarketplaceProduct(deleteProductPk);
-    onGetMarketplaceProducts();
-    setIsDeleteModal(false);
+    onDeleteMarketplaceProduct &&
+      deleteProductPk &&
+      onDeleteMarketplaceProduct(deleteProductPk, {
+        onSuccess: () => {
+          setIsDeleteModal(false);
+          onGetMarketplaceProducts();
+        },
+      });
     // onDeleteProject && projectPK && onDeleteProject(projectPK);
     //todo
   };

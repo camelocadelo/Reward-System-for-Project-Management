@@ -27,6 +27,7 @@ function ProjectPage(props: ProjectPageProps): JSX.Element {
 
   const my_pk = localStorage.getItem('pk');
 
+  console.log('commit');
   const handleOpenModal = () => {
     setIsCreateModal(true);
   };
@@ -90,7 +91,7 @@ function ProjectPage(props: ProjectPageProps): JSX.Element {
           setTimeout(() => {
             history?.push('/projects');
           }, 200);
-          onGetUserProjects();
+          onGetUserProjects(my_pk);
           // setPageLoading(false);
           console.log('success 2');
         },

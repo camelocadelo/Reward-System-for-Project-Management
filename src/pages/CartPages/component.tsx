@@ -42,6 +42,8 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
     onMakePurchase &&
       onMakePurchase({
         onSuccess: (response: any) => {
+          onGetCartItems();
+          onGetUserPurchases();
           setIsPurchasedModal(true);
           console.log('the returned success response: ', response);
           // const { data } = response?.createdTagState;
@@ -144,7 +146,7 @@ function MarketplaceUserPage(props: CartPageProps): JSX.Element {
       )}
       {isPurchasedModal && (
         <RegisterSuccessModal
-          titleText="You have successfully puchased the items in your cart"
+          titleText="You have successfully purchased the items in your cart"
           onClickModalOk={handlePurchaseModalOk}
         />
       )}

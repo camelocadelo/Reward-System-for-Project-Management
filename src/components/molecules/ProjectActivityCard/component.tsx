@@ -43,7 +43,11 @@ function ProjectActivityCard(props: ProjectActivityCardProps): JSX.Element {
         </span>
       </div>
       <div className="typography__variant-subtext" style={{ marginBottom: '84px', width: '70%' }}>
-        <span> {eventType === 'GitHub' ? `${gitType}: ${gitMeta}` : shortenMessage(message)} </span>
+        <span>
+          {eventType === 'GitHub'
+            ? `${gitType}: ${shortenMessage(gitMeta)}`
+            : shortenMessage(message)}
+        </span>
       </div>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
         <span style={{ fontSize: '14px' }}>

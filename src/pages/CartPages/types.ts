@@ -2,7 +2,7 @@ export interface CartPageProps {
   onGetCartItems(): void;
   cartItems: any;
   onDeleteFromCart?: any;
-  onMakePurchase?: any;
+  onMakePurchase(callbacks?: any): any;
   userPurchases?: any;
   onGetUserPurchases?: any;
 }
