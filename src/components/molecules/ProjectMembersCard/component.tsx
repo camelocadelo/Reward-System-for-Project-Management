@@ -87,17 +87,15 @@ function ProjectMembersCard(props: ProjectMembersCardProps): JSX.Element {
                     {m.account_bonus} points
                   </span>
                 </div>
-                {isAdmin === 'true' ||
-                  isManager === 'true' ||
-                  (isOrgOwner === 'true' && (
-                    <div style={{ marginRight: '10px' }}>
-                      <BorderedButton
-                        text="Reduce points"
-                        onSendBonuses={() => handleReducePoints(m.username)}
-                        color="#02A0FC"
-                      />
-                    </div>
-                  ))}
+                {(isAdmin === 'true' || isManager === 'true' || isOrgOwner === 'true') && (
+                  <div style={{ marginRight: '10px' }}>
+                    <BorderedButton
+                      text="Reduce points"
+                      onSendBonuses={() => handleReducePoints(m.username)}
+                      color="#02A0FC"
+                    />
+                  </div>
+                )}
               </div>
               <img
                 src={deleteIcon}

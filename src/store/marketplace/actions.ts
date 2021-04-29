@@ -92,7 +92,7 @@ export const deleteFromCart = (data: any, callbacks?: any) => (dispatch: any, ge
   });
 };
 
-export const makePurchase = (data: any, callbacks?: any) => (dispatch: any, getState: any) => {
+export const makePurchase = (callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: MAKE_PURCHASE,
