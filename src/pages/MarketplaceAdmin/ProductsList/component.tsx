@@ -46,6 +46,8 @@ function ProductsList(props: ProductsListProps) {
   };
 
   console.log('the marketplace products: ', marketplaceProducts);
+  console.log('the marketplace products: ', marketplaceProducts);
+  console.log('dfgdfgd');
 
   const handleModalOk = () => {
     onDeleteMarketplaceProduct &&
