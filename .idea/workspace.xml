@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6748e5f5-c705-46f8-ac1a-746035c08c9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/ProjectMembersCard/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/UserActivityTable/TableRow/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPages/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPages/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPages/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MarketplaceAdmin/ProductsList/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProjectPage/component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectPage/component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/marketplace/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/marketplace/actions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +30,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/molecules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -90,7 +83,8 @@
       <workItem from="1619682919456" duration="1040000" />
       <workItem from="1619708295010" duration="3002000" />
       <workItem from="1619711340382" duration="1641000" />
-      <workItem from="1619713008403" duration="15030000" />
+      <workItem from="1619713008403" duration="15753000" />
+      <workItem from="1619730420974" duration="1888000" />
     </task>
     <servers />
   </component>
